@@ -45,9 +45,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{21723913-c5ab-4553-95cb-1dce64a90471}</Project>
       <Name>Domain</Name>
