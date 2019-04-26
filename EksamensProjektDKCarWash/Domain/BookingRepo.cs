@@ -8,5 +8,10 @@ namespace Domain
 {
     public class BookingRepo
     {
+        private List<Booking> bookings = new List<Booking>();
+        public void CreateBooking(string customerName, DateTime startTime, string email, string telephone, int package)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
