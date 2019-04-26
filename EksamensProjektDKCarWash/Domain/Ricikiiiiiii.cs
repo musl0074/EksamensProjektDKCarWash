@@ -9,5 +9,6 @@ namespace Domain
     class Ricikiiiiiii
     {
         public bool rickierfope = true;
+        public bool erfrankfrankeee = true;
     }
 }
