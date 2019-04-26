@@ -64,7 +64,7 @@
       <Project>{21723913-c5ab-4553-95cb-1dce64a90471}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EksamensProjektDKCarWash\UI.csproj">
+    <ProjectReference Include="..\UI\UI.csproj">
       <Project>{5f84dfc8-a174-428a-a367-5dc6be08265f}</Project>
       <Name>UI</Name>
     </ProjectReference>

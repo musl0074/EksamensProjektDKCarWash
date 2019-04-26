@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Domain;
 
 namespace Application
@@ -12,7 +13,19 @@ namespace Application
         private string connectionstring;
         public Booking Sp_CreateBooking(string customerName, DateTime startTime, string email, string telephone, int package)
         {
-            throw new NotImplementedException();
+          return  Sp_CreateBookingStump(customerName, startTime, email, telephone, package);  
+        }
+        public Booking Sp_CreateBookingStump(string customerName, DateTime startTime, string email, string telephone, int package)
+        {
+            try
+            {
+                return new Booking(customerName, startTime, email, telephone, package,3);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message); 
+                throw;
+            } 
         }
     }
 }

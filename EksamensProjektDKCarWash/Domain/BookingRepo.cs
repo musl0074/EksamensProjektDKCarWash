@@ -9,9 +9,14 @@ namespace Domain
     public class BookingRepo
     {
         private List<Booking> bookings = new List<Booking>();
-        public void CreateBooking(string customerName, DateTime startTime, string email, string telephone, int package)
+        public void CreateBooking(Booking b)
         {
-            throw new NotImplementedException();
+            bookings.Add(b);
+        }
+
+        public List<Booking> GetBookings()
+        {
+            return bookings;
         }
     }
 }
