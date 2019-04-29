@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookingViewModel.cs" />
+    <Compile Include="CreateBookingViewModel.cs" />
     <Compile Include="DBViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

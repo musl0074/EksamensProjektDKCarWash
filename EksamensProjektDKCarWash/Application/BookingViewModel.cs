@@ -10,24 +10,13 @@ namespace Application
 {
    public class BookingViewModel
     {
-        private BookingRepo br = new BookingRepo();
         private DBViewModel dbvm = new DBViewModel();
 
 
-
-        public void CreateBooking(string customerName, DateTime startTime, DateTime bookingDate, string email, string telephone, Package package)
+        public void DeleteBooking(int bookingId)
         {
-            Booking b =  dbvm.CreatePrivateBooking(customerName, startTime, bookingDate, email, telephone, package);
-            try
-            {
-                br.CreateBooking(b);
-            }
-            catch (NullReferenceException e)
-            {
-                MessageBox.Show(e.Message);
-                throw;
-            }
-            
+
         }
+        
     }
 }
