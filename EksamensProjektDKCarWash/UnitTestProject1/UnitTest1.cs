@@ -15,13 +15,13 @@ namespace UnitTestProject1
         BookingViewModel bvmT = new BookingViewModel();
         BookingRepo brT = new BookingRepo();
         Booking b1;
-        Package p1 = new Package("Nej", "fuck af med dig", 250);
+        Package p1 = new Package("Premium Pakke", "Polering og bilrude", 250.43);
         
         [TestMethod]
         public void TestBookingId()
         {
             b1 = dbvmT.CreatePrivateBooking("Frank", new DateTime(2019, 9, 22, 10, 00, 00), "frank@eal.dk", "+4511223344", p1);
-            Assert.AreEqual(15, b1.Id);
+            Assert.IsTrue(0<b1.Id);
         }
 
         [TestMethod]

@@ -32,6 +32,7 @@ namespace Application
                     cmd1.Parameters.Add(new SqlParameter("@Email", email));
                     cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", telephone));
                     cmd1.Parameters.Add(new SqlParameter("@PackageName", package.Name));
+                    cmd1.Parameters.Add(new SqlParameter("@VAT", vat));
 
                     SqlDataReader reader = cmd1.ExecuteReader();
 
