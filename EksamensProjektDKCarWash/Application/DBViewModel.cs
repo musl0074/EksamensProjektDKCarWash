@@ -19,6 +19,7 @@ namespace Application
             Booking b  = null;
             int id = 0;
             string dateTime = startTime.ToString();
+            string bookingDateTime = bookingDate.ToString();
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
