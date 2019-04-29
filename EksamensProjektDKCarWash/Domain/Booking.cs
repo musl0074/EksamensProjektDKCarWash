@@ -12,19 +12,19 @@ namespace Domain
         public DateTime StartTime { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
-        public int Package { get; set; }
         public string Vat { get; set; }
         public int Id { get; set; }
+        public Package Package { get; set; }
 
 
  
-        public Booking(string customerName, DateTime startTime, string email, string telephone, int package, int id, string vat = "")
+        public Booking(string customerName, DateTime startTime, string email, string telephone, Package package, int id, string vat = "")
         {
             CustomerName = customerName;
             StartTime = startTime;
             Email = email;
             Telephone = telephone;
-            Package = package;
+            Package = package;     
             Id = id;
             Vat = vat;
         }

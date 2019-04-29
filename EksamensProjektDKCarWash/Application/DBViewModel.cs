@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,22 +12,57 @@ namespace Application
 {
    public class DBViewModel
     {
-        private string connectionstring;
-        public Booking Sp_CreateBooking(string customerName, DateTime startTime, string email, string telephone, int package)
+        private static string connectionString = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
+        public Booking CreatePrivateBooking(string customerName, DateTime startTime, string email, string telephone, Package package, string vat = "")
         {
-          return  Sp_CreateBookingStump(customerName, startTime, email, telephone, package);  
-        }
-        public Booking Sp_CreateBookingStump(string customerName, DateTime startTime, string email, string telephone, int package)
-        {
-            try
+
+            Booking b  = null;
+            int id = 0;
+            string dateTime = startTime.ToString();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
-                return new Booking(customerName, startTime, email, telephone, package,3);
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("spCreatePrivateBooking", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@CustomerName", customerName));
+                    cmd1.Parameters.Add(new SqlParameter("@StartTime", dateTime));
+                    cmd1.Parameters.Add(new SqlParameter("@Email", email));
+                    cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", telephone));
+                    cmd1.Parameters.Add(new SqlParameter("@PackageName", package.Name));
+
+                    SqlDataReader reader = cmd1.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            id = int.Parse(reader["BookingID"].ToString());
+                        }
+                    }                 
+                    b = new Booking(customerName, startTime, email, telephone, package, id, vat);
+                }
+
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }               
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message); 
-                throw;
-            } 
+            return b;
         }
+        //public Booking Sp_CreateBookingStump(string customerName, DateTime startTime, string email, string telephone, int package)
+        //{
+        //    try
+        //    {
+        //        return new Booking(customerName, startTime, email, telephone, package,3);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show(e.Message); 
+        //        throw;
+        //    } 
+        //}
     }
 }

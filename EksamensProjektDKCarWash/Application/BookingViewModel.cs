@@ -15,9 +15,9 @@ namespace Application
 
 
 
-        public void CreateBooking(string customerName,DateTime startTime,string email, string telephone,int package)
+        public void CreateBooking(string customerName,DateTime startTime,string email, string telephone, Package package)
         {
-         Booking b =  dbvm.Sp_CreateBooking(customerName, startTime, email, telephone, package);
+         Booking b =  dbvm.CreatePrivateBooking(customerName, startTime, email, telephone, package);
             try
             {
                 br.CreateBooking(b);
