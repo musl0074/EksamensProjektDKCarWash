@@ -20,7 +20,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestBookingId()
         {
-            b1 = dbvmT.CreatePrivateBooking("Frank", new DateTime(2019, 9, 22, 10, 00, 00), "frank@eal.dk", "+4511223344", p1);
+            b1 = dbvmT.CreatePrivateBooking("Frank", new DateTime(2019, 9, 22, 10, 00, 00), new DateTime(2019, 9, 22, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
             Assert.IsTrue(0<b1.Id);
         }
 
