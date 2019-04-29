@@ -8,16 +8,16 @@ using Domain;
 
 namespace Application
 {
-   public class BookingViewModel
+   public class CreateBookingViewModel
     {
         private BookingRepo br = new BookingRepo();
         private DBViewModel dbvm = new DBViewModel();
 
 
 
-        public void CreateBooking(string customerName,DateTime startTime,string email, string telephone, Package package)
+        public void CreateBooking(string customerName, DateTime startTime, DateTime bookingDate, string email, string telephone, Package package)
         {
-         Booking b =  dbvm.CreatePrivateBooking(customerName, startTime, email, telephone, package);
+            Booking b = dbvm.Sp_CreatePrivateBooking(customerName, startTime, bookingDate, email, telephone, package);
             try
             {
                 br.CreateBooking(b);
