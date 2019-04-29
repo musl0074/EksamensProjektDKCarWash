@@ -28,7 +28,7 @@ namespace UnitTestProject1
         public void TestAtToBookingRepo()
         {
             List<Booking> bookingsT;
-            b1 = dbvmT.CreatePrivateBooking("Frank", new DateTime(2019, 9, 22, 10, 00, 00), "frank@eal.dk", "+4511223344", p1);
+            b1 = dbvmT.CreatePrivateBooking("Frank", new DateTime(2019, 9, 22, 10, 00, 00), new DateTime(2019, 9, 22, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
             brT.CreateBooking(b1);
             bookingsT = brT.GetBookings();
             Assert.IsTrue(bookingsT.Count > 0);

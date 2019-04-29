@@ -13,7 +13,7 @@ namespace Application
    public class DBViewModel
     {
         private static string connectionString = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
-        public Booking CreatePrivateBooking(string customerName, DateTime startTime, string email, string telephone, Package package, string vat = "")
+        public Booking CreatePrivateBooking(string customerName, DateTime startTime, string bookingDate, string email, string telephone, Package package, string vat = "")
         {
 
             Booking b  = null;
@@ -29,6 +29,7 @@ namespace Application
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@CustomerName", customerName));
                     cmd1.Parameters.Add(new SqlParameter("@StartTime", dateTime));
+                    cmd1.Parameters.Add(new SqlParameter("@BookingDate", bookingDate));
                     cmd1.Parameters.Add(new SqlParameter("@Email", email));
                     cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", telephone));
                     cmd1.Parameters.Add(new SqlParameter("@PackageName", package.Name));
@@ -43,7 +44,7 @@ namespace Application
                             id = int.Parse(reader["BookingID"].ToString());
                         }
                     }                 
-                    b = new Booking(customerName, startTime, email, telephone, package, id, vat);
+                    b = new Booking(customerName, startTime, bookingDate, email, telephone, package, id, vat);
                 }
 
                 catch (SqlException e)
