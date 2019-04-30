@@ -87,10 +87,9 @@ namespace UnitTestProject1
         [TestMethod]
         public void DeleteBookingFromDB() // testen virker kun hvis der eksister en booking med det givne ID
         {
-            dbvmT.Sp_CreatePrivateBooking("Frank", "10.30", new DateTime(2019, 9, 20, 09, 00, 00), "frank@eal.dk", "+4511223344", p2, "");
-            dbvmT.Sp_DeleteBooking(12);
+            dbvmT.Sp_DeleteBooking(20);
           //  dbvmT.Sp_FindsingleBookingWithID;
-            Assert.IsTrue(dbvmT.Sp_FindsingleBookingWithID(12) != null);
+            Assert.IsTrue(dbvmT.Sp_FindsingleBookingWithID(20) == 0);
         }
 
         [TestMethod]
