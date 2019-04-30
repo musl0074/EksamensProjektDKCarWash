@@ -15,7 +15,7 @@ namespace Application
 
 
 
-        public void CreateBooking(string customerName, DateTime startTime, DateTime bookingDate, string email, string telephone, Package package)
+        public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package)
         {
             Booking b = dbvm.Sp_CreatePrivateBooking(customerName, startTime, bookingDate, email, telephone, package);
             try
