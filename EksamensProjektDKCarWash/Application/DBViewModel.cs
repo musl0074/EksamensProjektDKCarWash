@@ -112,5 +112,10 @@ namespace Application
             }
             return bookings;
         }
+
+        public object Sp_FindsingleBookingWithID(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
