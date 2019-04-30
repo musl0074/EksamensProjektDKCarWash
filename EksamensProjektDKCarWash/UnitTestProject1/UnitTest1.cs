@@ -69,29 +69,27 @@ namespace UnitTestProject1
             //b1.Package = p1;
             //b1.Vat = "88888888";
             //b1.Id = 2;
-          
+           
             // brT.CreateBooking(b1);
-            List<Booking> bookingsT = brT.GetBookings();
-            bookingsT.Add(b1);
-            bookingsT.Add(b2);
-            bookingsT.Add(b3);
-            bookingsT.Add(b4);
-            brT.DeleteBooking(b1.Id);
-
-
-            Assert.AreEqual(bookingsT.Count, 3);
-            
-          //  bvmT.DeleteBooking(b1.Id);
-
-            //Booking b2 = null;
-            //foreach (var item in bookingsT)
-            //{
-            //    if (item.Id == b1.Id)
-            //        b2 = item;
-            //}
-
-
-           // Assert.IsTrue(b2 == null); // Hvis b2 aldrig bliver sat, så er testen korrekt gennemført, da den ikke kunne finde den nylige oprettede booking
+            // List<Booking> bookingsT = brT.GetBookings();
+            //bookingsT.Add(b1);
+            //bookingsT.Add(b2);
+            //bookingsT.Add(b3);
+            //bookingsT.Add(b4);
+            brT.CreateBooking(b1);
+            brT.CreateBooking(b2);
+            brT.CreateBooking(b3);
+            brT.CreateBooking(b4);
+            //List<Booking> bookingT = brT.GetBookings();
+            brT.DeleteBooking(2);
+            Assert.AreEqual(brT.GetBookings().Count, 3);
+        }
+        [TestMethod]
+        public void DeleteBookingFromDB() // testen virker kun hvis der eksister en booking med det givne ID
+        {
+            dbvmT.Sp_DeleteBooking(20);
+          //  dbvmT.Sp_FindsingleBookingWithID;
+            Assert.IsTrue(dbvmT.Sp_FindsingleBookingWithID(20) == 0);
         }
 
         [TestMethod]
