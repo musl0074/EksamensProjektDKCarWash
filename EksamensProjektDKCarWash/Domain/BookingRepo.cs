@@ -18,5 +18,16 @@ namespace Domain
         {
             return bookings;
         }
+
+        public void DeleteBooking(int bookingId)
+        {
+            foreach (Booking item in bookings)
+            {
+                if (item.Id == bookingId)
+                {
+                    bookings.Remove(item);
+                }
+            }
+        }
     }
 }
