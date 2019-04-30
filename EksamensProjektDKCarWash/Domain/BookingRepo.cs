@@ -22,7 +22,7 @@ namespace Domain
 
         public void DeleteBooking(int bookingId)
         {
-            foreach (Booking item in bookings)
+            foreach (Booking item in bookings.ToList())
             {
                 if (item.Id == bookingId)
                 {
