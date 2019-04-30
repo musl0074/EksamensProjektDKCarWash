@@ -13,13 +13,11 @@ namespace Application
    public class DBViewModel
     {
         private static string connectionString = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
-        public Booking Sp_CreatePrivateBooking(string customerName, DateTime startTime, DateTime bookingDate, string email, string telephone, Package package, string vat = "")
+        public Booking Sp_CreatePrivateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package, string vat = "")
         {
 
             Booking b  = null;
             int id = 0;
-            string dateTime = startTime.ToString();
-            string bookingDateTime = bookingDate.ToString();
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -29,7 +27,7 @@ namespace Application
                     SqlCommand cmd1 = new SqlCommand("spCreatePrivateBooking", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@CustomerName", customerName));
-                    cmd1.Parameters.Add(new SqlParameter("@StartTime", dateTime));
+                    cmd1.Parameters.Add(new SqlParameter("@StartTime", startTime));
                     cmd1.Parameters.Add(new SqlParameter("@BookingDate", bookingDate));
                     cmd1.Parameters.Add(new SqlParameter("@Email", email));
                     cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", telephone));
@@ -71,6 +69,48 @@ namespace Application
         public void Sp_DeleteBooking(int bookingId)
         {
 
+        }
+
+        public List<Booking> Sp_ShowBooking(DateTime bookingDate)
+        {
+            List<Booking> bookings = new List<Booking>();
+            Booking b = null;
+            string customerName = "";
+            string startTime = "";
+            string packageName = "";
+
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("ShowDailyBookings", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@BookingDate", bookingDate));
+
+                    SqlDataReader reader = cmd1.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            customerName = (reader["CustomerName"].ToString());
+                            startTime = reader["StartTime"].ToString();
+                            packageName = reader["PackageName"].ToString();
+                            b = new Booking(customerName, startTime, bookingDate, packageName);
+                            bookings.Add(b);
+                        }
+                    }
+                }
+
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+                
+            }
+            return bookings;
         }
     }
 }

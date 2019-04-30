@@ -9,6 +9,7 @@ namespace Domain
     public class BookingRepo
     {
         private List<Booking> bookings = new List<Booking>();
+        private List<Booking> showBookingsList = new List<Booking>();
         public void CreateBooking(Booking b)
         {
             bookings.Add(b);
@@ -28,6 +29,16 @@ namespace Domain
                     bookings.Remove(item);
                 }
             }
+        }
+
+        public void AddToShowBookingsList(Booking b)
+        {
+            showBookingsList.Add(b);
+        }
+
+        public List<Booking> getShowBookingsList()
+        {
+            return showBookingsList;
         }
     }
 }
