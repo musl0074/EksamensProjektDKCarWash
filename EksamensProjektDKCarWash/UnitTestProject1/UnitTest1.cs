@@ -128,8 +128,8 @@ namespace UnitTestProject1
         public void TestUpdateBookingDB() // testen virker kun en gang ellers skal CustomerName ændres.
         {
             List <Booking> bookingsT  =dbvmT.Sp_GetAllBookings();
-            Booking b2 = brT.FindSingleBooking(22);
-            Booking b1 = new Booking("Ricky", "10.30", new DateTime(2019, 12, 03, 00, 00, 00), "frank@eal.dk", "+4511223344", p2, 22, "");
+            Booking b1 = brT.FindSingleBooking(22);
+            Booking b2 = new Booking("Ricky", "10.30", new DateTime(2019, 12, 03, 00, 00, 00), "frank@eal.dk", "+4511223344", p2, 22, "");
             dbvmT.Sp_UpdateBooking(b1);
             bookingsT = dbvmT.Sp_GetAllBookings();
             Booking b3 = brT.FindSingleBooking(22);
