@@ -24,7 +24,7 @@ namespace Application
                 try
                 {
                     con.Open();
-                    SqlCommand cmd1 = new SqlCommand("spCreatePrivateBooking", con);
+                    SqlCommand cmd1 = new SqlCommand("Sp_CreatePrivateBooking", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@CustomerName", customerName));
                     cmd1.Parameters.Add(new SqlParameter("@StartTime", startTime));
@@ -100,7 +100,7 @@ namespace Application
                 try
                 {
                     con.Open();
-                    SqlCommand cmd1 = new SqlCommand("ShowDailyBookings", con);
+                    SqlCommand cmd1 = new SqlCommand("Sp_ShowDailyBookings", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@BookingDate", bookingDate));
 
