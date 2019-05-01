@@ -54,9 +54,6 @@ namespace UnitTestProject1
             Assert.IsTrue(bookingsT.Count > 0);
         }
 
-
-
-
         [TestMethod]
         public void DeletedFromBookingRepo () // Testen bliver KUN grøn, hvis der KUN er ÉN booking inde i systemet, når testen bliver kørt
         {
@@ -84,6 +81,7 @@ namespace UnitTestProject1
             brT.DeleteBooking(2);
             Assert.AreEqual(brT.GetBookings().Count, 3);
         }
+
         [TestMethod]
         public void DeleteBookingFromDB() // testen virker kun hvis der eksister en booking med det givne ID
         {
@@ -104,6 +102,7 @@ namespace UnitTestProject1
             bookingsT = sbvmT.ShowBooking(new DateTime(2019, 12, 01, 00, 00, 00));           
             Assert.IsTrue(bookingsT.Count == 5);
         }
+
         [TestMethod]
         public void TestFindBooking()
         {
@@ -113,17 +112,19 @@ namespace UnitTestProject1
             Assert.AreSame(b2.Id, b1.Id);
 
         }
+
         [TestMethod]
         public void TestUpdateBookingRepo()
         {
             Booking b1 = new Booking("Frank", "10.30", new DateTime(2019, 12, 03, 00, 00, 00), "frank@eal.dk", "+4511223344", p2, 2, "");
             brT.CreateBooking(b1);
-            Booking b2 =brT.GetBooking(2);
+            Booking b2 = brT.FindSingleBooking(2);
             b2.CustomerName = "Ricky";
             brT.UpdateBooking(b2);
             Booking b3 = brT.GetBooking(2);
             Assert.AreSame(b2.CustomerName, b3.CustomerName);
         }
+
         [TestMethod]
         public void TestUpdateBookingDB() // testen virker kun en gang ellers skal CustomerName ændres.
         {
@@ -137,7 +138,5 @@ namespace UnitTestProject1
 
             Assert.AreSame(b2.CustomerName, b3.CustomerName);
         }
-
-
     }
 }
