@@ -32,12 +32,40 @@ namespace Domain
             Vat = vat;
         }
 
+        public Booking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, string packageName, int id, string vat = "")
+        {
+            CustomerName = customerName;
+            StartTime = startTime;
+            BookingDate = bookingDate;
+            Email = email;
+            Telephone = telephone;
+            PackageName = packageName;
+            id = Id;
+            Vat = vat;
+        }
+
         public Booking(string customerName, string startTime, DateTime bookingDate, string packageName)
         {
             CustomerName = customerName;
             StartTime = startTime;
             BookingDate = bookingDate;
             PackageName = packageName;
+        }
+
+        public void UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, Package package)
+        {
+            CustomerName = customerName;
+            BookingDate = bookingDate;
+            StartTime = startTime;
+            Email = email;
+            Telephone = telephone;
+            Vat = vat;
+            Package = package;
+        }
+
+        public override string ToString()
+        {
+            return CustomerName + ":" + BookingDate.ToString() + ":" + StartTime + ":" + Email + ":" + Telephone + ":" + Vat + ":" + Package.Name + ":";
         }
     }
 }

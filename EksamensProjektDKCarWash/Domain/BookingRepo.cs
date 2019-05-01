@@ -66,5 +66,14 @@ namespace Domain
             }
             return "En fejl er forekommet og booking er ikke ændret!";
         }
+
+        public void GetAllBookings(List<Booking> allBookings)
+        {
+            bookings.Clear();
+            foreach (Booking booking in allBookings)
+            {
+                bookings.Add(booking);
+            }
+        }
     }
 }
