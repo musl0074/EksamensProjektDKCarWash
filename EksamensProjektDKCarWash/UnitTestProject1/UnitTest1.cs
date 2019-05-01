@@ -109,7 +109,7 @@ namespace UnitTestProject1
         {
             Booking b1 = new Booking("Frank", "10.30", new DateTime(2019, 12, 03, 00, 00, 00), "frank@eal.dk", "+4511223344", p2, 2, "");
             brT.CreateBooking(b1);
-            Booking b2 = brT.FindSingleBooking(2);
+            Booking b2 = brT.GetBooking(2);
             Assert.AreSame(b2.Id, b1.Id);
 
         }
@@ -118,21 +118,21 @@ namespace UnitTestProject1
         {
             Booking b1 = new Booking("Frank", "10.30", new DateTime(2019, 12, 03, 00, 00, 00), "frank@eal.dk", "+4511223344", p2, 2, "");
             brT.CreateBooking(b1);
-            Booking b2 =brT.FindSingleBooking(2);
+            Booking b2 =brT.GetBooking(2);
             b2.CustomerName = "Ricky";
             brT.UpdateBooking(b2);
-            Booking b3 = brT.FindSingleBooking(2);
+            Booking b3 = brT.GetBooking(2);
             Assert.AreSame(b2.CustomerName, b3.CustomerName);
         }
         [TestMethod]
         public void TestUpdateBookingDB() // testen virker kun en gang ellers skal CustomerName ændres.
         {
             List <Booking> bookingsT  =dbvmT.Sp_GetAllBookings();
-            Booking b1 = brT.FindSingleBooking(22);
+            Booking b1 = brT.GetBooking(22);
             Booking b2 = new Booking("Ricky", "10.30", new DateTime(2019, 12, 03, 00, 00, 00), "frank@eal.dk", "+4511223344", p2, 22, "");
             dbvmT.Sp_UpdateBooking(b2);
             bookingsT = dbvmT.Sp_GetAllBookings();
-            Booking b3 = brT.FindSingleBooking(22);
+            Booking b3 = brT.GetBooking(22);
 
 
             Assert.AreSame(b2.CustomerName, b3.CustomerName);
