@@ -109,8 +109,8 @@ namespace UnitTestProject1
         {
             Booking b1 = new Booking("Frank", "10.30", new DateTime(2019, 12, 03, 00, 00, 00), "frank@eal.dk", "+4511223344", p2, 2, "");
             brT.CreateBooking(b1);
-            
-            Assert.AreSame(b2.Id, 2);
+            Booking b2 = brT.FindSingleBooking(2);
+            Assert.AreSame(b2.Id, b1.Id);
 
         }
         [TestMethod]
