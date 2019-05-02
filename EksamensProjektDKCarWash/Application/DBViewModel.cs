@@ -66,6 +66,35 @@ namespace Application
         //    } 
         //}
 
+        public void Sp_UpdateBooking(Booking currentBooking)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_UpdateBooking", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@BookingID", currentBooking.Id));
+                    cmd1.Parameters.Add(new SqlParameter("@PackageName", currentBooking.Package.Name));
+                    cmd1.Parameters.Add(new SqlParameter("@StartTime", currentBooking.StartTime));
+                    cmd1.Parameters.Add(new SqlParameter("@CustomerName", currentBooking.CustomerName));
+                    cmd1.Parameters.Add(new SqlParameter("@BookingDate", currentBooking.BookingDate));
+                    cmd1.Parameters.Add(new SqlParameter("@Email", currentBooking.Email));
+                    cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", currentBooking.Telephone));
+                    cmd1.Parameters.Add(new SqlParameter("@VAT", currentBooking.Vat));
+
+                    cmd1.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(e.Message);
+                    
+                }
+
+            }
+        }
+
         public void Sp_DeleteBooking(int bookingId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -76,11 +105,11 @@ namespace Application
                     SqlCommand cmd1 = new SqlCommand("Sp_DeleteBooking", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@BookingID", bookingId));
+                    cmd1.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(e.Message);
-                    throw;
+                    MessageBox.Show(e.Message);                    
                 }
 
             }
@@ -136,7 +165,7 @@ namespace Application
                 try
                 {
                     con.Open();
-                    SqlCommand cmd1 = new SqlCommand("Sp_FindSingleBookingWithID", con);
+                    SqlCommand cmd1 = new SqlCommand("Sp_GetBookingWithId", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@BookingID", v));
 
@@ -160,6 +189,49 @@ namespace Application
 
 
             }
+        }
+
+        public List<Booking> Sp_GetAllBookings()
+        {
+            List<Booking> bookings = new List<Booking>();
+            Booking b;
+
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_GetAllBookings", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataReader reader = cmd1.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            int bookingId = int.Parse(reader["BookingId"].ToString());
+                            string packageName = reader["PackageName"].ToString();
+                            string startTime = reader["StartTime"].ToString();
+                            string customerName = reader["CustomerName"].ToString();
+                            DateTime bookingDate = reader.GetFieldValue<DateTime>(reader.GetOrdinal("BookingDate"));
+                            string email = reader["Email"].ToString();
+                            string telephone = reader["PhoneNumber"].ToString();
+                            string VAT = reader["VAT"].ToString();
+                            b = new Booking(customerName, startTime, bookingDate, email, telephone, packageName, bookingId, VAT);
+                            bookings.Add(b);
+                        }
+                    }
+                }
+
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+
+            }
+            return bookings;
         }
     }
 }
