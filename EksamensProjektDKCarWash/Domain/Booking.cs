@@ -40,7 +40,7 @@ namespace Domain
             Email = email;
             Telephone = telephone;
             PackageName = packageName;
-            id = Id;
+            Id = id;
             Vat = vat;
         }
 

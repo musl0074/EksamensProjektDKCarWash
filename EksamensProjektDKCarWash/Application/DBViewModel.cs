@@ -73,21 +73,23 @@ namespace Application
                 try
                 {
                     con.Open();
-                    SqlCommand cmd1 = new SqlCommand("Sp_DeleteBooking", con);
+                    SqlCommand cmd1 = new SqlCommand("Sp_UpdateBooking", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@BookingID", currentBooking.Id));
-                    cmd1.Parameters.Add(new SqlParameter("@PackageName", currentBooking.PackageName));
+                    cmd1.Parameters.Add(new SqlParameter("@PackageName", currentBooking.Package.Name));
                     cmd1.Parameters.Add(new SqlParameter("@StartTime", currentBooking.StartTime));
                     cmd1.Parameters.Add(new SqlParameter("@CustomerName", currentBooking.CustomerName));
                     cmd1.Parameters.Add(new SqlParameter("@BookingDate", currentBooking.BookingDate));
                     cmd1.Parameters.Add(new SqlParameter("@Email", currentBooking.Email));
                     cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", currentBooking.Telephone));
                     cmd1.Parameters.Add(new SqlParameter("@VAT", currentBooking.Vat));
+
+                    cmd1.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
                     MessageBox.Show(e.Message);
-                    throw;
+                    
                 }
 
             }
@@ -103,11 +105,11 @@ namespace Application
                     SqlCommand cmd1 = new SqlCommand("Sp_DeleteBooking", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@BookingID", bookingId));
+                    cmd1.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(e.Message);
-                    throw;
+                    MessageBox.Show(e.Message);                    
                 }
 
             }
@@ -218,6 +220,7 @@ namespace Application
                             string telephone = reader["PhoneNumber"].ToString();
                             string VAT = reader["VAT"].ToString();
                             b = new Booking(customerName, startTime, bookingDate, email, telephone, packageName, bookingId, VAT);
+                            bookings.Add(b);
                         }
                     }
                 }
