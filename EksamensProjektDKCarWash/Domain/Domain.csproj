@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Booking.cs" />
     <Compile Include="BookingRepo.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

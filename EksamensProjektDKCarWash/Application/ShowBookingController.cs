@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Application
 {
-    public class ShowBookingViewModel
+    public class ShowBookingController
     {
-        DBViewModel dbvm = new DBViewModel();
+        DBController dbc = new DBController();
         BookingRepo br = new BookingRepo();
 
 
@@ -17,7 +17,7 @@ namespace Application
         {
             for (int i = 0; i < 5; i++)
             {
-                List<Booking> b1 = dbvm.Sp_ShowBooking(bookingDate);
+                List<Booking> b1 = dbc.Sp_ShowBooking(bookingDate);
                 foreach (Booking booking in b1)
                 {
                     br.AddToShowBookingsList(booking);

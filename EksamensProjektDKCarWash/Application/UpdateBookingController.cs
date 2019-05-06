@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Application
 {
-    public class UpdateBookingViewModel
+    public class UpdateBookingController
     {
        public Booking currentBooking { get; set; }
-       private DBViewModel dbvm = new DBViewModel();
+       private DBController dbc = new DBController();
        private BookingRepo br = new BookingRepo();
 
 
@@ -23,7 +23,7 @@ namespace Application
         public string UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, Package package)
         {
             currentBooking.UpdateBooking(customerName, bookingDate, startTime, email, telephone, vat, package);
-            dbvm.Sp_UpdateBooking(currentBooking);
+            dbc.Sp_UpdateBooking(currentBooking);
             return br.UpdateBooking(currentBooking);
         }
 

@@ -20,6 +20,12 @@ namespace Domain
             Price = price;
         }
 
+        public Package (string name)
+        {
+            Name = name;
+        }
+           
+
 
     }
 }

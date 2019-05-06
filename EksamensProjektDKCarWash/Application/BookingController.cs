@@ -8,26 +8,25 @@ using Domain;
 
 namespace Application
 {
-   public class CreateBookingViewModel
+   public class BookingController
     {
+        private DBController dbc = new DBController();
         private BookingRepo br = new BookingRepo();
-        private DBViewModel dbvm = new DBViewModel();
 
 
-
-        public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package)
+        public void DeleteBooking(int bookingId)
         {
-            Booking b = dbvm.Sp_CreatePrivateBooking(customerName, startTime, bookingDate, email, telephone, package);
+            br.DeleteBooking(bookingId);
             try
             {
-                br.CreateBooking(b);
+                dbc.Sp_DeleteBooking(bookingId);
             }
             catch (NullReferenceException e)
             {
                 MessageBox.Show(e.Message);
                 throw;
             }
-            
         }
+        
     }
 }

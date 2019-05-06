@@ -10,7 +10,7 @@ using Domain;
 
 namespace Application
 {
-    public class DBViewModel
+    public class DBController
     {
         private static string connectionString = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
         public Booking Sp_CreatePrivateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package, string vat = "")
@@ -78,11 +78,11 @@ namespace Application
                     cmd1.Parameters.Add(new SqlParameter("@BookingID", currentBooking.Id));
                     cmd1.Parameters.Add(new SqlParameter("@PackageName", currentBooking.Package.Name));
                     cmd1.Parameters.Add(new SqlParameter("@StartTime", currentBooking.StartTime));
-                    cmd1.Parameters.Add(new SqlParameter("@CustomerName", currentBooking.CustomerName));
+                    cmd1.Parameters.Add(new SqlParameter("@CustomerName", currentBooking.Customer.CustomerName));
                     cmd1.Parameters.Add(new SqlParameter("@BookingDate", currentBooking.BookingDate));
-                    cmd1.Parameters.Add(new SqlParameter("@Email", currentBooking.Email));
-                    cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", currentBooking.Telephone));
-                    cmd1.Parameters.Add(new SqlParameter("@VAT", currentBooking.Vat));
+                    cmd1.Parameters.Add(new SqlParameter("@Email", currentBooking.Customer.Email));
+                    cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", currentBooking.Customer.Telephone));
+                    cmd1.Parameters.Add(new SqlParameter("@VAT", currentBooking.Customer.Vat));
 
                     cmd1.ExecuteNonQuery();
                 }

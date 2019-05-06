@@ -42,12 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookingViewModel.cs" />
-    <Compile Include="CreateBookingViewModel.cs" />
-    <Compile Include="DBViewModel.cs" />
+    <Compile Include="BookingController.cs" />
+    <Compile Include="CreateBookingController.cs" />
+    <Compile Include="DBController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShowBookingViewModel.cs" />
-    <Compile Include="UpdateBookingViewModel.cs" />
+    <Compile Include="ShowBookingController.cs" />
+    <Compile Include="UpdateBookingController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
