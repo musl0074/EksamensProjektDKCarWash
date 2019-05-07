@@ -17,6 +17,7 @@ namespace Application
 
         public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package)
         {
+
             Booking b = dbc.Sp_CreatePrivateBooking(customerName, startTime, bookingDate, email, telephone, package);
             try
             {
