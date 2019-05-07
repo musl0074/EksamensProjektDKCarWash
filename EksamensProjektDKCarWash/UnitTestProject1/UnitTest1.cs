@@ -41,8 +41,10 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestBookingId()
         {
-            cbcT.CreateBooking("Frank", "12.30", new DateTime(2019, 9, 22, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
-            Assert.IsTrue(0 < b1.Id);
+            brT.ClearAllBookings();
+            b1 = dbcT.Sp_CreateBooking("Frank", "12.30", new DateTime(2019, 9, 22, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
+            brT.CreateBooking(b1);
+            Assert.IsTrue(0 < brT.GetBookings().Count && b1.Id > 0);
         }
 
         [TestMethod]

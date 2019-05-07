@@ -74,7 +74,11 @@ namespace Domain
             {
                 bookings.Add(booking);
             }
-            
+        }
+
+        public void ClearAllBookings()
+        {
+            bookings.Clear();
         }
     }
 }

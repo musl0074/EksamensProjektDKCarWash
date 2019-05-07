@@ -13,7 +13,7 @@ namespace Application
     public class DBController
     {
         private static string connectionString = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
-        public Booking Sp_CreatePrivateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package, string vat = "")
+        public Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package, string vat = "")
         {
 
             Booking b = null;
