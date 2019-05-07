@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    class PickUpTruck
+    public class PickUpTruck
     {
+        string PickUpTruckName { get; set; }
+
+        public PickUpTruck(string pickUpTruckName)
+        {
+            PickUpTruckName = pickUpTruckName;
+        }
     }
 }
