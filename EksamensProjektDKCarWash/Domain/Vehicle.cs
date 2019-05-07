@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    class Vehicle
+   public class Vehicle
     {
-        string LicensePlate { get; set; }
-        string Brand { get; set; }
-        string Model { get; set; }
-        string TypeOfCar { get; set; }
+        public string LicensePlate { get; private set; }
+        public string Brand { get; private set; }
+        public string Model { get; private set; }
+        public string TypeOfCar { get; private set; }
 
         public Vehicle(string licensePlate, string brand, string model, string typeOfCar)
         {

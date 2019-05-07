@@ -8,7 +8,7 @@ namespace Domain
 {
     public class PickUpTruck
     {
-        string PickUpTruckName { get; set; }
+        public string PickUpTruckName { get; private set; }
 
         public PickUpTruck(string pickUpTruckName)
         {

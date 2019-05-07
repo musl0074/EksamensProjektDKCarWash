@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    class PackageRepo
+   public class PackageRepo
     {
     }
 }

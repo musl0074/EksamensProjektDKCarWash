@@ -10,7 +10,7 @@ using Domain;
 
 namespace Application
 {
-    public class DBController
+    public class DBController : IConnector
     {
         private static string connectionString = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
         public Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package, string vat = "")
@@ -157,7 +157,7 @@ namespace Application
             return bookings;
         }
 
-        public int Sp_FindsingleBookingWithID(int v)
+        public int Sp_FindsingleBookingWithID(int bookingId)
         {
             int result = 0;
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -167,7 +167,7 @@ namespace Application
                     con.Open();
                     SqlCommand cmd1 = new SqlCommand("Sp_GetBookingWithId", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Parameters.Add(new SqlParameter("@BookingID", v));
+                    cmd1.Parameters.Add(new SqlParameter("@BookingID", bookingId));
 
                     SqlDataReader reader = cmd1.ExecuteReader();
                     if (reader.HasRows)
@@ -189,6 +189,12 @@ namespace Application
 
 
             }
+        }
+
+        public PickUpDeal Sp_CreatePickUpDeal(Driver driver, PickUpTruck pickUpTruck, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
+        {
+            PickUpDeal pud = new PickUpDeal(0, driver, pickUpTruck, "odense", postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
+            return pud;
         }
 
         public List<Booking> Sp_GetAllBookings()

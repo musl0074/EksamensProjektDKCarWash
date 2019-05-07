@@ -10,7 +10,7 @@ namespace Domain
     {
         private List<Booking> bookings = new List<Booking>();
         private List<Booking> showBookingsList = new List<Booking>();
-        public void CreateBooking(Booking b)
+        public void AddBookingToList(Booking b)
         {
             bookings.Add(b);
         }

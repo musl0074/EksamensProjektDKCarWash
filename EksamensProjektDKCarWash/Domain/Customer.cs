@@ -8,10 +8,10 @@ namespace Domain
 {
     public class Customer
     {
-        public string CustomerName { get; set; }
-        public string Email { get; set; }
-        public string Telephone { get; set; }
-        public string Vat { get; set; }
+        public string CustomerName { get; private set; }
+        public string Email { get; private set; }
+        public string Telephone { get; private set; }
+        public string Vat { get; private set; }
 
         public Customer(string customerName, string email, string telephone, string vat = "")
         {

@@ -8,7 +8,7 @@ namespace Domain
 {
     public class Driver
     {
-        string Name { get; set; }
+        public string Name { get; private set; }
 
         public Driver(string name)
         {

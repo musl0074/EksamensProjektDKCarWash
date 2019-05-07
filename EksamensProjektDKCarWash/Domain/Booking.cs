@@ -8,11 +8,11 @@ namespace Domain
 {
     public class Booking
     {
-        public Customer Customer { get; set; }
-        public string StartTime { get; set; }
-        public DateTime BookingDate { get; set; }
-        public int Id { get; set; }
-        public Package Package { get; set; }
+        public Customer Customer { get; private set; }
+        public string StartTime { get; private set; }
+        public DateTime BookingDate { get; private set; }
+        public int Id { get; private set; }
+        public Package Package { get; private set; }
 
 
  

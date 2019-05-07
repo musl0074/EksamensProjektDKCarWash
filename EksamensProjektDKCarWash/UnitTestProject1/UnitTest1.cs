@@ -12,11 +12,15 @@ namespace UnitTestProject1
 
     {
         Booking b1, b2, b3, b4, b5;
+        PickUpDeal pud1;
         Package p1, p2, p3;
+        Driver d1, d2, d3, d4;
+        PickUpTruck put1, put2, put3;
+        Vehicle v1, v2, v3, v4;
         BookingRepo brT;
         BookingController bcT;
-        ShowBookingController sbcT;
-        CreateBookingController cbcT;
+        PickUpDealController pudcT;
+        PickUpDealRepo pudrT;
         DBController dbcT;
 
 
@@ -24,62 +28,63 @@ namespace UnitTestProject1
         public void TestInitialize()
         {
             dbcT = new DBController();
-            cbcT = new CreateBookingController();
             bcT = new BookingController();
+            pudcT = new PickUpDealController();
             brT = new BookingRepo();
-            sbcT = new ShowBookingController();
             p1 = new Package("Premium Pakke", "Polering og bilrude", 250.43);
             p2 = new Package("Luksus Pakke", "Polering og bilrude", 25000);
             p3 = new Package("Basis Pakke", "Polering og bilrude", 4444);
+            d1 = new Driver("Mathias");
+            d2 = new Driver("Muslim");
+            d3 = new Driver("Adam");
+            put1 = new PickUpTruck("Autotransporter 1");
+            v1 = new Vehicle("12ty432", "BMW", "X5", "SUV");
             b1 = new Booking("Frank", "12.30", new DateTime(2019, 9, 24, 10, 00, 00), "frank@eal.dk", "+4511223344", p1, 2, "");
             b2 = new Booking("Frank", "12.30", new DateTime(2019, 9, 24, 10, 00, 00), "frank@eal.dk", "+4511223344", p1, 4, "");
             b3 = new Booking("Frank", "12.30", new DateTime(2019, 9, 24, 10, 00, 00), "frank@eal.dk", "+4511223344", p1, 3, "");
             b4 = new Booking("Frank", "12.30", new DateTime(2019, 9, 24, 10, 00, 00), "frank@eal.dk", "+4511223344", p1, 5, "");
+            pud1 = new PickUpDeal(1, d1, put1, "Odense M", 5230, v1, 500, "Rødegårdsvej 273", new DateTime(2019, 9, 24, 10, 00, 00), "15.30");
         }
 
 
         [TestMethod]
-        public void TestBookingId()
+        public void TestCreateBookingRepo()
         {
             brT.ClearAllBookings();
-            b1 = dbcT.Sp_CreateBooking("Frank", "12.30", new DateTime(2019, 9, 22, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
-            brT.CreateBooking(b1);
-            Assert.IsTrue(0 < brT.GetBookings().Count && b1.Id > 0);
+            brT.AddBookingToList(b1);
+            Assert.IsTrue(0 < brT.GetBookings().Count);
         }
 
         [TestMethod]
-        public void TestAtToBookingRepo()
+        public void TestCreateBookingId()
         {
-            List<Booking> bookingsT;
-            brT.CreateBooking(b1);
-            bookingsT = brT.GetBookings();
-            Assert.IsTrue(bookingsT.Count > 0);
+            b1 = dbcT.Sp_CreateBooking("Frank", "12.30", new DateTime(2019, 9, 24, 10, 00, 00), "frank@eal.dk", "+4511223344", p1);
+            Assert.IsTrue(b1.Id > 0);
+        }
+
+        [TestMethod]
+        public void TestCreatePickUpDealRepo()
+        {
+            pudrT.ClearPickUpDeals();
+            pudrT.AddPickUpDealToList(pud1);
+            Assert.IsTrue(0 < pudrT.GetPickUpDeals().Count);
+        }
+
+        [TestMethod]
+        public void TestCreatePickUpDealId()
+        {
+            pud1 = dbcT.Sp_CreatePickUpDeal(d1, put1, 5230, v1, 2000, "rødegårdsvej", new DateTime(2019, 9, 24, 10, 00, 00), "15.30");
+            Assert.IsTrue(pud1.PickUpId > 0);
         }
 
         [TestMethod]
         public void DeletedFromBookingRepo() // Testen bliver KUN grøn, hvis der KUN er ÉN booking inde i systemet, når testen bliver kørt
         {
-            //  b1 = brT.Sp_CreatePrivateBooking("Frank", new DateTime(2019, 9, 22, 10, 00, 00), new DateTime(2019, 9, 22, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
-            //b1.CustomerName = "Frank";
-            //b1.StartTime = new DateTime(2019, 9, 22, 10, 00, 00);
-            //b1.BookingDate = new DateTime(2019, 9, 24, 10, 00, 00);
-            //b1.Email = "frank@eal.dk";
-            //b1.Telephone = "+4522334455";
-            //b1.Package = p1;
-            //b1.Vat = "88888888";
-            //b1.Id = 2;
-
-            // brT.CreateBooking(b1);
-            // List<Booking> bookingsT = brT.GetBookings();
-            //bookingsT.Add(b1);
-            //bookingsT.Add(b2);
-            //bookingsT.Add(b3);
-            //bookingsT.Add(b4);
-            brT.CreateBooking(b1);
-            brT.CreateBooking(b2);
-            brT.CreateBooking(b3);
-            brT.CreateBooking(b4);
-            //List<Booking> bookingT = brT.GetBookings();
+   
+            brT.AddBookingToList(b1);
+            brT.AddBookingToList(b2);
+            brT.AddBookingToList(b3);
+            brT.AddBookingToList(b4);
             brT.DeleteBooking(2);
             Assert.AreEqual(brT.GetBookings().Count, 3);
         }
@@ -107,12 +112,12 @@ namespace UnitTestProject1
         public void TestShowBooking()
         {
             List<Booking> bookingsT;
-            cbcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 24, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
-            cbcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 25, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
-            cbcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 26, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
-            cbcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 27, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
-            cbcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 28, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
-            bookingsT = sbcT.ShowBooking(new DateTime(2019, 12, 24, 00, 00, 00));
+            bcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 24, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
+            bcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 25, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
+            bcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 26, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
+            bcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 27, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
+            bcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 28, 00, 00, 00), "frank@eal.dk", "+4511223344", p1);
+            bookingsT = bcT.ShowBooking(new DateTime(2019, 12, 24, 00, 00, 00));
             Assert.IsTrue(bookingsT.Count == 5);
         }
 
@@ -120,7 +125,7 @@ namespace UnitTestProject1
         public void TestFindBooking()
         {
             Booking b1 = new Booking("Frank", "10.30", new DateTime(2019, 12, 03, 00, 00, 00), "frank@eal.dk", "+4511223344", p2, 2, "");
-            brT.CreateBooking(b1);
+            brT.AddBookingToList(b1);
             Booking b2 = brT.GetBooking(2);
             Assert.AreEqual(b2.Id, b1.Id);
         }
@@ -129,9 +134,9 @@ namespace UnitTestProject1
         public void TestUpdateBookingRepo()
         {
             Booking b1 = new Booking("Frank", "10.30", new DateTime(2019, 12, 03, 00, 00, 00), "frank@eal.dk", "+4511223344", p2, 2, "");
-            brT.CreateBooking(b1);
+            brT.AddBookingToList(b1);
             Booking b2 = brT.GetBooking(2);
-            b2.Customer.CustomerName = "Ricky";
+            //b2.Customer.CustomerName = "Ricky"; DEN KAN IKKE SETTES DA DEN ER PRIVAT
             brT.UpdateBooking(b2);
             Booking b3 = brT.GetBooking(2);
             Assert.AreSame(b2.Customer.CustomerName, b3.Customer.CustomerName);
