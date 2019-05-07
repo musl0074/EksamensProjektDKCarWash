@@ -16,29 +16,44 @@ using System.Windows.Shapes;
 
 namespace EksamensProjektDKCarWash
 {
-    /// <summary>
-    /// Interaction logic for WeeklyBookingsPage.xaml
-    /// </summary>
+
+            /*
+            Border b = new Border();
+            b.Background = Brushes.Blue;
+            Grid.SetRow(b, 2);
+            Grid.SetColumn(b, 1);
+            Grid_Main.Children.Add(b);
+            */
+
     public partial class WeeklyBookingsPage : Page
     {
+        public DateTime CurrentMonday { get; set; }
+
         public WeeklyBookingsPage()
         {
             InitializeComponent();
 
-            Label_MonthWeekYear.Content = GetMonthWeekYear();
+            Label_MonthWeekYear.Content = GetMondayToSaturday();
+            CurrentMonday = GetCurrentMonday();
         }
 
-        public string GetMonthWeekYear ()
+        public DateTime GetCurrentMonday ()
         {
-            string month = MonthToString(DateTime.Now.Month);
-
-            CultureInfo cultureInfo = new CultureInfo("da-DK");
-            string week = cultureInfo.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday).ToString();
-
-            string year = DateTime.Now.Year.ToString();
-
-            return $"{month} - {week} - {year}";
+            return DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
+        public string GetMondayToSaturday ()
+        {
+            DateTime monday = GetCurrentMonday();
+            return $"Mandag d. {monday.ToString("dd/MM/yyyy")} - Lørdag d. {monday.AddDays(+5).ToString("dd/MM/yyyy")}";
+        }
+        public string GetMonthWeekYear (DateTime dateTime)
+        {
+            return $"Mandag d. {dateTime.ToString("dd/MM/yyyy")} - Lørdag d. {dateTime.AddDays(+5).ToString("dd/MM/yyyy")}";
+        }
+
+
+        // MonthToString
+        /*
         public string MonthToString (int month)
         {
             switch (month)
@@ -81,8 +96,84 @@ namespace EksamensProjektDKCarWash
             }
 
             return "UNKNOWN";
+        }  // MULIGVIS SLETTES
+        */
+
+        
+        // Button - NAVIGATE LEFT
+        private void Button_NavigateLeft_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentMonday = CurrentMonday.AddDays(-7); // The new CurrentMonday
+            Label_MonthWeekYear.Content = GetMonthWeekYear(CurrentMonday);
+
+            LoadWeek(CurrentMonday);
         }
 
+        // Button - NAVIGATE RIGHT
+        private void Button_NavigateRight_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentMonday = CurrentMonday.AddDays(+7); // The new CurrentMonday
+            Label_MonthWeekYear.Content = GetMonthWeekYear(CurrentMonday);
+
+            LoadWeek(CurrentMonday);
+        }
+
+        // Load all bookings for that week
+        public void LoadWeek (DateTime currentMonday)
+        {
+
+        }
+
+
+
+
+        private void Button_Monday_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime monday = CurrentMonday;
+            LoadDay(monday, "Mandag");
+        }
+
+        private void Button_Tuesday_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime tuesday = CurrentMonday.AddDays(+1);
+            LoadDay(tuesday, "Tirsdag");
+
+        }
+
+        private void Button_Wednesday_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime wednesday = CurrentMonday.AddDays(+2);
+            LoadDay(wednesday, "Onsdag");
+        }
+
+        private void Button_Thursday_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime thursday = CurrentMonday.AddDays(+3);
+            LoadDay(thursday, "Torsdag");
+        }
+
+        private void Button_Friday_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime friday = CurrentMonday.AddDays(+4);
+            LoadDay(friday, "Fredag");
+        }
+
+        private void Button_Saturday_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime saturday = CurrentMonday.AddDays(+5);
+            LoadDay(saturday, "Lørdag");
+        }
+
+
+        public void LoadDay (DateTime date, string day)
+        {
+            Window dailyBookingsWindow = new Window();
+            dailyBookingsWindow.WindowState = WindowState.Maximized;
+            dailyBookingsWindow.Content = new DailyBookingsPage(date, day);
+            dailyBookingsWindow.Show();
+        }
+
+       
     }
 
 

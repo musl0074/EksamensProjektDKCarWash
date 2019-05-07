@@ -55,10 +55,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BookingWindow.xaml.cs">
+      <DependentUpon>BookingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateBookingWindow.xaml.cs">
+      <DependentUpon>CreateBookingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DailyBookingsPage.xaml.cs">
+      <DependentUpon>DailyBookingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateBookingWindow.xaml.cs">
+      <DependentUpon>UpdateBookingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WeeklyBookingsPage.xaml.cs">
       <DependentUpon>WeeklyBookingsPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="CreateBookingPage.xaml">
+    <Page Include="BookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateBookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DailyBookingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,13 +90,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CreateBookingPage.xaml.cs">
-      <DependentUpon>CreateBookingPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UpdateBookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WeeklyBookingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
