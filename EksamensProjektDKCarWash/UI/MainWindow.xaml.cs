@@ -23,6 +23,23 @@ namespace EksamensProjektDKCarWash
         public MainWindow()
         {
             InitializeComponent();
+
+            FrameMain.Content = new WeeklyBookingsPage();
+        }
+
+
+        // Button - CREATE BOOKING
+        private void Button_CreateBooking_Click(object sender, RoutedEventArgs e)
+        {
+            Window createBookingWindow = new CreateBookingWindow();
+            createBookingWindow.WindowState = WindowState.Maximized;
+            createBookingWindow.Show();
+        }
+
+        // Button - SHOW WEEKLY BOOKINGS
+        private void Button_ShowWeeklyBookings_Click(object sender, RoutedEventArgs e)
+        {
+            FrameMain.Content = new WeeklyBookingsPage();
         }
     }
 }

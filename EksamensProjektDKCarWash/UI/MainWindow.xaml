@@ -5,6 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EksamensProjektDKCarWash"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid/>
+        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized">
+    <Grid>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="1049" Margin="254,0,0,0" VerticalAlignment="Top" Width="19" Background="#FF7E7E7E"/>
+        <Button x:Name="Button_ShowWeeklyBookings" Content="Vis Ugeplan" HorizontalAlignment="Left" Margin="13,176,0,0" VerticalAlignment="Top" Width="226" Height="96" FontSize="20" Background="#FFFBFBFB" Click="Button_ShowWeeklyBookings_Click"/>
+        <Button x:Name="Button_CreateBooking" Content="Aftal Booking" HorizontalAlignment="Left" Margin="13,66,0,0" VerticalAlignment="Top" Width="226" Height="96" FontSize="20" Background="#FFFBFBFB" Click="Button_CreateBooking_Click"/>
+        <Frame x:Name="FrameMain" HorizontalAlignment="Left" Height="1049" Margin="273,0,0,0" VerticalAlignment="Top" Width="1639" NavigationUIVisibility="Hidden"/>
+
+    </Grid>
 </Window>
