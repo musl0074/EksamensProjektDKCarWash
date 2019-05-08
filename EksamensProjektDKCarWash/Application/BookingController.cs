@@ -11,16 +11,16 @@ namespace Application
    public class BookingController
     {
         public Booking currentBooking { get; private set; }
-
         private BookingRepo br = new BookingRepo();
-        private IConnector dbc = new DBController();
-        
+        private PackageRepo pr = new PackageRepo();
+        private IConnector dbc = new DBConnector();    
 
 
 
-        public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package, string vat = "")
+        public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, string packageName, string vat = "")
         {
-            Booking b = dbc.Sp_CreateBooking(customerName, startTime, bookingDate, email, telephone, package, vat);
+         
+            Booking b = dbc.Sp_CreateBooking(customerName, startTime, bookingDate, email, telephone, packageName, vat);
             try
             {
                 br.AddBookingToList(b);
@@ -48,12 +48,12 @@ namespace Application
 
         public List<Booking> ShowBooking(DateTime bookingDate)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
-                List<Booking> b1 = dbc.Sp_ShowBooking(bookingDate);
-                foreach (Booking booking in b1)
+                List<Booking> bookingsList = dbc.Sp_ShowBooking(bookingDate);
+                foreach (Booking booking in bookingsList)
                 {
-                    br.AddToShowBookingsList(booking);
+                    br.AddBookingToBookingsData(booking);
                 }
                 bookingDate.AddDays(1);
             }
@@ -66,9 +66,12 @@ namespace Application
             return currentBooking.ToString();
         }
 
-        public string UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, Package package)
+        public string UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, string packageName)
         {
-            currentBooking.UpdateBooking(customerName, bookingDate, startTime, email, telephone, vat, package);
+
+            Package package = pr.FindPackage(packageName);
+            Customer customer = new Customer(customerName, email, telephone, vat);
+            currentBooking.UpdateBooking(customer, startTime, bookingDate, package);
             dbc.Sp_UpdateBooking(currentBooking);
             return br.UpdateBooking(currentBooking);
         }

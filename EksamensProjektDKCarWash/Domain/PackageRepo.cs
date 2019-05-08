@@ -8,5 +8,31 @@ namespace Domain
 {
    public class PackageRepo
     {
+        private List<Package> packages = new List<Package>();
+        
+
+
+        public void AddPackageToList(Package p)
+        {
+            packages.Add(p);
+        }
+
+        public Package FindPackage(string packageName)
+        {
+            foreach (Package package in packages)
+            {
+                if(package.Name == packageName)
+                {
+                    return package;
+                }
+            }
+            return null;
+        }
+
+        public List<Package> GetAllPackages()
+        {
+            return packages;
+        }
+
     }
 }

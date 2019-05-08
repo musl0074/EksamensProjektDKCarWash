@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class PickUpDeal
+    public class PickUpAgreement
     {
         public int PickUpId { get; private set; }
         public Driver Driver { get; private set; }
@@ -19,7 +19,7 @@ namespace Domain
         public DateTime PickUpDate { get; private set; }
         public string PickUpTime { get; private set; }
 
-        public PickUpDeal(int pickUpId, Driver driver, PickUpTruck pickUpTruck, string city, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
+        public PickUpAgreement(int pickUpId, Driver driver, PickUpTruck pickUpTruck, string city, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
         {
             PickUpId = pickUpId;
             Driver = driver;

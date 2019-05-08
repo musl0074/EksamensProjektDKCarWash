@@ -10,7 +10,7 @@ namespace UnitTestProject1
 {
     public class DBTestController : IConnector
     {
-        public Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package, string vat = "")
+        public Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, string packageName, string vat = "")
         {
             throw new NotImplementedException();
         }
@@ -20,7 +20,7 @@ namespace UnitTestProject1
             throw new NotImplementedException();
         }
 
-        public int Sp_FindsingleBookingWithID(int bookingId)
+        public int Sp_FindSingleBookingWithID(int bookingId)
         {
             throw new NotImplementedException();
         }

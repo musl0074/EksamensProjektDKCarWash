@@ -16,36 +16,25 @@ namespace Domain
 
 
  
-        public Booking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package, int id, string vat = "")
+        public Booking(Customer customer, string startTime, DateTime bookingDate, Package package, int id)
         {
-            Customer = new Customer(customerName, email, telephone, vat);
+            Customer = customer;
             StartTime = startTime;
             BookingDate = bookingDate;
             Package = package;     
             Id = id;
         }
-
-        public Booking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, string packageName, int id, string vat = "")
+        public Booking(Customer customer, string startTime, DateTime bookingDate, Package package)
         {
-            Customer = new Customer(customerName, email, telephone, vat);
+            Customer = customer;
             StartTime = startTime;
             BookingDate = bookingDate;
-            Package = new Package(packageName);
-            Id = id;
-         
+            Package = package;
         }
 
-        public Booking(string customerName, string startTime, DateTime bookingDate, string packageName)
+        public void UpdateBooking(Customer customer, string startTime, DateTime bookingDate, Package package)
         {
-            Customer = new Customer(customerName);
-            StartTime = startTime;
-            BookingDate = bookingDate;
-            Package = new Package(packageName);
-        }
-
-        public void UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, Package package)
-        {
-            Customer = new Customer(customerName, email, telephone, vat);
+            Customer = customer;
             BookingDate = bookingDate;
             StartTime = startTime;
             Package = package;
