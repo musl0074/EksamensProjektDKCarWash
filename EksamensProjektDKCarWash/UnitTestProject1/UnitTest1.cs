@@ -32,6 +32,7 @@ namespace UnitTestProject1
             bcT = new BookingController();
             pudcT = new PickUpAgreementController();
             brT = new BookingRepo();
+            pudrT = new PickUpAgreementRepo();
             p1 = new Package("Premium Pakke", "Polering og bilrude", 250.43);
             p2 = new Package("Luksus Pakke", "Polering og bilrude", 25000);
             p3 = new Package("Basis Pakke", "Polering og bilrude", 4444);
@@ -47,7 +48,7 @@ namespace UnitTestProject1
             b2 = new Booking(c1, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), p1, 4);
             b3 = new Booking(c2, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), p1, 3);
             b4 = new Booking(c3, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), p1, 5);
-            pud1 = new PickUpAgreement(1, d1, put1, "Odense M", 5230, v1, 500, "Rødegårdsvej 273", new DateTime(2019, 9, 24, 10, 00, 00), "15.30");
+            pud1 = new PickUpAgreement(1, d1, put1, "Odense C", 5000, v1, 500, "Rødegårdsvej 273", new DateTime(2019, 9, 24, 10, 00, 00), "15.30");
         }
 
 
@@ -77,7 +78,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestCreatePickUpDealId()
         {
-            pud1 = dbcT.Sp_CreatePickUpAgreement(d1, put1, 5230, v1, 2000, "rødegårdsvej", new DateTime(2019, 9, 24, 10, 00, 00), "15.30");
+            pud1 = dbcT.Sp_CreatePickUpAgreement(d1, put1, 5000, v1, 2000, "rødegårdsvej", new DateTime(2019, 9, 24, 10, 00, 00), "15.30");
             Assert.IsTrue(pud1.PickUpId > 0);
         }
 
