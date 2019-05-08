@@ -10,7 +10,9 @@ namespace Domain
     {
         private List<Booking> bookings = new List<Booking>();
         private List<Booking> showBookingsList = new List<Booking>();
-        public void CreateBooking(Booking b)
+        private List<string> bookingsData = new List<string>();
+
+        public void AddBookingToList(Booking b)
         {
             bookings.Add(b);
         }
@@ -74,7 +76,21 @@ namespace Domain
             {
                 bookings.Add(booking);
             }
-            
+        }
+
+        public void ClearAllBookings()
+        {
+            bookings.Clear();
+        }
+
+        public void AddBookingToBookingsData(Booking booking)
+        {
+            bookingsData.Add(booking.ToString());
+        }
+
+        public List<string> GetBookingsData()
+        {
+            return bookingsData;
         }
     }
 }

@@ -8,64 +8,41 @@ namespace Domain
 {
     public class Booking
     {
-        public string CustomerName { get; set; }
-        public string StartTime { get; set; }
-        public DateTime BookingDate { get; set; }
-        public string Email { get; set; }
-        public string Telephone { get; set; }
-        public string Vat { get; set; }
-        public int Id { get; set; }
-        public Package Package { get; set; }
-        public string PackageName { get; set; }
+        public Customer Customer { get; private set; }
+        public string StartTime { get; private set; }
+        public DateTime BookingDate { get; private set; }
+        public int Id { get; private set; }
+        public Package Package { get; private set; }
 
 
  
-        public Booking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, Package package, int id, string vat = "")
+        public Booking(Customer customer, string startTime, DateTime bookingDate, Package package, int id)
         {
-            CustomerName = customerName;
+            Customer = customer;
             StartTime = startTime;
             BookingDate = bookingDate;
-            Email = email;
-            Telephone = telephone;
             Package = package;     
             Id = id;
-            Vat = vat;
         }
-
-        public Booking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, string packageName, int id, string vat = "")
+        public Booking(Customer customer, string startTime, DateTime bookingDate, Package package)
         {
-            CustomerName = customerName;
+            Customer = customer;
             StartTime = startTime;
             BookingDate = bookingDate;
-            Email = email;
-            Telephone = telephone;
-            PackageName = packageName;
-            Id = id;
-            Vat = vat;
+            Package = package;
         }
 
-        public Booking(string customerName, string startTime, DateTime bookingDate, string packageName)
+        public void UpdateBooking(Customer customer, string startTime, DateTime bookingDate, Package package)
         {
-            CustomerName = customerName;
-            StartTime = startTime;
-            BookingDate = bookingDate;
-            PackageName = packageName;
-        }
-
-        public void UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, Package package)
-        {
-            CustomerName = customerName;
+            Customer = customer;
             BookingDate = bookingDate;
             StartTime = startTime;
-            Email = email;
-            Telephone = telephone;
-            Vat = vat;
             Package = package;
         }
 
         public override string ToString()
         {
-            return CustomerName + ":" + BookingDate.ToString() + ":" + StartTime + ":" + Email + ":" + Telephone + ":" + Vat + ":" + Package.Name + ":";
+            return Customer.CustomerName + ":" + BookingDate.ToString() + ":" + StartTime + ":" + Customer.Email + ":" + Customer.Telephone + ":" + Customer.Vat + ":" + Package.Name + ":";
         }
     }
 }

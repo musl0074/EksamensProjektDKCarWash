@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A3C1D4B1-50F1-4E17-847C-06B1DF2EFD26}</ProjectGuid>
+    <ProjectGuid>{E9BCF520-D0A1-4705-95D3-13E0728B60EB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UnitTestProject1</RootNamespace>
@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBTestController.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,16 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj">
-      <Project>{a6f3eba8-d981-4ee1-8a45-e5aff3b2b44c}</Project>
+      <Project>{A6F3EBA8-D981-4EE1-8A45-E5AFF3B2B44C}</Project>
       <Name>Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{21723913-c5ab-4553-95cb-1dce64a90471}</Project>
+      <Project>{21723913-C5AB-4553-95CB-1DCE64A90471}</Project>
       <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UI\UI.csproj">
-      <Project>{5f84dfc8-a174-428a-a367-5dc6be08265f}</Project>
-      <Name>UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
