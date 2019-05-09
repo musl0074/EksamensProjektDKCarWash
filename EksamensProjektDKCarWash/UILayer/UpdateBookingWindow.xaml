@@ -1,0 +1,37 @@
+﻿<Window x:Class="UILayer.UpdateBookingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UILayer"
+        mc:Ignorable="d"
+        Title="UpdateBookingWindow" Height="1080" Width="1920">
+    <Grid>
+        <Viewbox HorizontalAlignment="Left" Height="33" Margin="164,82,0,0" VerticalAlignment="Top" Width="140">
+            <RadioButton x:Name="RadioButton_Private" Content="Privat" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="CustomerType" Height="14" Width="51" Checked="RadioButton_Private_Checked"/>
+        </Viewbox>
+        <Viewbox HorizontalAlignment="Left" Height="30" Margin="322,85,0,0" VerticalAlignment="Top" Width="132">
+            <RadioButton x:Name="RadioButton_Corporate" Content="Erhverv" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="CustomerType" Height="14" Width="59" Checked="RadioButton_Corporate_Checked"/>
+        </Viewbox>
+        <TextBox x:Name="TextBox_CustomerName" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="109,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444"/>
+        <Label Content="Kundenavn:" HorizontalAlignment="Left" Margin="109,165,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="TextBox_Email" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="597,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="597,165,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="TextBox_Phonenumber" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="109,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444"/>
+        <Label Content="Telefonnr:" HorizontalAlignment="Left" Margin="109,275,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="TextBox_VAT" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="597,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" Visibility="Collapsed"/>
+        <Label x:Name="Label_VAT" Content="CVR-nummer:" HorizontalAlignment="Left" Margin="597,275,0,0" VerticalAlignment="Top" FontSize="24" Visibility="Collapsed"/>
+        <ComboBox HorizontalAlignment="Left" Margin="1173,735,0,0" VerticalAlignment="Top" Width="288" Background="White" BorderBrush="#FFA29494" Height="44"/>
+        <Label Content="Vælg pakke(r):" HorizontalAlignment="Left" Margin="1173,693,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Button x:Name="Button_AddPackage" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Height="32" Margin="1470,741,0,0"/>
+        <ListBox HorizontalAlignment="Left" Height="440" Margin="1171,203,0,0" VerticalAlignment="Top" Width="373" Background="White" BorderBrush="Black"/>
+        <Label Content="Valgte pakker:" HorizontalAlignment="Left" Margin="1205,115,0,0" VerticalAlignment="Top" FontSize="48"/>
+        <ComboBox x:Name="ComboBox_TimeStamps" Margin="111,746,0,0" VerticalAlignment="Top" Background="White" BorderBrush="#FFA29494" Height="44" HorizontalAlignment="Left" Width="291"/>
+        <Label Content="Vælg tidspunkt:" HorizontalAlignment="Left" Margin="111,704,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Viewbox HorizontalAlignment="Left" Height="275" Margin="111,404,0,0" VerticalAlignment="Top" Width="335">
+            <Calendar x:Name="Calendar_Main" SelectedDatesChanged="Calendar_Main_SelectedDatesChanged" FirstDayOfWeek="Monday" Height="156"/>
+        </Viewbox>
+        <Button x:Name="Button_CreateBooking" Content="Gem ændringer" HorizontalAlignment="Left" VerticalAlignment="Top" Width="154" Height="50" FontSize="18" Margin="1449,963,0,0" Click="Button_CreateBooking_Click"/>
+
+    </Grid>
+</Window>

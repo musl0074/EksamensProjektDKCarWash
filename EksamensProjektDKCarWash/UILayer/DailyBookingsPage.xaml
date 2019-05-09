@@ -1,0 +1,126 @@
+﻿<Page x:Class="UILayer.DailyBookingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UILayer"
+      mc:Ignorable="d" 
+      d:DesignHeight="1049" d:DesignWidth="1639" Background="White"
+      Title="DailyBookingsPage">
+
+    <Grid x:Name="Grid_Main">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!--WEEK LABEL-->
+        <Label x:Name="Label_Day" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+               Content="Mandag" FontSize="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+        <!-- WEEK DAYS -->
+        <Label x:Name="Button_Monday" Grid.Row="1" Grid.Column="1"
+                Content="PLADS 1" FontSize="30" 
+                VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"/>
+        <Label x:Name="Button_Tuesday" Grid.Row="1" Grid.Column="2"
+                Content="PLADS 2" FontSize="30"
+               VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="3"
+                Content="PLADS 3" FontSize="30"
+               VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="4"
+                Content="PLADS 4" FontSize="30"
+               VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"/>
+
+
+        <!--TIME LABELS-->
+        <Label Grid.Row="2" Grid.Column="0"
+               Content="08:00" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+               FontSize="30"
+               RenderTransformOrigin="0.5,0.5" Margin="0,48">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+
+        <Label Grid.Row="3" Grid.Column="0"
+               Content="10:00" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+               FontSize="30"
+               RenderTransformOrigin="0.5,0.5" Margin="0,48">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+
+        <Label Grid.Row="4" Grid.Column="0"
+               Content="12:00" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+               FontSize="30"
+               RenderTransformOrigin="0.5,0.5" Margin="0,48">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+
+        <Label Grid.Row="5" Grid.Column="0"
+               Content="14:00" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+               FontSize="30"
+               RenderTransformOrigin="0.5,0.5" Margin="0,48">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+
+        <Label Grid.Row="6" Grid.Column="0"
+               Content="16:00" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+               FontSize="30"
+               RenderTransformOrigin="0.5,0.5" Margin="0,48">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+
+
+    </Grid>
+</Page>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Domain;
-using Application;
+using DomainLayer;
+using ApplicationLayer;
 //using UI;
 using System;
 using System.Collections.Generic;
