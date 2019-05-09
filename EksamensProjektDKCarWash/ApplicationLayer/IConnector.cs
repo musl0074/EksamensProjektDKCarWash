@@ -9,7 +9,7 @@ namespace ApplicationLayer
 {
     public interface IConnector
     {
-        Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, string packageName, string vat = "");
+        Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<Package> packages, Vehicle vehicle, string vat = "");
         void Sp_UpdateBooking(Booking currentBooking);
         void Sp_DeleteBooking(int bookingId);
         List<Booking> Sp_ShowBooking(DateTime bookingDate);

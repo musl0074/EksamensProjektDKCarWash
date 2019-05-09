@@ -12,37 +12,42 @@ namespace DomainLayer
         public string StartTime { get; private set; }
         public DateTime BookingDate { get; private set; }
         public int Id { get; private set; }
-        public Package Package { get; private set; }
+        public List<Package> Packages { get; private set; }
 
 
  
-        public Booking(Customer customer, string startTime, DateTime bookingDate, Package package, int id)
+        public Booking(Customer customer, string startTime, DateTime bookingDate, List<Package> packages, int id)
         {
             Customer = customer;
             StartTime = startTime;
             BookingDate = bookingDate;
-            Package = package;     
+            Packages = packages;     
             Id = id;
         }
-        public Booking(Customer customer, string startTime, DateTime bookingDate, Package package)
+        public Booking(Customer customer, string startTime, DateTime bookingDate, List<Package> packages)
         {
             Customer = customer;
             StartTime = startTime;
             BookingDate = bookingDate;
-            Package = package;
+            Packages = packages;
         }
 
-        public void UpdateBooking(Customer customer, string startTime, DateTime bookingDate, Package package)
+        public void UpdateBooking(Customer customer, string startTime, DateTime bookingDate, List<Package> packages)
         {
             Customer = customer;
             BookingDate = bookingDate;
             StartTime = startTime;
-            Package = package;
+            Packages = packages;
         }
 
         public override string ToString()
         {
-            return Customer.CustomerName + ":" + BookingDate.ToString() + ":" + StartTime + ":" + Customer.Email + ":" + Customer.Telephone + ":" + Customer.Vat + ":" + Package.Name + ":";
+            List<string> stringPackages = new List<string>();
+            foreach (Package package in Packages)
+            {
+                stringPackages.Add(package.Name);
+            }
+            return Customer.CustomerName + ":" + BookingDate.ToString() + ":" + StartTime + ":" + Customer.Email + ":" + Customer.Telephone + ":" + Customer.Vat + ":" + stringPackages + ":";
         }
     }
 }

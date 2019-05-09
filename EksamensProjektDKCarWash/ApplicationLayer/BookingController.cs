@@ -17,10 +17,15 @@ namespace ApplicationLayer
 
 
 
-        public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, string packageName, string vat = "")
+        public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<string> packageNames, string licensePlate, string brand, string model, string typeOfCar, string vat = "")
         {
-         
-            Booking b = dbc.Sp_CreateBooking(customerName, startTime, bookingDate, email, telephone, packageName, vat);
+            Vehicle vehicle = new Vehicle(licensePlate, brand, model, typeOfCar);
+            List<Package> packages = new List<Package>();
+            foreach (string packageName in packageNames)
+            {
+                packages.Add(pr.FindPackage(packageName));
+            }
+            Booking b = dbc.Sp_CreateBooking(customerName, startTime, bookingDate, email, telephone, packages, vehicle, vat);
             try
             {
                 br.AddBookingToList(b);
@@ -69,12 +74,16 @@ namespace ApplicationLayer
             return currentBooking.ToString();
         }
 
-        public string UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, string packageName)
+        public string UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, List<string> packageNames)
         {
 
-            Package package = pr.FindPackage(packageName);
+            List<Package> packages = new List<Package>();
+            foreach (string packageName in packageNames)
+            {
+                packages.Add(pr.FindPackage(packageName));
+            }
             Customer customer = new Customer(customerName, email, telephone, vat);
-            currentBooking.UpdateBooking(customer, startTime, bookingDate, package);
+            currentBooking.UpdateBooking(customer, startTime, bookingDate, packages);
             dbc.Sp_UpdateBooking(currentBooking);
             return br.UpdateBooking(currentBooking);
         }

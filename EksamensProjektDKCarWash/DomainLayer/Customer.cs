@@ -12,6 +12,16 @@ namespace DomainLayer
         public string Email { get; private set; }
         public string Telephone { get; private set; }
         public string Vat { get; private set; }
+        public Vehicle Vehicle { get; private set; }
+
+        public Customer(string customerName, string email, string telephone, Vehicle vehicle, string vat = "")
+        {
+            CustomerName = customerName;
+            Email = email;
+            Telephone = telephone;
+            Vat = vat;
+            Vehicle = vehicle;
+        }
 
         public Customer(string customerName, string email, string telephone, string vat = "")
         {
