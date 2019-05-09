@@ -56,6 +56,54 @@ namespace ApplicationLayer
             }
             return b;
         }
+
+
+        public PickUpAgreement Sp_CreatePickUpAgreement(Driver driver, PickUpTruck pickUpTruck, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
+        {
+            PickUpAgreement pua = null;
+            int pickUpId = 0;
+            string city = "";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_CreatePickUpAgreement", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@DriverName", driver.Name));
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpTruckName", pickUpTruck.PickUpTruckName));
+                    cmd1.Parameters.Add(new SqlParameter("@PostalCode", postalCode));
+                    cmd1.Parameters.Add(new SqlParameter("@LicensePlate", vehicle.LicensePlate));
+                    cmd1.Parameters.Add(new SqlParameter("@Brand", vehicle.Brand));
+                    cmd1.Parameters.Add(new SqlParameter("@Model", vehicle.Model));
+                    cmd1.Parameters.Add(new SqlParameter("@TypeOfCar", vehicle.TypeOfCar));
+                    cmd1.Parameters.Add(new SqlParameter("@Price", price));
+                    cmd1.Parameters.Add(new SqlParameter("@StreetName", streetName));
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpDate", pickUpDate));
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpTime", pickUpTime));
+
+                    SqlDataReader reader = cmd1.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            pickUpId = int.Parse(reader["PickUpID"].ToString());
+                            city = reader["City"].ToString();
+                        }
+                    }
+                    pua = new PickUpAgreement(pickUpId, driver, pickUpTruck, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
+                }
+
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+            }
+            return pua;
+        }
+
         //public Booking Sp_CreateBookingStump(string customerName, DateTime startTime, string email, string telephone, int package)
         //{
         //    try
@@ -196,11 +244,7 @@ namespace ApplicationLayer
             }
         }
 
-        public PickUpAgreement Sp_CreatePickUpAgreement(Driver driver, PickUpTruck pickUpTruck, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
-        {
-            PickUpAgreement pud = new PickUpAgreement(0, driver, pickUpTruck, "odense", postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
-            return pud;
-        }
+       
 
         public List<Booking> Sp_GetAllBookings()
         {
