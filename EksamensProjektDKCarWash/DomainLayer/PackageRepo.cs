@@ -8,8 +8,18 @@ namespace DomainLayer
 {
    public class PackageRepo
     {
+        private static PackageRepo instance;
+
         private List<Package> packages = new List<Package>();
         
+
+        public static PackageRepo GetInstance ()
+        {
+            if (instance == null)
+                instance = new PackageRepo();
+
+            return instance;
+        }
 
 
         public void AddPackageToList(Package p)

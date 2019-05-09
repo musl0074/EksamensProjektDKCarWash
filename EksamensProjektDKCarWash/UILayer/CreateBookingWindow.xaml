@@ -31,7 +31,7 @@
         <Viewbox HorizontalAlignment="Left" Height="275" Margin="111,404,0,0" VerticalAlignment="Top" Width="335">
             <Calendar x:Name="Calendar_Main" SelectedDatesChanged="Calendar_Main_SelectedDatesChanged" FirstDayOfWeek="Monday" Height="168"/>
         </Viewbox>
-        <Button x:Name="Button_CreateBooking" Content="Opret booking" HorizontalAlignment="Left" VerticalAlignment="Top" Width="182" Height="70" FontSize="18" IsEnabled="False" Margin="1681,937,0,0"/>
+        <Button x:Name="Button_CreateBooking" Content="Opret booking" HorizontalAlignment="Left" VerticalAlignment="Top" Width="182" Height="70" FontSize="18" IsEnabled="False" Margin="1681,937,0,0" Click="Button_CreateBooking_Click"/>
         <Button x:Name="Button_RemovePackage" Content="Fjern" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="39" Margin="1563,203,0,0" Click="Button_RemovePackage_Click" FontSize="16"/>
 
     </Grid>
