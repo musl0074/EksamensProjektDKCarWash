@@ -11,13 +11,13 @@ namespace UnitTestProject1
     public class UnitTest1
 
     {
-        Booking b1, b2, b3, b4, b5;
+        Booking b1, b2, b3, b4;
         Customer c1, c2, c3;
         PickUpAgreement pud1;
         Package p1, p2, p3;
-        Driver d1, d2, d3, d4;
-        PickUpTruck put1, put2, put3;
-        Vehicle v1, v2, v3, v4;
+        Driver d1, d2, d3;
+        PickUpTruck put1;
+        Vehicle v1;
         List<Package> packages1;
         List<Package> packages2;
         BookingRepo brT;
@@ -59,10 +59,10 @@ namespace UnitTestProject1
             c3 = new Customer("muslim", "muslim@avminali.dk", "004523674598", "");
             put1 = new PickUpTruck("Autotransporter 1");
             v1 = new Vehicle("12ty432", "BMW", "X5", "SUV");
-            b1 = new Booking(c1, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), packages1, 2);
-            b2 = new Booking(c1, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), packages1, 4);
+            b1 = new Booking(c1, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), packages1, 1);
+            b2 = new Booking(c1, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), packages1, 2);
             b3 = new Booking(c2, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), packages2, 3);
-            b4 = new Booking(c3, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), packages2, 5);
+            b4 = new Booking(c3, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), packages2, 4);
             bookingsT = new List<Booking>();
             pud1 = new PickUpAgreement(1, d1, put1, "Odense C", 5000, v1, 500, "Rødegårdsvej 273", new DateTime(2019, 9, 24, 10, 00, 00), "15.30");
         }
@@ -132,17 +132,17 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestShowBooking()
         {
+            
             foreach (Package package in packages1)
             {
-                stringPackagesT.Add(package.Name);
-                prT.AddPackageToList(package);
+                stringPackagesT.Add(package.Name);             
             }
 
-            bcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 24, 00, 00, 00), "frank@eal.dk", "+4511223344", stringPackagesT, "12ty432", "BMW", "X5", "SUV");
-            bcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 25, 00, 00, 00), "frank@eal.dk", "+4511223344", stringPackagesT, "12ty432", "BMW", "X5", "SUV");
-            bcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 26, 00, 00, 00), "frank@eal.dk", "+4511223344", stringPackagesT, "12ty432", "BMW", "X5", "SUV");
-            bcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 27, 00, 00, 00), "frank@eal.dk", "+4511223344", stringPackagesT, "12ty432", "BMW", "X5", "SUV");
-            bcT.CreateBooking("Frank", "12.30", new DateTime(2019, 12, 28, 00, 00, 00), "frank@eal.dk", "+4511223344", stringPackagesT, "12ty432", "BMW", "X5", "SUV");
+            bcT.CreateBooking("muslim", "12.30", new DateTime(2019, 11, 24, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
+            bcT.CreateBooking("muslim", "12.30", new DateTime(2019, 11, 25, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
+            bcT.CreateBooking("muslim", "12.30", new DateTime(2019, 11, 26, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
+            bcT.CreateBooking("muslim", "12.30", new DateTime(2019, 11, 27, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
+            bcT.CreateBooking("muslim", "12.30", new DateTime(2019, 11, 28, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
             bookingsT = bcT.ShowBooking(new DateTime(2019, 12, 24, 00, 00, 00));
             Assert.IsTrue(bookingsT.Count == 5);
         }

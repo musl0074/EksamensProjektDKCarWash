@@ -30,6 +30,11 @@ namespace UnitTestProject1
             throw new NotImplementedException();
         }
 
+        public List<Package> Sp_GetAllPackages()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Booking> Sp_ShowBooking(DateTime bookingDate)
         {
             throw new NotImplementedException();

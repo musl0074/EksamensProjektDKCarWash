@@ -19,6 +19,12 @@ namespace ApplicationLayer
 
         public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<string> packageNames, string licensePlate, string brand, string model, string typeOfCar, string vat = "")
         {
+            List<Package> packagesFromDB = dbc.Sp_GetAllPackages();
+            foreach (Package package in packagesFromDB)
+            {
+                pr.AddPackageToList(package);
+            }
+
             Vehicle vehicle = new Vehicle(licensePlate, brand, model, typeOfCar);
             List<Package> packages = new List<Package>();
             foreach (string packageName in packageNames)

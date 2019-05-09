@@ -15,6 +15,7 @@ namespace ApplicationLayer
         List<Booking> Sp_ShowBooking(DateTime bookingDate);
         int Sp_FindSingleBookingWithID(int bookingId);
         List<Booking> Sp_GetAllBookings();
+        List<Package> Sp_GetAllPackages();
     }
 }
      
