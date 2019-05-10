@@ -62,10 +62,6 @@ namespace DomainLayer
             showBookingsList.Add(b);
         }
 
-        public List<Booking> getShowBookingsList()
-        {
-            return showBookingsList;
-        }
 
         public string UpdateBooking(Booking currentBooking)
         {

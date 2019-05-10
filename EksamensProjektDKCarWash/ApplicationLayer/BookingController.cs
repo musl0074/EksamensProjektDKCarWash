@@ -17,10 +17,21 @@ namespace ApplicationLayer
 
 
 
-        public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, string packageName, string vat = "")
+        public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<string> packageNames, string licensePlate, string brand, string model, string typeOfCar, string vat = "")
         {
-         
-            Booking b = dbc.Sp_CreateBooking(customerName, startTime, bookingDate, email, telephone, packageName, vat);
+            List<Package> packagesFromDB = dbc.Sp_GetAllPackages();
+            foreach (Package package in packagesFromDB)
+            {
+                pr.AddPackageToList(package);
+            }
+
+            Vehicle vehicle = new Vehicle(licensePlate, brand, model, typeOfCar);
+            List<Package> packages = new List<Package>();
+            foreach (string packageName in packageNames)
+            {
+                packages.Add(pr.FindPackage(packageName));
+            }
+            Booking b = dbc.Sp_CreateBooking(customerName, startTime, bookingDate, email, telephone, packages, vehicle, vat);
             try
             {
                 br.AddBookingToList(b);
@@ -49,7 +60,7 @@ namespace ApplicationLayer
         // Input er en MANDAG
             // Går ind og finder alle datoerne for mandagen, bruger Booking.ToString() og tilføjer den til en liste af strings
                 // Dette gør den for Mandag til Lørdag
-        public List<Booking> ShowBooking(DateTime bookingDate)
+        public List<string> ShowBooking(DateTime bookingDate)
         {
             for (int i = 0; i < 6; i++)
             {
@@ -58,9 +69,9 @@ namespace ApplicationLayer
                 {
                     br.AddBookingToBookingsData(booking);
                 }
-                bookingDate.AddDays(1);
+                bookingDate = bookingDate.AddDays(+1);
             }
-            return br.getShowBookingsList();
+            return br.GetBookingsData();
         }
 
         public string GetBooking(int bookingID)
@@ -69,12 +80,16 @@ namespace ApplicationLayer
             return currentBooking.ToString();
         }
 
-        public string UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, string packageName)
+        public string UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, List<string> packageNames)
         {
 
-            Package package = pr.FindPackage(packageName);
+            List<Package> packages = new List<Package>();
+            foreach (string packageName in packageNames)
+            {
+                packages.Add(pr.FindPackage(packageName));
+            }
             Customer customer = new Customer(customerName, email, telephone, vat);
-            currentBooking.UpdateBooking(customer, startTime, bookingDate, package);
+            currentBooking.UpdateBooking(customer, startTime, bookingDate, packages);
             dbc.Sp_UpdateBooking(currentBooking);
             return br.UpdateBooking(currentBooking);
         }
