@@ -36,12 +36,16 @@ namespace UILayer
         {
             Label_VAT.Visibility = Visibility.Visible;
             TextBox_VAT.Visibility = Visibility.Visible;
+
+            CheckEnableCreateButton();
         }
 
         private void RadioButton_Private_Checked(object sender, RoutedEventArgs e)
         {
             Label_VAT.Visibility = Visibility.Collapsed;
             TextBox_VAT.Visibility = Visibility.Collapsed;
+
+            CheckEnableCreateButton();
         }
 
 
@@ -87,6 +91,8 @@ namespace UILayer
             {
                 string package = (string)ComboBox_Packages.SelectedItem;
                 ListBox_Packages.Items.Add(package);
+
+                CheckEnableCreateButton();
             }
         }
 
@@ -95,6 +101,27 @@ namespace UILayer
         {
             if (ListBox_Packages.SelectedItem != null)
                 ListBox_Packages.Items.Remove(ListBox_Packages.SelectedItem);
+
+            CheckEnableCreateButton();
+        }
+
+        // Button - Create booking
+        private void Button_CreateBooking_Click(object sender, RoutedEventArgs e)
+        {
+            string customerName = TextBox_CustomerName.Text;
+            string startTime = (string)ComboBox_TimeStamps.SelectedItem;
+            DateTime bookingDate = (DateTime)Calendar_Main.SelectedDate;
+            string email = TextBox_Email.Text;
+            string telephoneNumber = TextBox_Phonenumber.Text;
+            string vat = TextBox_VAT.Text;
+            List<string> packages = new List<string>();
+
+            foreach (string package in ListBox_Packages.Items)
+            {
+                packages.Add(package);
+            }
+
+            bc.CreateBooking(customerName, startTime, bookingDate, email, telephoneNumber, packages, vat);
         }
 
 
@@ -163,6 +190,8 @@ namespace UILayer
             CheckEnableCreateButton();
         }
 
-       
+
+
+
     }
 }
