@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ApplicationLayer;
 
 namespace UILayer
 {
@@ -19,6 +20,9 @@ namespace UILayer
     /// </summary>
     public partial class UpdateBookingWindow : Window
     {
+        private BookingController bc = new BookingController();
+        private PackageController pc = new PackageController();
+
         public UpdateBookingWindow(int bookingId)
         {
             InitializeComponent();

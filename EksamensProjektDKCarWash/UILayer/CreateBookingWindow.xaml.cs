@@ -34,16 +34,14 @@ namespace UILayer
         // RadioButton
         private void RadioButton_Corporate_Checked(object sender, RoutedEventArgs e)
         {
-            Label_VAT.Visibility = Visibility.Visible;
-            TextBox_VAT.Visibility = Visibility.Visible;
+            TextBox_VAT.IsEnabled = true;
 
             CheckEnableCreateButton();
         }
 
         private void RadioButton_Private_Checked(object sender, RoutedEventArgs e)
         {
-            Label_VAT.Visibility = Visibility.Collapsed;
-            TextBox_VAT.Visibility = Visibility.Collapsed;
+            TextBox_VAT.IsEnabled = false;
 
             CheckEnableCreateButton();
         }
@@ -121,7 +119,12 @@ namespace UILayer
                 packages.Add(package);
             }
 
-            bc.CreateBooking(customerName, startTime, bookingDate, email, telephoneNumber, packages, vat);
+            string licensePlate = TextBox_LicensePlate.Text;
+            string brand = TextBox_Brand.Text;
+            string model = TextBox_Model.Text;
+            string typeOfCar = (string)ComboBox_TypeOfCar.SelectedItem;
+
+            bc.CreateBooking(customerName, startTime, bookingDate, email, telephoneNumber, packages, licensePlate, brand, model, typeOfCar, vat);
         }
 
 
@@ -135,7 +138,12 @@ namespace UILayer
                 TextBox_Email.Text != string.Empty &&
                 TextBox_Phonenumber.Text != string.Empty &&
                 ComboBox_TimeStamps.SelectedItem != null &&
-                ListBox_Packages.HasItems == true)
+                ListBox_Packages.HasItems == true &&
+                TextBox_LicensePlate.Text != string.Empty &&
+                TextBox_Model.Text != string.Empty &&
+                TextBox_Brand.Text != string.Empty &&
+                ComboBox_TypeOfCar.SelectedItem != null
+                )
                 {
                     Button_CreateBooking.IsEnabled = true;
                 }
@@ -151,7 +159,11 @@ namespace UILayer
                 TextBox_Phonenumber.Text != string.Empty &&
                 TextBox_VAT.Text != string.Empty &&
                 ComboBox_TimeStamps.SelectedItem != null &&
-                ListBox_Packages.HasItems == true)
+                ListBox_Packages.HasItems == true && 
+                TextBox_LicensePlate.Text != string.Empty &&
+                TextBox_Model.Text != string.Empty &&
+                TextBox_Brand.Text != string.Empty &&
+                ComboBox_TypeOfCar.SelectedItem != null)
                 {
                     Button_CreateBooking.IsEnabled = true;
                 }
@@ -190,8 +202,24 @@ namespace UILayer
             CheckEnableCreateButton();
         }
 
+        private void ComboBox_TypeOfCar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
 
+        private void TextBox_LicensePlate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
 
+        private void TextBox_Model_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
 
+        private void TextBox_Brand_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
     }
 }
