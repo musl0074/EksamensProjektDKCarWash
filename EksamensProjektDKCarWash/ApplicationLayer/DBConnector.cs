@@ -234,11 +234,15 @@ namespace ApplicationLayer
         {
             List<Booking> bookings = new List<Booking>();
             List<Package> packages = new List<Package>();
+            List<Package> packagesFromDB = new List<Package>();
             Booking b = null;
             string customerName = "";
             string startTime = "";
             string packageName = "";
             string bookingId = "";
+            pr.AddPackageFromDBToList(Sp_GetAllPackages());
+            
+            
 
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -274,7 +278,8 @@ namespace ApplicationLayer
                                         {
                                             while (reader2.Read())
                                             {
-                                                packages.Add(pr.FindPackage((reader["PackageName"].ToString())));
+                                                packageName = reader2["packageName"].ToString();
+                                                packages.Add(pr.FindPackage(packageName));
                                             }
                                         }
                                     }

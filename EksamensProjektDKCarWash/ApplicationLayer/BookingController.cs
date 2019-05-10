@@ -60,7 +60,7 @@ namespace ApplicationLayer
         // Input er en MANDAG
             // Går ind og finder alle datoerne for mandagen, bruger Booking.ToString() og tilføjer den til en liste af strings
                 // Dette gør den for Mandag til Lørdag
-        public List<Booking> ShowBooking(DateTime bookingDate)
+        public List<string> ShowBooking(DateTime bookingDate)
         {
             for (int i = 0; i < 6; i++)
             {
@@ -69,9 +69,9 @@ namespace ApplicationLayer
                 {
                     br.AddBookingToBookingsData(booking);
                 }
-                bookingDate.AddDays(1);
+                bookingDate = bookingDate.AddDays(+1);
             }
-            return br.getShowBookingsList();
+            return br.GetBookingsData();
         }
 
         public string GetBooking(int bookingID)
