@@ -27,6 +27,15 @@ namespace DomainLayer
             packages.Add(p);
         }
 
+        public void AddPackageFromDBToList(List<Package> packagesFromDB)
+        {
+            packages.Clear();
+            foreach (Package package in packagesFromDB)
+            {
+                packages.Add(package);
+            }
+        }
+
         public Package FindPackage(string packageName)
         {
             foreach (Package package in packages)

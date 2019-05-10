@@ -10,7 +10,7 @@ namespace UnitTestProject1
 {
     public class DBTestController : IConnector
     {
-        public Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, string packageName, string vat = "")
+        public Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<Package> packages, Vehicle vehicle, string vat = "")
         {
             throw new NotImplementedException();
         }
@@ -26,6 +26,11 @@ namespace UnitTestProject1
         }
 
         public List<Booking> Sp_GetAllBookings()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Package> Sp_GetAllPackages()
         {
             throw new NotImplementedException();
         }
