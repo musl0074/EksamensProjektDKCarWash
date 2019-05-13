@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="BookingController.cs" />
     <Compile Include="DBConnector.cs" />
-    <Compile Include="IConnector.cs" />
     <Compile Include="PackageController.cs" />
     <Compile Include="PickUpAgreementController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,7 +13,7 @@ namespace ApplicationLayer
         public Booking CurrentBooking { get; private set; }
         private BookingRepo br = BookingRepo.GetInstance();
         private PackageRepo pr = PackageRepo.GetInstance();
-        private IConnector dbc = new DBConnector();    
+        private DBConnector dbc = new DBConnector();    
 
 
 
