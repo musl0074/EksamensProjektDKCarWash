@@ -8,9 +8,21 @@ namespace DomainLayer
 {
     public class BookingRepo
     {
+        private static BookingRepo instance;
+
         private List<Booking> bookings = new List<Booking>();
         private List<Booking> showBookingsList = new List<Booking>();
         private List<string> bookingsData = new List<string>();
+
+
+        public static BookingRepo GetInstance ()
+        {
+            if (instance == null)
+                instance = new BookingRepo();
+
+            return instance;
+        }
+
 
         public void AddBookingToList(Booking b)
         {

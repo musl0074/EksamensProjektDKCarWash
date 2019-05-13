@@ -11,7 +11,7 @@ namespace ApplicationLayer
     public class PickUpAgreementController
     {
         private DBConnector dbc = new DBConnector();
-        private PickUpAgreementRepo puar = new PickUpAgreementRepo();
+        private PickUpAgreementRepo puar = PickUpAgreementRepo.GetInstance();
 
         public void CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string streetName, string licensePlate, string brand, string model, string typeOfCar, DateTime pickUpDate, string pickUpTime, double price)
         {

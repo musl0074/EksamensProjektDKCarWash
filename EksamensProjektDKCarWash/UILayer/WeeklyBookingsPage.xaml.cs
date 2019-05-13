@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ApplicationLayer;
 
 namespace UILayer
 {
@@ -27,6 +28,8 @@ namespace UILayer
 
     public partial class WeeklyBookingsPage : Page
     {
+        private BookingController bc = new BookingController();
+
         public DateTime CurrentMonday { get; set; }
 
         public WeeklyBookingsPage()
@@ -35,6 +38,7 @@ namespace UILayer
 
             Label_MonthWeekYear.Content = GetMondayToSaturday();
             CurrentMonday = GetCurrentMonday();
+            LoadWeeklyBookings(CurrentMonday);
         }
 
         public DateTime GetCurrentMonday ()
@@ -51,53 +55,92 @@ namespace UILayer
             return $"Mandag d. {dateTime.ToString("dd/MM/yyyy")} - Lørdag d. {dateTime.AddDays(+5).ToString("dd/MM/yyyy")}";
         }
 
-
-        // MonthToString
-        /*
-        public string MonthToString (int month)
+        public void LoadWeeklyBookings (DateTime monday)
         {
-            switch (month)
+            List<List<string>> bookings = bc.ShowBooking(monday); // Get all bookings.ToString() from Monday to Saturday
+            
+            int column = 1; // Determines which column to place the UI element in.
+
+            foreach (List<string> day in bookings) // Loop through every day
             {
-                case 1:
-                    return "Januar";
+                int t8 = 0, t10 = 0, t12 = 0, t14 = 0, t16 = 0;  // Counters for bookings @ timespan
 
-                case 2:
-                    return "Februar";
 
-                case 3:
-                    return "Marts";
+                foreach (string booking in day) // Loop through each booking in a day
+                {
+                    string[] split = booking.Split(';'); // Split the ToString() to get data. 
 
-                case 4:
-                    return "April";
+                    switch (split[2]) // StartTime
+                    {
+                        case "08:00":
+                            t8++;
+                            break;
 
-                case 5:
-                    return "Maj";
+                        case "10:00":
+                            t10++;
+                            break;
 
-                case 6:
-                    return "Juni";
+                        case "12:00":
+                            t12++;
+                            break;
 
-                case 7:
-                    return "Juli";
+                        case "14:00":
+                            t14++;
+                            break;
 
-                case 8:
-                    return "August";
+                        case "16:00":
+                            t16++;
+                            break;
+                    }
+                }
 
-                case 9:
-                    return "September";
+                // Insert Borders at their respective rows and columns
+                if (t8 != 0)
+                {
+                    Border b = new Border();
+                    b.Background = Brushes.Gray;
+                    Grid.SetColumn(b, column);
+                    Grid.SetRow(b, 2);
+                    Grid_Main.Children.Add(b);
+                }
+                if (t10 != 0)
+                {
+                    Border b = new Border();
+                    b.Background = Brushes.Gray;
+                    Grid.SetColumn(b, column);
+                    Grid.SetRow(b, 3);
+                    Grid_Main.Children.Add(b);
+                }
+                if (t12 != 0)
+                {
+                    Border b = new Border();
+                    b.Background = Brushes.Gray;
+                    Grid.SetColumn(b, column);
+                    Grid.SetRow(b, 4);
+                    Grid_Main.Children.Add(b);
+                }
+                if (t14 != 0)
+                {
+                    Border b = new Border();
+                    b.Background = Brushes.Gray;
+                    Grid.SetColumn(b, column);
+                    Grid.SetRow(b, 5);
+                    Grid_Main.Children.Add(b);
+                }
+                if (t16 != 0)
+                {
+                    Border b = new Border();
+                    b.Background = Brushes.Gray;
+                    Grid.SetColumn(b, column);
+                    Grid.SetRow(b, 6);
+                    Grid_Main.Children.Add(b);
+                }
 
-                case 10:
-                    return "Oktober";
-
-                case 11:
-                    return "November";
-
-                case 12:
-                    return "December";
+                column++;  // Increment column, so the next iteration of "Day" will use the correct column
             }
 
-            return "UNKNOWN";
-        }  // MULIGVIS SLETTES
-        */
+
+        }
 
         
         // Button - NAVIGATE LEFT
@@ -106,7 +149,7 @@ namespace UILayer
             CurrentMonday = CurrentMonday.AddDays(-7); // The new CurrentMonday
             Label_MonthWeekYear.Content = GetMonthWeekYear(CurrentMonday);
 
-            LoadWeek(CurrentMonday);
+            LoadWeeklyBookings(CurrentMonday);
         }
 
         // Button - NAVIGATE RIGHT
@@ -115,14 +158,10 @@ namespace UILayer
             CurrentMonday = CurrentMonday.AddDays(+7); // The new CurrentMonday
             Label_MonthWeekYear.Content = GetMonthWeekYear(CurrentMonday);
 
-            LoadWeek(CurrentMonday);
+            LoadWeeklyBookings(CurrentMonday);
         }
+        
 
-        // Load all bookings for that week
-        public void LoadWeek (DateTime currentMonday)
-        {
-
-        }
 
 
 

@@ -8,7 +8,18 @@ namespace DomainLayer
 {
    public class PickUpAgreementRepo
     {
+        private static PickUpAgreementRepo instance;
+
         private List<PickUpAgreement> pickUpAgreements = new List<PickUpAgreement>();
+
+
+        public static PickUpAgreementRepo GetInstance ()
+        {
+            if (instance == null)
+                instance = new PickUpAgreementRepo();
+
+            return instance;
+        }
 
         public void AddPickUpAgreementToList(PickUpAgreement pua)
         {
