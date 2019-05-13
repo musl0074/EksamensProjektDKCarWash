@@ -56,17 +56,22 @@ namespace ApplicationLayer
                     Console.WriteLine("Ups" + e.Message);
                 }
 
+
+               
+
                 foreach (Package package in packages)
                 {
                     try
                     {
                         SqlCommand cmd2 = new SqlCommand("Sp_AddPackagesToBooking", con);
                         cmd2.CommandType = CommandType.StoredProcedure;
+                        cmd2.Parameters.Clear();
                         cmd2.Parameters.Add(new SqlParameter("@BookingId", id));
                         cmd2.Parameters.Add(new SqlParameter("@PackageName", package.Name));
 
-                        SqlDataReader reader = cmd2.ExecuteReader();
-
+                        
+                        cmd2.ExecuteNonQuery();
+                        cmd2.Dispose();
                         //if (reader.HasRows)
                         //{
                         //    while (reader.Read())
@@ -75,7 +80,7 @@ namespace ApplicationLayer
                         //    }
                         //}
 
-                        reader.Close();
+                        
                     }
 
                     catch (SqlException e)

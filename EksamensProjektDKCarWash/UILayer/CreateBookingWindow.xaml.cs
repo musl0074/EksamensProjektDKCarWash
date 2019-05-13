@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,7 +29,9 @@ namespace UILayer
             InitializeComponent();
 
             UpdateUpToCurrentDate();
-            LoadPackages();
+
+            Thread packageThread = new Thread(() => LoadPackages());
+            packageThread.Start();
         }
 
         // RadioButton
@@ -74,11 +77,11 @@ namespace UILayer
         public void LoadPackages ()
         {
             List<string> packagesString = pc.LoadAllPackagesToString();
-            ComboBox_Packages.Items.Clear();
+            Dispatcher.BeginInvoke(new Action(() => ComboBox_Packages.Items.Clear()));  // Need to use dispatcher to make changes to UI
 
             foreach (string package in packagesString)
             {
-                ComboBox_Packages.Items.Add(package);
+                Dispatcher.BeginInvoke(new Action(() => ComboBox_Packages.Items.Add(package)));
             }
         }
 
@@ -122,7 +125,8 @@ namespace UILayer
             string licensePlate = TextBox_LicensePlate.Text;
             string brand = TextBox_Brand.Text;
             string model = TextBox_Model.Text;
-            string typeOfCar = (string)ComboBox_TypeOfCar.SelectedItem;
+            Label typeOfCarLabel = (Label)ComboBox_TypeOfCar.SelectedItem;
+            string typeOfCar = (string)typeOfCarLabel.Content;
 
             bc.CreateBooking(customerName, startTime, bookingDate, email, telephoneNumber, packages, licensePlate, brand, model, typeOfCar, vat);
         }
