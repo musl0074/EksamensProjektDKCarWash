@@ -10,7 +10,7 @@ namespace ApplicationLayer
    public class PackageController
     {
         DBConnector dbc = new DBConnector();
-        PackageRepo pr = new PackageRepo();
+        PackageRepo pr = PackageRepo.GetInstance();
         
         public void LoadAllPackagesToPackageRepo()
         {

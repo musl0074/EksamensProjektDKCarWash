@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ApplicationLayer;
 
 namespace UILayer
 {
@@ -27,6 +28,8 @@ namespace UILayer
 
     public partial class WeeklyBookingsPage : Page
     {
+        private BookingController bc = new BookingController();
+
         public DateTime CurrentMonday { get; set; }
 
         public WeeklyBookingsPage()
@@ -35,6 +38,7 @@ namespace UILayer
 
             Label_MonthWeekYear.Content = GetMondayToSaturday();
             CurrentMonday = GetCurrentMonday();
+            LoadWeeklyBookings(CurrentMonday);
         }
 
         public DateTime GetCurrentMonday ()
@@ -53,7 +57,7 @@ namespace UILayer
 
         public void LoadWeeklyBookings (DateTime monday)
         {
-            List<List<string>> bookings = bc.GetAllBookings(monday); // Get all bookings.ToString() from Monday to Saturday
+            List<List<string>> bookings = bc.ShowBooking(monday); // Get all bookings.ToString() from Monday to Saturday
             
             int column = 1; // Determines which column to place the UI element in.
 
@@ -64,7 +68,7 @@ namespace UILayer
 
                 foreach (string booking in day) // Loop through each booking in a day
                 {
-                    string[] split = booking.Split(':'); // Split the ToString() to get data. 
+                    string[] split = booking.Split(';'); // Split the ToString() to get data. 
 
                     switch (split[2]) // StartTime
                     {
@@ -94,6 +98,7 @@ namespace UILayer
                 if (t8 != 0)
                 {
                     Border b = new Border();
+                    b.Background = Brushes.Gray;
                     Grid.SetColumn(b, column);
                     Grid.SetRow(b, 2);
                     Grid_Main.Children.Add(b);
@@ -101,6 +106,7 @@ namespace UILayer
                 if (t10 != 0)
                 {
                     Border b = new Border();
+                    b.Background = Brushes.Gray;
                     Grid.SetColumn(b, column);
                     Grid.SetRow(b, 3);
                     Grid_Main.Children.Add(b);
@@ -108,6 +114,7 @@ namespace UILayer
                 if (t12 != 0)
                 {
                     Border b = new Border();
+                    b.Background = Brushes.Gray;
                     Grid.SetColumn(b, column);
                     Grid.SetRow(b, 4);
                     Grid_Main.Children.Add(b);
@@ -115,6 +122,7 @@ namespace UILayer
                 if (t14 != 0)
                 {
                     Border b = new Border();
+                    b.Background = Brushes.Gray;
                     Grid.SetColumn(b, column);
                     Grid.SetRow(b, 5);
                     Grid_Main.Children.Add(b);
@@ -122,6 +130,7 @@ namespace UILayer
                 if (t16 != 0)
                 {
                     Border b = new Border();
+                    b.Background = Brushes.Gray;
                     Grid.SetColumn(b, column);
                     Grid.SetRow(b, 6);
                     Grid_Main.Children.Add(b);
