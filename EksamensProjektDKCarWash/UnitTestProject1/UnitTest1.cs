@@ -140,11 +140,11 @@ namespace UnitTestProject1
                 stringPackagesT.Add(package.Name);
             }
             
-            bcT.CreateBooking("muslim", "12.30", new DateTime(2019, 12, 24, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
-            bcT.CreateBooking("muslim", "12.30", new DateTime(2019, 12, 25, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
-            bcT.CreateBooking("muslim", "12.30", new DateTime(2019, 12, 26, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
-            bcT.CreateBooking("muslim", "12.30", new DateTime(2019, 12, 27, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
-            bcT.CreateBooking("muslim", "12.30", new DateTime(2019, 12, 28, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
+            bcT.CreateBooking("muslim", "08:00", new DateTime(2019, 05, 06, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
+            bcT.CreateBooking("muslim", "10:00", new DateTime(2019, 05, 07, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
+            bcT.CreateBooking("muslim", "12:00", new DateTime(2019, 05, 08, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
+            bcT.CreateBooking("muslim", "14:00", new DateTime(2019, 05, 09, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
+            bcT.CreateBooking("muslim", "16:00", new DateTime(2019, 05, 10, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
             bookingStringsT = bcT.ShowBooking(new DateTime(2019, 12, 24, 00, 00, 00));
             Assert.IsTrue(bookingStringsT.Count == 5);
         }
