@@ -13,9 +13,9 @@ namespace ApplicationLayer
         public Booking CurrentBooking { get; private set; }
         private BookingRepo br = BookingRepo.GetInstance();
         private PackageRepo pr = PackageRepo.GetInstance();
-        private IConnector dbc = new DBConnector();    
+        private DBConnector dbc = new DBConnector();    
 
-
+        
 
         public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<string> packageNames, string licensePlate, string brand, string model, string typeOfCar, string vat = "")
         {

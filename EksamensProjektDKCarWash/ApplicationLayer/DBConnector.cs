@@ -82,7 +82,6 @@ namespace ApplicationLayer
 
                         
                     }
-
                     catch (SqlException e)
                     {
                         Console.WriteLine("Ups" + e.Message);
