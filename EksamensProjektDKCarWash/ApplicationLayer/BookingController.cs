@@ -135,19 +135,19 @@ namespace ApplicationLayer
                 }
             }
 
-            if (t8 != 4)
+            if (t8 < 4)
                 timestamps.Add("08:00");
 
-            if (t10 != 4)
+            if (t10 < 4)
                 timestamps.Add("10:00");
 
-            if (t12 != 4)
+            if (t12 < 4)
                 timestamps.Add("12:00");
 
-            if (t14 != 4)
+            if (t14 < 4)
                 timestamps.Add("14:00");
 
-            if (t16 != 4)
+            if (t16 < 4)
                 timestamps.Add("16:00");
 
             return timestamps;
