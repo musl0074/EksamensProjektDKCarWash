@@ -82,7 +82,6 @@ namespace ApplicationLayer
 
                         
                     }
-
                     catch (SqlException e)
                     {
                         Console.WriteLine("Ups" + e.Message);
@@ -318,10 +317,11 @@ namespace ApplicationLayer
                              
                             }
 
+                            Customer customer = new Customer(customerName);
+                            b = new Booking(customer, startTime, bookingDate, packages);
+                            bookings.Add(b);
                         }
-                        Customer customer = new Customer(customerName);
-                        b = new Booking(customer, startTime, bookingDate, packages);
-                        bookings.Add(b);
+                        
                     }
                 }
 
