@@ -38,6 +38,31 @@ namespace DomainLayer
             pickUpAgreements.Clear();
         }
 
+        public void DeletePickUpAgreement(int pickUpAgreementId)
+        {
+            foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
+            {
+                if(pickUpAgreement.PickUpAgreementID == pickUpAgreementId)
+                {
+                    pickUpAgreements.Remove(pickUpAgreement);
+                }
+            }
+        }
+
+        public string UpdatePickUpAgreement(PickUpAgreement currentPickUpAgreement)
+        {
+            foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
+            {
+                if (currentPickUpAgreement.PickUpAgreementID == pickUpAgreement.PickUpAgreementID)
+                {
+                    pickUpAgreements.Remove(pickUpAgreement);
+                    pickUpAgreements.Add(currentPickUpAgreement);
+                    return "Booking er ændret!";
+                }
+            }
+            return "En fejl er forekommet og booking er ikke ændret!";
+        }
+
 
     }
 }

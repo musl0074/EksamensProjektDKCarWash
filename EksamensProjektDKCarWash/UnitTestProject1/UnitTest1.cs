@@ -55,7 +55,7 @@ namespace UnitTestProject1
             d1 = new Driver("Mathias");
             d2 = new Driver("Muslim");
             d3 = new Driver("Adam");
-            v1 = new Vehicle("12ty432", "BMW", "X5", "SUV");
+            v1 = new Vehicle("12ty432", "BMW");
             c1 = new Customer("Frank", "Frankeee@eee.dk", "004523438452", "");
             c2 = new Customer("Daniel", "muslim@eal.dk", "004522639513", v1, "");
             c3 = new Customer("muslim", "muslim@avminali.dk", "004523674598", "");

@@ -35,8 +35,6 @@ namespace UnitTestProject1
                     cmd1.Parameters.Add(new SqlParameter("@VAT", vat));
                     cmd1.Parameters.Add(new SqlParameter("@LicensePlate", vehicle.LicensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@Brand", vehicle.Brand));
-                    cmd1.Parameters.Add(new SqlParameter("@Model", vehicle.Model));
-                    cmd1.Parameters.Add(new SqlParameter("@TypeOfCar", vehicle.TypeOfCar));
 
                     SqlDataReader reader = cmd1.ExecuteReader();
 
@@ -112,8 +110,6 @@ namespace UnitTestProject1
                     cmd1.Parameters.Add(new SqlParameter("@PostalCode", postalCode));
                     cmd1.Parameters.Add(new SqlParameter("@LicensePlate", vehicle.LicensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@Brand", vehicle.Brand));
-                    cmd1.Parameters.Add(new SqlParameter("@Model", vehicle.Model));
-                    cmd1.Parameters.Add(new SqlParameter("@TypeOfCar", vehicle.TypeOfCar));
                     cmd1.Parameters.Add(new SqlParameter("@Price", price));
                     cmd1.Parameters.Add(new SqlParameter("@StreetName", streetName));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpDate", pickUpDate));
@@ -168,8 +164,6 @@ namespace UnitTestProject1
                     cmd1.Parameters.Add(new SqlParameter("@BookingDate", currentBooking.BookingDate));
                     cmd1.Parameters.Add(new SqlParameter("@Email", currentBooking.Customer.Email));
                     cmd1.Parameters.Add(new SqlParameter("@Brand", currentBooking.Customer.Vehicle.Brand));
-                    cmd1.Parameters.Add(new SqlParameter("@Model", currentBooking.Customer.Vehicle.Model));
-                    cmd1.Parameters.Add(new SqlParameter("@TypeOfCar", currentBooking.Customer.Vehicle.TypeOfCar));
                     cmd1.Parameters.Add(new SqlParameter("@LicensePlate", currentBooking.Customer.Vehicle.LicensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", currentBooking.Customer.Telephone));
                     cmd1.Parameters.Add(new SqlParameter("@VAT", currentBooking.Customer.Vat));
@@ -434,7 +428,7 @@ namespace UnitTestProject1
                                 }
                             }
 
-                            Vehicle vehicle = new Vehicle(licensePlate, brand, model, typeOfCar);
+                            Vehicle vehicle = new Vehicle(licensePlate, brand);
                             Customer customer = new Customer(customerName, email, telephone, vehicle, VAT);
                             b = new Booking(customer, startTime, bookingDate, packages, bookingId);
                             bookings.Add(b);

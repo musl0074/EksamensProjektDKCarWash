@@ -17,21 +17,19 @@ namespace ApplicationLayer
 
 
 
-        public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<string> packageNames, string licensePlate, string brand, string model, string typeOfCar, string vat = "")
+        public void CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<string> packageNames, string licensePlate, string brand, string vat = "")
         {
             List<Package> packagesFromDB = dbc.Sp_GetAllPackages();
             foreach (Package package in packagesFromDB)
             {
                 pr.AddPackageToList(package);
             }
-
-            Vehicle vehicle = new Vehicle(licensePlate, brand, model, typeOfCar);
             List<Package> packages = new List<Package>();
             foreach (string packageName in packageNames)
             {
                 packages.Add(pr.FindPackage(packageName));
             }
-            Booking b = dbc.Sp_CreateBooking(customerName, startTime, bookingDate, email, telephone, packages, vehicle, vat);
+            Booking b = dbc.Sp_CreateBooking(customerName, startTime, bookingDate, email, telephone, packages, licensePlate, brand, vat);
             try
             {
                 br.AddBookingToList(b);
@@ -87,7 +85,7 @@ namespace ApplicationLayer
             return CurrentBooking.ToString();
         }
 
-        public string UpdateBooking(string customerName, DateTime bookingDate, string startTime, string email, string telephone, string vat, List<string> packageNames)
+        public string UpdateBooking(int customerId, int vehicleId, string customerName, DateTime bookingDate, string startTime, string email, string licensePlate, string brand, string telephone, string vat, List<string> packageNames)
         {
 
             List<Package> packages = new List<Package>();
@@ -95,7 +93,8 @@ namespace ApplicationLayer
             {
                 packages.Add(pr.FindPackage(packageName));
             }
-            Customer customer = new Customer(customerName, email, telephone, vat);
+            Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
+            Customer customer = new Customer(customerName, email, telephone, vehicle, customerId, vat);
             CurrentBooking.UpdateBooking(customer, startTime, bookingDate, packages);
             dbc.Sp_UpdateBooking(CurrentBooking);
             return br.UpdateBooking(CurrentBooking);
