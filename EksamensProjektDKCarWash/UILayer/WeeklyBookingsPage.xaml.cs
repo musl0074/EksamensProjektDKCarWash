@@ -41,6 +41,9 @@ namespace UILayer
             LoadWeeklyBookings(CurrentMonday);
         }
 
+
+
+
         public DateTime GetCurrentMonday ()
         {
             return DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
@@ -57,6 +60,24 @@ namespace UILayer
 
         public void LoadWeeklyBookings (DateTime monday)
         {
+            // Draw the grid
+            for (int i = 1; i < 7; i++)
+            {
+                for (int y = 2; y < 7; y++)
+                {
+                    Border b = new Border();
+                    b.BorderThickness = new Thickness(1);
+                    b.BorderBrush = Brushes.Gray;
+
+                    Grid.SetColumn(b, i);
+                    Grid.SetRow(b, y);
+                    Grid_Main.Children.Add(b);
+                }
+            }
+
+
+
+
             List<List<string>> bookings = bc.ShowBooking(monday); // Get all bookings.ToString() from Monday to Saturday
             
             int column = 1; // Determines which column to place the UI element in.
@@ -97,43 +118,63 @@ namespace UILayer
                 // Insert Borders at their respective rows and columns
                 if (t8 != 0)
                 {
-                    Border b = new Border();
-                    b.Background = Brushes.Gray;
-                    Grid.SetColumn(b, column);
-                    Grid.SetRow(b, 2);
-                    Grid_Main.Children.Add(b);
+                    Label l = new Label();
+                    l.Content = t8;
+                    l.VerticalContentAlignment = VerticalAlignment.Center;
+                    l.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    l.FontSize = 75;
+
+                    Grid.SetColumn(l, column);
+                    Grid.SetRow(l, 2);
+                    Grid_Main.Children.Add(l);
                 }
                 if (t10 != 0)
                 {
-                    Border b = new Border();
-                    b.Background = Brushes.Gray;
-                    Grid.SetColumn(b, column);
-                    Grid.SetRow(b, 3);
-                    Grid_Main.Children.Add(b);
+                    Label l = new Label();
+                    l.Content = t8;
+                    l.VerticalContentAlignment = VerticalAlignment.Center;
+                    l.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    l.FontSize = 75;
+
+                    Grid.SetColumn(l, column);
+                    Grid.SetRow(l, 3);
+                    Grid_Main.Children.Add(l);
                 }
                 if (t12 != 0)
                 {
-                    Border b = new Border();
-                    b.Background = Brushes.Gray;
-                    Grid.SetColumn(b, column);
-                    Grid.SetRow(b, 4);
-                    Grid_Main.Children.Add(b);
+                    Label l = new Label();
+                    l.Content = t8;
+                    l.VerticalContentAlignment = VerticalAlignment.Center;
+                    l.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    l.FontSize = 75;
+
+                    Grid.SetColumn(l, column);
+                    Grid.SetRow(l, 4);
+                    Grid_Main.Children.Add(l);
                 }
                 if (t14 != 0)
                 {
-                    Border b = new Border();
-                    b.Background = Brushes.Gray;
-                    Grid.SetColumn(b, column);
-                    Grid.SetRow(b, 5);
-                    Grid_Main.Children.Add(b);
+                    Label l = new Label();
+                    l.Content = t8;
+                    l.VerticalContentAlignment = VerticalAlignment.Center;
+                    l.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    l.FontSize = 75;
+
+                    Grid.SetColumn(l, column);
+                    Grid.SetRow(l, 5);
+                    Grid_Main.Children.Add(l);
                 }
                 if (t16 != 0)
                 {
-                    Border b = new Border();
-                    b.Background = Brushes.Gray;
-                    Grid.SetColumn(b, column);
-                    Grid.SetRow(b, 6);
-                    Grid_Main.Children.Add(b);
+                    Label l = new Label();
+                    l.Content = t8;
+                    l.VerticalContentAlignment = VerticalAlignment.Center;
+                    l.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    l.FontSize = 75;
+
+                    Grid.SetColumn(l, column);
+                    Grid.SetRow(l, 6);
+                    Grid_Main.Children.Add(l);
                 }
 
                 column++;  // Increment column, so the next iteration of "Day" will use the correct column
