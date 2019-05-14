@@ -47,7 +47,7 @@ namespace DomainLayer
             {
                 stringPackages.Add(package.Name);
             }
-            return Customer.CustomerName + ";" + BookingDate.ToString() + ";" + StartTime + ";" + Customer.Email + ";" + Customer.Telephone + ";" + Customer.Vat + ";" + stringPackages + ":";
+            return Id + ";"+ Customer.CustomerName + ";" + BookingDate.ToString() + ";" + StartTime + ";" + Customer.Email + ";" + Customer.Telephone + ";" + Customer.Vat + ";" + stringPackages + ":";
         }
     }
 }

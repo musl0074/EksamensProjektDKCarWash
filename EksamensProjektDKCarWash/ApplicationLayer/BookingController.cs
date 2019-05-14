@@ -153,5 +153,81 @@ namespace ApplicationLayer
 
             return timestamps;
         }
+        public List<string>GetDailyBookings(DateTime DailyDateTime)
+        {
+            List<string> dailyBookingsStrings = new List<string>();
+           List<Booking>dailybookings= dbc.Sp_ShowBooking(DailyDateTime);
+
+            foreach (Booking item in dailybookings)
+            {
+                string tostring = item.ToString();
+                string[] split = tostring.Split(';');
+                string combineString = split[0] + split[3] + split[7];
+                dailyBookingsStrings.Add(combineString);
+            }
+
+            return dailyBookingsStrings = SortedByStartTime(dailyBookingsStrings);
+
+        }
+        public List<string> SortedByStartTime(List<string> unsortedList)
+        {
+            List<string> list8 = new List<string>();
+            List<string> list10 = new List<string>();
+            List<string> list12 = new List<string>();
+            List<string> list14 = new List<string>();
+            List<string> list16 = new List<string>();
+            List<string> listSorted = new List<string>();
+
+
+
+
+            foreach (var item in unsortedList)
+            {
+                string[] split = item.Split(';');
+                if (split[1] == "08:00")
+                {
+                    list8.Add(item);
+                }
+                if (split[1] == "10:00")
+                {
+                    list10.Add(item);
+                }
+                if (split[1] == "12:00")
+                {
+                    list12.Add(item);
+                }
+                if (split[1] == "14:00")
+                {
+                    list14.Add(item);
+                }
+                if (split[1] == "16:00")
+                {
+                    list16.Add(item);
+                }
+            }
+            foreach (var item in list8)
+            {
+                listSorted.Add(item);
+            }
+            foreach (var item in list10)
+            {
+                listSorted.Add(item);
+            }
+            foreach (var item in list12)
+            {
+                listSorted.Add(item);
+            }
+            foreach (var item in list14)
+            {
+                listSorted.Add(item);
+            }
+            foreach (var item in list16)
+
+            {
+                listSorted.Add(item);
+            }
+            return listSorted;
+        }
+
     }
 }
