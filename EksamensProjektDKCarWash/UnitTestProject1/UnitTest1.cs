@@ -55,10 +55,10 @@ namespace UnitTestProject1
             d1 = new Driver("Mathias");
             d2 = new Driver("Muslim");
             d3 = new Driver("Adam");
-            v1 = new Vehicle("12ty432", "BMW");
-            c1 = new Customer("Frank", "Frankeee@eee.dk", "004523438452", "");
-            c2 = new Customer("Daniel", "muslim@eal.dk", "004522639513", v1, "");
-            c3 = new Customer("muslim", "muslim@avminali.dk", "004523674598", "");
+            v1 = new Vehicle("12ty432", "BMW", 1);
+            c1 = new Customer("Frank", "Frankeee@eee.dk", "004523438452", 1, "");
+            c2 = new Customer("Daniel", "muslim@eal.dk", "004522639513", v1, 2, "");
+            c3 = new Customer("muslim", "muslim@avminali.dk", "004523674598", 3, "");
             put1 = new PickUpTruck("Autotransporter 1");
             b1 = new Booking(c1, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), packages1, 1);
             b2 = new Booking(c1, "12.30", new DateTime(2019, 9, 24, 10, 00, 00), packages1, 2);
@@ -81,7 +81,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestCreateBookingId()
         {
-            b1 = dbcT.Sp_CreateBooking("Frank", "12.30", new DateTime(2019, 9, 24, 10, 00, 00), "frank@eal.dk", "+4511223344", packages1, v1);
+            b1 = dbcT.Sp_CreateBooking(c1.CustomerName, "14:00", new DateTime(2019, 9, 24, 10, 00, 00), c1.Email, c1.Telephone, packages1, v1.LicensePlate, v1.Brand, "");
             Assert.IsTrue(b1.Id > 0);
         }
 
@@ -96,8 +96,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestCreatePickUpDealId()
         {
-            pud1 = dbcT.Sp_CreatePickUpAgreement(d1, put1, 5000, v1, 2000, "rødegårdsvej", new DateTime(2019, 9, 24, 10, 00, 00), "15.30");
-            Assert.IsTrue(pud1.PickUpId > 0);
+            pud1 = dbcT.Sp_CreatePickUpAgreement(d1.Name, p1.Name, 5230, "43ty545", "BMW", 500, "Rødegårdsvej 273", new DateTime(2019, 9, 24, 10, 00, 00), "10:30");
+            Assert.IsTrue(pud1.PickUpAgreementID > 0);
         }
 
         [TestMethod]
@@ -140,12 +140,12 @@ namespace UnitTestProject1
                 stringPackagesT.Add(package.Name);
             }
  
-            bcT.CreateBooking("muslim", "08:00", new DateTime(2019, 06, 05, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
-            bcT.CreateBooking("muslim", "10:00", new DateTime(2019, 06, 06, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
-            bcT.CreateBooking("muslim", "12:00", new DateTime(2019, 06, 07, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
-            bcT.CreateBooking("muslim", "14:00", new DateTime(2019, 06, 08, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
-            bcT.CreateBooking("muslim", "16:00", new DateTime(2019, 06, 10, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
-            bcT.CreateBooking("muslim", "18:00", new DateTime(2019, 06, 11, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES", "AMG", "SEDAN");
+            bcT.CreateBooking("muslim", "08:00", new DateTime(2019, 06, 05, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
+            bcT.CreateBooking("muslim", "10:00", new DateTime(2019, 06, 06, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
+            bcT.CreateBooking("muslim", "12:00", new DateTime(2019, 06, 07, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
+            bcT.CreateBooking("muslim", "14:00", new DateTime(2019, 06, 08, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
+            bcT.CreateBooking("muslim", "16:00", new DateTime(2019, 06, 10, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
+            bcT.CreateBooking("muslim", "18:00", new DateTime(2019, 06, 11, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
             bookingStringsT = bcT.ShowBooking(new DateTime(2019, 06, 05, 00, 00, 00));
             Assert.IsTrue(bookingStringsT.Count == 6);
         }
