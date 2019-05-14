@@ -1,16 +1,15 @@
-﻿using System;
+﻿using DomainLayer;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using DomainLayer;
 
-namespace ApplicationLayer
+namespace UnitTestProject1
 {
-    public class DBConnector
+    public class DBConnectorTest
     {
         PackageRepo pr = new PackageRepo();
         private static string connectionString = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
@@ -32,7 +31,7 @@ namespace ApplicationLayer
                     cmd1.Parameters.Add(new SqlParameter("@StartTime", startTime));
                     cmd1.Parameters.Add(new SqlParameter("@BookingDate", bookingDate));
                     cmd1.Parameters.Add(new SqlParameter("@Email", email));
-                    cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", telephone));              
+                    cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", telephone));
                     cmd1.Parameters.Add(new SqlParameter("@VAT", vat));
                     cmd1.Parameters.Add(new SqlParameter("@LicensePlate", vehicle.LicensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@Brand", vehicle.Brand));
@@ -57,7 +56,7 @@ namespace ApplicationLayer
                 }
 
 
-               
+
 
                 foreach (Package package in packages)
                 {
@@ -69,7 +68,7 @@ namespace ApplicationLayer
                         cmd2.Parameters.Add(new SqlParameter("@BookingId", id));
                         cmd2.Parameters.Add(new SqlParameter("@PackageName", package.Name));
 
-                        
+
                         cmd2.ExecuteNonQuery();
                         cmd2.Dispose();
                         //if (reader.HasRows)
@@ -80,13 +79,14 @@ namespace ApplicationLayer
                         //    }
                         //}
 
-                        
+
                     }
+
                     catch (SqlException e)
                     {
                         Console.WriteLine("Ups" + e.Message);
                     }
-                }             
+                }
                 Customer customer = new Customer(customerName, email, telephone, vat);
                 b = new Booking(customer, startTime, bookingDate, packages, id);
             }
@@ -167,6 +167,10 @@ namespace ApplicationLayer
                     cmd1.Parameters.Add(new SqlParameter("@CustomerName", currentBooking.Customer.CustomerName));
                     cmd1.Parameters.Add(new SqlParameter("@BookingDate", currentBooking.BookingDate));
                     cmd1.Parameters.Add(new SqlParameter("@Email", currentBooking.Customer.Email));
+                    cmd1.Parameters.Add(new SqlParameter("@Brand", currentBooking.Customer.Vehicle.Brand));
+                    cmd1.Parameters.Add(new SqlParameter("@Model", currentBooking.Customer.Vehicle.Model));
+                    cmd1.Parameters.Add(new SqlParameter("@TypeOfCar", currentBooking.Customer.Vehicle.TypeOfCar));
+                    cmd1.Parameters.Add(new SqlParameter("@LicensePlate", currentBooking.Customer.Vehicle.LicensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", currentBooking.Customer.Telephone));
                     cmd1.Parameters.Add(new SqlParameter("@VAT", currentBooking.Customer.Vat));
 
@@ -208,7 +212,7 @@ namespace ApplicationLayer
 
                     }
                 }
-              
+
 
 
             }
@@ -265,8 +269,8 @@ namespace ApplicationLayer
             string packageName = "";
             string bookingId = "";
             pr.AddPackageFromDBToList(Sp_GetAllPackages());
-            
-            
+
+
 
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -295,7 +299,7 @@ namespace ApplicationLayer
                                     SqlCommand cmd2 = new SqlCommand("Sp_FindAllPackagesForBooking", con2);
                                     cmd2.CommandType = CommandType.StoredProcedure;
                                     cmd2.Parameters.Add(new SqlParameter("@BookingID", bookingId));
-                                    
+
                                     using (SqlDataReader reader2 = cmd2.ExecuteReader())
                                     {
                                         if (reader2.HasRows)
@@ -314,21 +318,20 @@ namespace ApplicationLayer
                                 {
                                     Console.WriteLine("Ups" + e.Message);
                                 }
-                             
+
                             }
 
-                            Customer customer = new Customer(customerName);
-                            b = new Booking(customer, startTime, bookingDate, packages);
-                            bookings.Add(b);
                         }
-                        
+                        Customer customer = new Customer(customerName);
+                        b = new Booking(customer, startTime, bookingDate, packages);
+                        bookings.Add(b);
                     }
                 }
 
                 catch (SqlException e)
                 {
                     Console.WriteLine("Ups" + e.Message);
-                }                         
+                }
             }
             return bookings;
         }
@@ -366,7 +369,7 @@ namespace ApplicationLayer
             }
         }
 
-       
+
 
         public List<Booking> Sp_GetAllBookings()
         {
@@ -375,8 +378,6 @@ namespace ApplicationLayer
             Booking b;
             pr.AddPackageFromDBToList(Sp_GetAllPackages());
             string packageName = "";
-
-
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -412,7 +413,6 @@ namespace ApplicationLayer
                                     SqlCommand cmd2 = new SqlCommand("Sp_FindAllPackagesForBooking", con2);
                                     cmd2.CommandType = CommandType.StoredProcedure;
                                     cmd2.Parameters.Add(new SqlParameter("@BookingID", bookingId));
-
                                     using (SqlDataReader reader2 = cmd2.ExecuteReader())
                                     {
                                         if (reader2.HasRows)
@@ -421,6 +421,7 @@ namespace ApplicationLayer
                                             {
                                                 packageName = reader2["packageName"].ToString();
                                                 packages.Add(pr.FindPackage(packageName));
+    
                                             }
                                         }
                                     }
@@ -431,7 +432,6 @@ namespace ApplicationLayer
                                 {
                                     Console.WriteLine("Ups" + e.Message);
                                 }
-
                             }
 
                             Vehicle vehicle = new Vehicle(licensePlate, brand, model, typeOfCar);
@@ -448,6 +448,7 @@ namespace ApplicationLayer
                 }
 
             }
+            packages.Clear();
             return bookings;
         }
 
