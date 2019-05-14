@@ -15,11 +15,13 @@ namespace ApplicationLayer
         PackageRepo pr = new PackageRepo();
         private static string connectionString = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
         private static string connectionString2 = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
-        public Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<Package> packages, Vehicle vehicle, string vat = "")
+        public Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<Package> packages, string licensePlate, string brand, string vat = "")
         {
 
             Booking b = null;
             int id = 0;
+            int vehicleId = 0;
+            int customerId = 0;
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -32,12 +34,10 @@ namespace ApplicationLayer
                     cmd1.Parameters.Add(new SqlParameter("@StartTime", startTime));
                     cmd1.Parameters.Add(new SqlParameter("@BookingDate", bookingDate));
                     cmd1.Parameters.Add(new SqlParameter("@Email", email));
-                    cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", telephone));              
+                    cmd1.Parameters.Add(new SqlParameter("@PhoneNumber", telephone));
                     cmd1.Parameters.Add(new SqlParameter("@VAT", vat));
-                    cmd1.Parameters.Add(new SqlParameter("@LicensePlate", vehicle.LicensePlate));
-                    cmd1.Parameters.Add(new SqlParameter("@Brand", vehicle.Brand));
-                    cmd1.Parameters.Add(new SqlParameter("@Model", vehicle.Model));
-                    cmd1.Parameters.Add(new SqlParameter("@TypeOfCar", vehicle.TypeOfCar));
+                    cmd1.Parameters.Add(new SqlParameter("@LicensePlate", licensePlate));
+                    cmd1.Parameters.Add(new SqlParameter("@Brand", brand));
 
                     SqlDataReader reader = cmd1.ExecuteReader();
 
@@ -46,6 +46,8 @@ namespace ApplicationLayer
                         while (reader.Read())
                         {
                             id = int.Parse(reader["BookingID"].ToString());
+                            vehicleId = int.Parse(reader["VehicleID"].ToString());
+                            customerId = int.Parse(reader["CustomerID"].ToString());
                         }
                     }
                     reader.Close();
@@ -57,7 +59,7 @@ namespace ApplicationLayer
                 }
 
 
-               
+
 
                 foreach (Package package in packages)
                 {
@@ -69,7 +71,7 @@ namespace ApplicationLayer
                         cmd2.Parameters.Add(new SqlParameter("@BookingId", id));
                         cmd2.Parameters.Add(new SqlParameter("@PackageName", package.Name));
 
-                        
+
                         cmd2.ExecuteNonQuery();
                         cmd2.Dispose();
                         //if (reader.HasRows)
@@ -80,25 +82,27 @@ namespace ApplicationLayer
                         //    }
                         //}
 
-                        
+
                     }
                     catch (SqlException e)
                     {
                         Console.WriteLine("Ups" + e.Message);
                     }
-                }             
-                Customer customer = new Customer(customerName, email, telephone, vat);
+                }
+                Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
+                Customer customer = new Customer(customerName, email, telephone, vehicle, customerId, vat);
                 b = new Booking(customer, startTime, bookingDate, packages, id);
             }
             return b;
         }
 
 
-        public PickUpAgreement Sp_CreatePickUpAgreement(Driver driver, PickUpTruck pickUpTruck, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
+        public PickUpAgreement Sp_CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string licensePlate, string brand, double price, string streetName, DateTime pickUpDate, string pickUpTime)
         {
             PickUpAgreement pua = null;
             int pickUpId = 0;
             string city = "";
+            int vehicleId = 0;
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -107,13 +111,11 @@ namespace ApplicationLayer
                     con.Open();
                     SqlCommand cmd1 = new SqlCommand("Sp_CreatePickUpAgreement", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Parameters.Add(new SqlParameter("@DriverName", driver.Name));
-                    cmd1.Parameters.Add(new SqlParameter("@PickUpTruckName", pickUpTruck.PickUpTruckName));
+                    cmd1.Parameters.Add(new SqlParameter("@DriverName", driverName));
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpTruckName", pickUpTruckName));
                     cmd1.Parameters.Add(new SqlParameter("@PostalCode", postalCode));
-                    cmd1.Parameters.Add(new SqlParameter("@LicensePlate", vehicle.LicensePlate));
-                    cmd1.Parameters.Add(new SqlParameter("@Brand", vehicle.Brand));
-                    cmd1.Parameters.Add(new SqlParameter("@Model", vehicle.Model));
-                    cmd1.Parameters.Add(new SqlParameter("@TypeOfCar", vehicle.TypeOfCar));
+                    cmd1.Parameters.Add(new SqlParameter("@LicensePlate", licensePlate));
+                    cmd1.Parameters.Add(new SqlParameter("@Brand", brand));
                     cmd1.Parameters.Add(new SqlParameter("@Price", price));
                     cmd1.Parameters.Add(new SqlParameter("@StreetName", streetName));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpDate", pickUpDate));
@@ -127,9 +129,13 @@ namespace ApplicationLayer
                         {
                             pickUpId = int.Parse(reader["PickUpID"].ToString());
                             city = reader["City"].ToString();
+                            vehicleId = int.Parse(reader["VehicleID"].ToString());
                         }
                     }
-                    pua = new PickUpAgreement(pickUpId, driver, pickUpTruck, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
+                    Driver driver = new Driver(driverName);
+                    PickUpTruck put = new PickUpTruck(pickUpTruckName);
+                    Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
+                    pua = new PickUpAgreement(pickUpId, driver, put, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
                 }
 
                 catch (SqlException e)
@@ -152,6 +158,37 @@ namespace ApplicationLayer
         //        throw;
         //    } 
         //}
+
+        public void Sp_UpdatePickUpAgreement(PickUpAgreement currentPickUpAgreement)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_UpdatePickUpAgreement", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpAgreementID", currentPickUpAgreement.PickUpAgreementID));
+                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentPickUpAgreement.Vehicle.VehicleID));
+                    cmd1.Parameters.Add(new SqlParameter("@DriverName", currentPickUpAgreement.Driver.Name));
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpTruckName", currentPickUpAgreement.PickUpTruck.PickUpTruckName));
+                    cmd1.Parameters.Add(new SqlParameter("@PostalCode", currentPickUpAgreement.PostalCode));
+                    cmd1.Parameters.Add(new SqlParameter("@LicensePlate", currentPickUpAgreement.Vehicle.LicensePlate));
+                    cmd1.Parameters.Add(new SqlParameter("@Brand", currentPickUpAgreement.Vehicle.Brand));
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpDate", currentPickUpAgreement.PickUpDate));
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpTime", currentPickUpAgreement.PickUpTime));
+                    cmd1.Parameters.Add(new SqlParameter("@Price", currentPickUpAgreement.Price));
+                    cmd1.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+
+                }
+
+            }
+        }
+    
 
         public void Sp_UpdateBooking(Booking currentBooking)
         {
@@ -208,7 +245,7 @@ namespace ApplicationLayer
 
                     }
                 }
-              
+
 
 
             }
@@ -233,6 +270,58 @@ namespace ApplicationLayer
 
             }
         }
+
+        public void Sp_DeletePickUpAgreement(int pickUpAgreementId)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_DeletePickupAgreement", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpAgreementId", pickUpAgreementId));
+                    cmd1.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+
+            }
+        }
+
+        public string Sp_GetCityByPostalCode(int postalCode)
+        {
+            string city = "";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_FindCityByPostal", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@PostalCode", postalCode));
+
+                    SqlDataReader reader = cmd1.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            city = reader["City"].ToString();
+                        }
+                    }
+                }
+
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+                return city;
+            }
+        }
+    
 
         public void Sp_DeletePackagesFromBooking(int bookingId)
         {
@@ -403,6 +492,8 @@ namespace ApplicationLayer
                             string brand = reader["Brand"].ToString();
                             string model = reader["Model"].ToString();
                             string typeOfCar = reader["typeOfCar"].ToString();
+                            int vehicleId = int.Parse(reader["VechicleID"].ToString());
+                            int customerId = int.Parse(reader["CustomerID"].ToString());
 
                             using (SqlConnection con2 = new SqlConnection(connectionString2))
                             {
@@ -434,8 +525,8 @@ namespace ApplicationLayer
 
                             }
 
-                            Vehicle vehicle = new Vehicle(licensePlate, brand, model, typeOfCar);
-                            Customer customer = new Customer(customerName, email, telephone, vehicle, VAT);
+                            Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
+                            Customer customer = new Customer(customerName, email, telephone, vehicle, customerId, VAT);
                             b = new Booking(customer, startTime, bookingDate, packages, bookingId);
                             bookings.Add(b);
                         }

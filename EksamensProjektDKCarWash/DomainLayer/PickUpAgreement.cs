@@ -8,7 +8,7 @@ namespace DomainLayer
 {
     public class PickUpAgreement
     {
-        public int PickUpId { get; private set; }
+        public int PickUpAgreementID { get; private set; }
         public Driver Driver { get; private set; }
         public PickUpTruck PickUpTruck { get; private set; }
         public string City { get; private set; }
@@ -21,7 +21,7 @@ namespace DomainLayer
 
         public PickUpAgreement(int pickUpId, Driver driver, PickUpTruck pickUpTruck, string city, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
         {
-            PickUpId = pickUpId;
+            PickUpAgreementID = pickUpId;
             Driver = driver;
             PickUpTruck = pickUpTruck;
             City = city;
@@ -31,7 +31,19 @@ namespace DomainLayer
             StreetName = streetName;
             PickUpDate = pickUpDate;
             PickUpTime = pickUpTime;
+        }
 
+        public void UpdatePickUpAgreement(Driver driver, PickUpTruck pickUpTruck, string city, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
+        {
+            Driver = driver;
+            PickUpTruck = pickUpTruck;
+            City = city;
+            PostalCode = postalCode;
+            Vehicle = vehicle;
+            Price = price;
+            StreetName = streetName;
+            PickUpDate = pickUpDate;
+            PickUpTime = pickUpTime;
         }
     }
 }
