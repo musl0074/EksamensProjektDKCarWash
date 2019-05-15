@@ -75,11 +75,13 @@ namespace UILayer
                 }
             }
 
+            // Load all bookings to BR
+            bc.LoadAllBookingsFromDatabase();
 
-
-
-            List<List<string>> bookings = bc.ShowBooking(monday); // Get all bookings.ToString() from Monday to Saturday
+            // -> BR -> Find all with Monday to Saturday
+            List<List<string>> bookings = bc.GetWeeklyBookings(monday); // Get all bookings.ToString() from Monday to Saturday
             
+
             int column = 1; // Determines which column to place the UI element in.
 
             foreach (List<string> day in bookings) // Loop through every day
@@ -91,7 +93,7 @@ namespace UILayer
                 {
                     string[] split = booking.Split(';'); // Split the ToString() to get data. 
 
-                    switch (split[2]) // StartTime
+                    switch (split[3]) // StartTime
                     {
                         case "08:00":
                             t8++;

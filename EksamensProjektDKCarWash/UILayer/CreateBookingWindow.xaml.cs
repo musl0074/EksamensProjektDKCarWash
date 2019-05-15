@@ -128,7 +128,7 @@ namespace UILayer
             Label typeOfCarLabel = (Label)ComboBox_TypeOfCar.SelectedItem;
             string typeOfCar = (string)typeOfCarLabel.Content;
 
-            bc.CreateBooking(customerName, startTime, bookingDate, email, telephoneNumber, packages, licensePlate, brand, model, typeOfCar, vat);
+            bc.CreateBooking(customerName, startTime, bookingDate, email, telephoneNumber, packages, licensePlate, brand, vat);
         }
 
 
@@ -225,5 +225,6 @@ namespace UILayer
         {
             CheckEnableCreateButton();
         }
+ 
     }
 }

@@ -38,10 +38,6 @@ namespace UILayer
         // Load all the bookings for this day
         public void LoadDay ()
         {
-            List<string> listBooking = bc.GetDailyBookings(CurrentDateTime);
-
-
-
             for (int i = 2; i < 7; i++) // ROw
             {
 
@@ -57,6 +53,14 @@ namespace UILayer
                 }
 
             }
+
+
+            // Load all bookings to BR
+            bc.LoadAllBookingsFromDatabase();
+
+            List<string> listBooking = bc.GetDailyBookings(CurrentDateTime);
+
+
             bool p1 = false;
             bool p2 = false;
             bool p3 = false;
@@ -260,12 +264,24 @@ namespace UILayer
             btn.Background = null;
             btn.Content = content;
             btn.FontSize = fontSize;
+            btn.HorizontalContentAlignment = HorizontalAlignment.Center;
+            btn.VerticalContentAlignment = VerticalAlignment.Center;
             Grid.SetColumn(btn, column);
             Grid.SetRow(btn, row);
             Grid_Main.Children.Add(btn);
+            btn.Click += (o, e) => button_clickEvent(o, e);
 
             return btn;
         }
-
+        private void button_clickEvent(object sender,RoutedEventArgs e )
+        {
+            Button b = (Button)sender;
+            string btn1 = (string)b.Content;
+            string[] split = btn1.Split(':');
+            Window specificBooking = new SpecificBookingWindow(split[0]);
+            specificBooking.Height = 540;
+            specificBooking.Width = 520;
+            specificBooking.Show();
+        }
     }
 }

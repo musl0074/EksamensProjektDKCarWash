@@ -59,25 +59,32 @@ namespace ApplicationLayer
         // Input er en MANDAG
         // Går ind og finder alle datoerne for mandagen, bruger Booking.ToString() og tilføjer den til en liste af strings
         // Dette gør den for Mandag til Lørdag
-        public List<List<string>> ShowBooking(DateTime bookingDate)
+        public List<List<string>> GetWeeklyBookings(DateTime bookingDate)
         {
             List<List<string>> daysWithBooking = new List<List<string>>();
+            List<Booking> bookings = br.GetBookings();
 
             for (int i = 0; i < 6; i++)
             {
-                List<Booking> bookingsList = dbc.Sp_ShowBooking(bookingDate);
-                List<string> bookingsString = new List<string>();
+                List<string> day = new List<string>();
 
-                foreach (Booking booking in bookingsList)
+                foreach (Booking booking in bookings)
                 {
-                    bookingsString.Add(booking.ToString());
+                    if (booking.BookingDate == bookingDate)
+                        day.Add(booking.ToString());
                 }
 
-                daysWithBooking.Add(bookingsString);
-                bookingDate = bookingDate.AddDays(1);
+                daysWithBooking.Add(day);
+
+                bookingDate = bookingDate.AddDays(+1);
             }
 
             return daysWithBooking;
+        }
+
+        public void LoadAllBookingsFromDatabase () // Updates the BookingRepository
+        {
+            br.UpdateAllBookings(dbc.Sp_GetAllBookings());
         }
 
         public string GetBooking(int bookingID)
@@ -155,19 +162,22 @@ namespace ApplicationLayer
         public List<string>GetDailyBookings(DateTime DailyDateTime)
         {
             List<string> dailyBookingsStrings = new List<string>();
-           List<Booking>dailybookings= dbc.Sp_ShowBooking(DailyDateTime);
+            List<Booking> dailybookings = br.GetBookings();
 
             foreach (Booking item in dailybookings)
             {
-                string tostring = item.ToString();
-                string[] split = tostring.Split(';');
-                string combineString = split[0] + split[3] + split[7];
-                dailyBookingsStrings.Add(combineString);
+                if (item.BookingDate == DailyDateTime)
+                {
+                    string tostring = item.ToString();
+                    string[] split = tostring.Split(';');
+                    string combineString = split[0] + ";" + split[3] + ";" + split[7];
+                    dailyBookingsStrings.Add(combineString);
+                }
             }
 
             return dailyBookingsStrings = SortedByStartTime(dailyBookingsStrings);
-
         }
+
         public List<string> SortedByStartTime(List<string> unsortedList)
         {
             List<string> list8 = new List<string>();
