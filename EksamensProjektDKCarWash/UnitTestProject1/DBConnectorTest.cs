@@ -126,7 +126,7 @@ namespace UnitTestProject1
                     {
                         while (reader.Read())
                         {
-                            pickUpId = int.Parse(reader["PickUpID"].ToString());
+                            pickUpId = int.Parse(reader["PickUpAgreementID"].ToString());
                             city = reader["City"].ToString();
                             vehicleId = int.Parse(reader["VehicleID"].ToString());
                         }
@@ -199,6 +199,10 @@ namespace UnitTestProject1
                     SqlCommand cmd1 = new SqlCommand("Sp_UpdateBooking", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@BookingID", currentBooking.Id));
+                    cmd1.Parameters.Add(new SqlParameter("@CustomerID", currentBooking.Customer.CustomerId));
+                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentBooking.Customer.Vehicle.VehicleID));
+                    cmd1.Parameters.Add(new SqlParameter("@Brand", currentBooking.Customer.Vehicle.Brand));
+                    cmd1.Parameters.Add(new SqlParameter("@LicensePlate", currentBooking.Customer.Vehicle.LicensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@StartTime", currentBooking.StartTime));
                     cmd1.Parameters.Add(new SqlParameter("@CustomerName", currentBooking.Customer.CustomerName));
                     cmd1.Parameters.Add(new SqlParameter("@BookingDate", currentBooking.BookingDate));
@@ -250,10 +254,38 @@ namespace UnitTestProject1
             }
         }
 
-        public void Sp_DeleteBooking(int bookingId)
+        public void Sp_DeleteBooking(int bookingId, int vehicleId, int customerId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_DeleteVehicle", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@VehicleId", vehicleId));
+                    cmd1.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_DeleteCustomer", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@CustomerId", customerId));
+                    cmd1.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+
                 try
                 {
                     con.Open();
@@ -489,9 +521,7 @@ namespace UnitTestProject1
                             string VAT = reader["VAT"].ToString();
                             string licensePlate = reader["LicensePlate"].ToString();
                             string brand = reader["Brand"].ToString();
-                            string model = reader["Model"].ToString();
-                            string typeOfCar = reader["typeOfCar"].ToString();
-                            int vehicleId = int.Parse(reader["VechicleID"].ToString());
+                            int vehicleId = int.Parse(reader["VehicleID"].ToString());
                             int customerId = int.Parse(reader["CustomerID"].ToString());
 
                             using (SqlConnection con2 = new SqlConnection(connectionString2))

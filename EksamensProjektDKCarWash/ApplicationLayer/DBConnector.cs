@@ -200,6 +200,10 @@ namespace ApplicationLayer
                     SqlCommand cmd1 = new SqlCommand("Sp_UpdateBooking", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@BookingID", currentBooking.Id));
+                    cmd1.Parameters.Add(new SqlParameter("@CustomerID", currentBooking.Customer.CustomerId));
+                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentBooking.Customer.Vehicle.VehicleID));
+                    cmd1.Parameters.Add(new SqlParameter("@Brand", currentBooking.Customer.Vehicle.Brand));
+                    cmd1.Parameters.Add(new SqlParameter("@LicensePlate", currentBooking.Customer.Vehicle.LicensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@StartTime", currentBooking.StartTime));
                     cmd1.Parameters.Add(new SqlParameter("@CustomerName", currentBooking.Customer.CustomerName));
                     cmd1.Parameters.Add(new SqlParameter("@BookingDate", currentBooking.BookingDate));
