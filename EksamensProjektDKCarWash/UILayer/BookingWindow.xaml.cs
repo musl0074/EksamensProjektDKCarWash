@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ApplicationLayer;
 
 namespace UILayer
 {
@@ -20,9 +21,19 @@ namespace UILayer
     /// </summary>
     public partial class BookingWindow : Page
     {
-        public BookingWindow()
+        BookingController bc = new BookingController();
+        public BookingWindow(string bookingId)
         {
             InitializeComponent();
+            LoadBooking(bookingId);
+            
+        }
+
+        public void LoadBooking(string bookingId)
+        {
+            string specificBooking = bc.GetBooking(int.Parse(bookingId));
+
+
         }
     }
 }
