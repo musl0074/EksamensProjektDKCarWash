@@ -42,12 +42,15 @@ namespace DomainLayer
 
         public override string ToString()
         {
-            List<string> stringPackages = new List<string>();
+            List<string> stringPackages = new List<string>(); 
+            string packages = string.Empty; // The combined string, providing all the packageNames
+
             foreach (Package package in Packages)
             {
-                stringPackages.Add(package.Name);
+                packages += package.Name + " ";
             }
-            return Id + ";"+ Customer.CustomerName + ";" + BookingDate.ToString() + ";" + StartTime + ";" + Customer.Email + ";" + Customer.Telephone + ";" + Customer.Vat + ";" + stringPackages + ":";
+
+            return Id + ";" + Customer.CustomerName + ";" + BookingDate.ToString() + ";" + StartTime + ";" + Customer.Email + ";" + Customer.Telephone + ";" + Customer.Vat + ";" + packages;
         }
     }
 }

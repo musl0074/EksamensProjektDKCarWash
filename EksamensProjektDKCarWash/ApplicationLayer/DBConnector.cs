@@ -407,7 +407,7 @@ namespace ApplicationLayer
                             }
 
                             Customer customer = new Customer(customerName);
-                            b = new Booking(customer, startTime, bookingDate, packages);
+                            b = new Booking(customer, startTime, bookingDate, packages, Int32.Parse(bookingId));
                             bookings.Add(b);
                         }
                         

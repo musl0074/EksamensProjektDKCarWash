@@ -161,7 +161,7 @@ namespace ApplicationLayer
             {
                 string tostring = item.ToString();
                 string[] split = tostring.Split(';');
-                string combineString = split[0] + split[3] + split[7];
+                string combineString = split[0] + ";" + split[3] + ";" + split[7];
                 dailyBookingsStrings.Add(combineString);
             }
 
