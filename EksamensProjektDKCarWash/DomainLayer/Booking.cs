@@ -47,7 +47,7 @@ namespace DomainLayer
 
             foreach (Package package in Packages)
             {
-                packages += package.Name + " ";
+                packages += "\n" + package.Name;
             }
 
             return Id + ";" + Customer.CustomerName + ";" + BookingDate.ToString() + ";" + StartTime + ";" + Customer.Email + ";" + Customer.Telephone + ";" + Customer.Vat + ";" + packages;

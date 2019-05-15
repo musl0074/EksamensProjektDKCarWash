@@ -155,7 +155,7 @@ namespace ApplicationLayer
         public List<string>GetDailyBookings(DateTime DailyDateTime)
         {
             List<string> dailyBookingsStrings = new List<string>();
-           List<Booking>dailybookings= dbc.Sp_ShowBooking(DailyDateTime);
+            List<Booking>dailybookings= dbc.Sp_ShowBooking(DailyDateTime);
 
             foreach (Booking item in dailybookings)
             {
