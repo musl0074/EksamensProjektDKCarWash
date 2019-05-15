@@ -55,7 +55,13 @@ namespace UILayer
         {
             string[] split = CurrentBooking.Split(';');
             Window UpdateWindow = new UpdateBookingWindow(int.Parse(split[0]));
+            UpdateWindow.WindowState = WindowState.Maximized;
             UpdateWindow.Show();
+        }
+
+        private void Button_Delete_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

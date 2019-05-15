@@ -5,11 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UILayer"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="500" Background="White" ResizeMode="NoResize"
+      d:DesignHeight="540" d:DesignWidth="520" Background="White" ResizeMode="NoResize"
       Title="BookingWindow">
 
 	<Grid>
-		<Button x:Name="Button_Delete" Content="Slet booking" Margin="26,437,381,26"/>
+		<Button x:Name="Button_Delete" Content="Slet booking" Margin="26,437,381,26" Click="Button_Delete_Click"/>
 		<Button x:Name="Button_Update" Content="Ændre booking" Margin="381,437,26,26" Click="Button_Update_Click"/>
 
 		<TextBox x:Name="TextBox_CustomerName" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" Height="30" Margin="130,55,130,384" TextWrapping="Wrap"  IsEnabled="False"/>
