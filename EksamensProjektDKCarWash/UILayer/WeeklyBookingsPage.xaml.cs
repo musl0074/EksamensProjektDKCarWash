@@ -91,7 +91,7 @@ namespace UILayer
                 {
                     string[] split = booking.Split(';'); // Split the ToString() to get data. 
 
-                    switch (split[2]) // StartTime
+                    switch (split[3]) // StartTime
                     {
                         case "08:00":
                             t8++;
