@@ -38,10 +38,6 @@ namespace UILayer
         // Load all the bookings for this day
         public void LoadDay ()
         {
-            List<string> listBooking = bc.GetDailyBookings(CurrentDateTime);
-
-
-
             for (int i = 2; i < 7; i++) // ROw
             {
 
@@ -57,6 +53,14 @@ namespace UILayer
                 }
 
             }
+
+
+            // Load all bookings to BR
+            bc.LoadAllBookingsFromDatabase();
+
+            List<string> listBooking = bc.GetDailyBookings(CurrentDateTime);
+
+
             bool p1 = false;
             bool p2 = false;
             bool p3 = false;
