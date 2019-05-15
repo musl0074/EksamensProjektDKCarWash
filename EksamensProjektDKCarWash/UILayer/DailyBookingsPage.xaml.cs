@@ -260,12 +260,18 @@ namespace UILayer
             btn.Background = null;
             btn.Content = content;
             btn.FontSize = fontSize;
+            btn.HorizontalContentAlignment = HorizontalAlignment.Center;
+            btn.VerticalContentAlignment = VerticalAlignment.Center;
             Grid.SetColumn(btn, column);
             Grid.SetRow(btn, row);
             Grid_Main.Children.Add(btn);
+            btn.Click += (o, e) => button_clickEvent(o, e);
 
             return btn;
         }
-
+        private void button_clickEvent(object sender,RoutedEventArgs e )
+        {
+            MessageBox.Show("Hello RIcky");
+        }
     }
 }

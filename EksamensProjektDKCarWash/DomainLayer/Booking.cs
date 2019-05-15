@@ -50,7 +50,7 @@ namespace DomainLayer
                 packages += "\n" + package.Name;
             }
 
-            return Id + ";" + Customer.CustomerName + ";" + BookingDate.ToString() + ";" + StartTime + ";" + Customer.Email + ";" + Customer.Telephone + ";" + Customer.Vat + ";" + packages;
+            return "        " + Id + ";" + Customer.CustomerName + ";" + BookingDate.ToString() + ";" + StartTime + ";" + Customer.Email + ";" + Customer.Telephone + ";" + Customer.Vat + ";" + packages;
         }
     }
 }
