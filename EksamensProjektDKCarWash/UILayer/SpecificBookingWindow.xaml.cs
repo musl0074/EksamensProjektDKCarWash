@@ -21,17 +21,19 @@ namespace UILayer
     /// </summary>
     public partial class SpecificBookingWindow : Window
     {
+        
         BookingController bc = new BookingController();
+        string CurrentBooking;
         public SpecificBookingWindow(string bookingId)
         {
             InitializeComponent();
-            LoadBooking(bookingId);
+            CurrentBooking = LoadBooking(bookingId);
 
 
 
         }
 
-        public void LoadBooking(string bookingId)
+        public string LoadBooking(string bookingId)
         {
             string specificBooking = bc.GetBooking(int.Parse(bookingId));
             string[] split = specificBooking.Split(';');
@@ -45,6 +47,15 @@ namespace UILayer
             TextBox_Phonenumber.Text = telephone;
             TextBox_VAT.Text = vat;
 
+            return specificBooking;
+
+        }
+
+        private void Button_Update_Click(object sender, RoutedEventArgs e)
+        {
+            string[] split = CurrentBooking.Split(';');
+            Window UpdateWindow = new UpdateBookingWindow(int.Parse(split[0]));
+            UpdateWindow.Show();
         }
     }
 }

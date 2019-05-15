@@ -279,6 +279,8 @@ namespace UILayer
             string btn1 = (string)b.Content;
             string[] split = btn1.Split(':');
             Window specificBooking = new SpecificBookingWindow(split[0]);
+            specificBooking.Height = 540;
+            specificBooking.Width = 520;
             specificBooking.Show();
         }
     }
