@@ -19,20 +19,31 @@ namespace UILayer
     /// <summary>
     /// Interaction logic for BookingWindow.xaml
     /// </summary>
-    public partial class BookingWindow : Page
+    public partial class SpecificBookingWindow : Window
     {
         BookingController bc = new BookingController();
-        public BookingWindow(string bookingId)
+        public SpecificBookingWindow(string bookingId)
         {
             InitializeComponent();
             LoadBooking(bookingId);
-            
+
+
+
         }
 
         public void LoadBooking(string bookingId)
         {
             string specificBooking = bc.GetBooking(int.Parse(bookingId));
+            string[] split = specificBooking.Split(';');
+            string customerName = split[1];
+            string email = split[4];
+            string telephone = split[5];
+            string vat = split[6];
 
+            TextBox_CustomerName.Text = customerName;
+            TextBox_Email.Text = email;
+            TextBox_Phonenumber.Text = telephone;
+            TextBox_VAT.Text = vat;
 
         }
     }

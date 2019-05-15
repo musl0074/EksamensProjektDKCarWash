@@ -275,7 +275,11 @@ namespace UILayer
         }
         private void button_clickEvent(object sender,RoutedEventArgs e )
         {
-            Window spcificBooking = new Spe
+            Button b = (Button)sender;
+            string btn1 = (string)b.Content;
+            string[] split = btn1.Split(':');
+            Window specificBooking = new SpecificBookingWindow(split[0]);
+            specificBooking.Show();
         }
     }
 }
