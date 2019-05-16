@@ -37,14 +37,20 @@ namespace UILayer
         {
             string specificBooking = bc.GetBooking(bookingId);
             string[] split = specificBooking.Split(';');
-            string[] dateSplit = split[2].Split(':');
+            string[] dateSplit = split[2].Split('.');
+            string[] packagesSplit = split[7].Split(',');
             TextBox_CustomerName.Text = split[1];
             TextBox_Email.Text = split[4];
             Textbox_Licensplate.Text = split[8];
             TextBox_Phonenumber.Text = split[5];
-            TextBox_VAT.Text = split[6];
-            Calendar_Main.SelectedDate = new DateTime(int.Parse(dateSplit[0]), int.Parse(dateSplit[1]), int.Parse(dateSplit[2]));
-            
+            TextBox_Vat.Text = split[6];
+            Textbox_Model.Text = split[9];
+            Calendar_Main.SelectedDate = new DateTime?(new DateTime(int.Parse(dateSplit[0]), int.Parse(dateSplit[1]), int.Parse(dateSplit[2])));
+
+            foreach (var item in packagesSplit)
+            {
+                ListBox_Packages.Items.Add(item);
+            }
 
         }
 
@@ -52,16 +58,16 @@ namespace UILayer
         // RadioButton
         private void RadioButton_Corporate_Checked(object sender, RoutedEventArgs e)
         {
-            Label_VAT.Visibility = Visibility.Visible;
-            TextBox_VAT.Visibility = Visibility.Visible;
+            //Label_VAT.Visibility = Visibility.Visible;
+            //TextBox_VAT.Visibility = Visibility.Visible;
 
             CheckEnableCreateButton();
         }
 
         private void RadioButton_Private_Checked(object sender, RoutedEventArgs e)
         {
-            Label_VAT.Visibility = Visibility.Collapsed;
-            TextBox_VAT.Visibility = Visibility.Collapsed;
+            //Label_VAT.Visibility = Visibility.Collapsed;
+            //TextBox_VAT.Visibility = Visibility.Collapsed;
 
             CheckEnableCreateButton();
         }
@@ -159,7 +165,7 @@ namespace UILayer
                 if (TextBox_CustomerName.Text != string.Empty &&
                 TextBox_Email.Text != string.Empty &&
                 TextBox_Phonenumber.Text != string.Empty &&
-                TextBox_VAT.Text != string.Empty &&
+                //TextBox_VAT.Text != string.Empty &&
                 ComboBox_TimeStamps.SelectedItem != null &&
                 ListBox_Packages.HasItems == true)
                 {

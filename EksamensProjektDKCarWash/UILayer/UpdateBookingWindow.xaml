@@ -19,24 +19,22 @@
 		<Label Content="Email:" HorizontalAlignment="Left" Margin="545,165,0,0" VerticalAlignment="Top" FontSize="24"/>
 		<TextBox x:Name="TextBox_Phonenumber" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="109,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="364"/>
 		<Label Content="Telefonnr:" HorizontalAlignment="Left" Margin="109,275,0,0" VerticalAlignment="Top" FontSize="24"/>
-		<TextBox x:Name="TextBox_VAT" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="597,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" Visibility="Collapsed"/>
-		<Label x:Name="Label_VAT" Content="CVR-nummer:" HorizontalAlignment="Left" Margin="597,275,0,0" VerticalAlignment="Top" FontSize="24" Visibility="Collapsed"/>
 		<ComboBox x:Name="ComboBox_Packages" HorizontalAlignment="Left" Margin="1492,719,0,0" VerticalAlignment="Top" Width="288" Background="White" BorderBrush="#FFA29494" Height="44" />
 		<Label Content="Vælg pakke(r):" HorizontalAlignment="Left" Margin="1492,677,0,0" VerticalAlignment="Top" FontSize="24"/>
 		<Button x:Name="Button_AddPackage" Content="Tilføj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Height="32" Margin="1789,725,0,0" Click="Button_AddPackage_Click"/>
 		<ListBox x:Name="ListBox_Packages" HorizontalAlignment="Left" Height="440" Margin="1490,187,0,0" VerticalAlignment="Top" Width="373" Background="White" BorderBrush="Black"/>
 		<Label Content="Valgte pakker:" HorizontalAlignment="Left" Margin="1492,108,0,0" VerticalAlignment="Top" FontSize="48"/>
-		<ComboBox x:Name="ComboBox_TimeStamps" Margin="111,746,0,0" VerticalAlignment="Top" Background="White" BorderBrush="#FFA29494" Height="44" HorizontalAlignment="Left" Width="291"/>
+		<ComboBox x:Name="ComboBox_TimeStamps"  Margin="111,746,0,0" VerticalAlignment="Top" Background="White" BorderBrush="#FFA29494" Height="44" HorizontalAlignment="Left" Width="291"/>
 		<Label Content="Vælg tidspunkt:" HorizontalAlignment="Left" Margin="111,704,0,0" VerticalAlignment="Top" FontSize="24"/>
 		<Viewbox HorizontalAlignment="Left" Height="275" Margin="111,404,0,0" VerticalAlignment="Top" Width="335">
 			<Calendar x:Name="Calendar_Main" SelectedDatesChanged="Calendar_Main_SelectedDatesChanged" FirstDayOfWeek="Monday" Height="156"/>
 		</Viewbox>
-		<Button x:Name="Button_UpdateBooking" Content="Opdater booking" HorizontalAlignment="Left" VerticalAlignment="Top" Width="182" Height="70" FontSize="18" IsEnabled="False" Margin="1681,937,0,0" Click="Button_UpdateBooking_Click"/>
+		<Button x:Name="Button_UpdateBooking" Content="Opdater booking" HorizontalAlignment="Left" VerticalAlignment="Top" Width="182" Height="70" FontSize="18" IsEnabled="False" Margin="1681,907,0,0" Click="Button_UpdateBooking_Click"/>
 		<Button x:Name="Button_RemovePackage" Content="Fjern" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="39" Margin="1386,198,0,0" FontSize="16" Click="Button_RemovePackage_Click"/>
-		<TextBox Name="TextBox_Vat" HorizontalAlignment="Left" Height="39" Margin="545,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="308" TextChanged="TextBox_TextChanged"/>
+		<TextBox IsEnabled="False" Name="TextBox_Vat" HorizontalAlignment="Left" Height="39" Margin="545,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="308" TextChanged="TextBox_TextChanged"/>
 		<Label Name="Label_Vat" Content="Cvr" HorizontalAlignment="Left" Margin="545,282,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.741,0.538"/>
 		<TextBox Name="Textbox_Licensplate" HorizontalAlignment="Left" Height="39" Margin="887,207,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="411"/>
-		<TextBox HorizontalAlignment="Left" Height="39" Margin="887,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="411"/>
+		<TextBox Name="Textbox_Model" HorizontalAlignment="Left" Height="39" Margin="887,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="411"/>
 		<Label Name="Label_Licensplate" Content="NummerPlade" HorizontalAlignment="Left" Margin="887,176,0,0" VerticalAlignment="Top"/>
 		<Label Name="Label_Model" Content="Bilmærke" HorizontalAlignment="Left" Margin="887,282,0,0" VerticalAlignment="Top"/>
 

@@ -47,10 +47,10 @@ namespace DomainLayer
 
             foreach (Package package in Packages)
             {
-                packages += "\n" + package.Name;
+                packages += "\n" + package.Name + ",";
             }
 
-            return "        " + Id + ";" + Customer.CustomerName + ";" + BookingDate.ToString("yyyy:mm:dd") + ";" + StartTime + ";" + Customer.Email + ";" + Customer.Telephone + ";" + Customer.Vat + ";" + packages + ";" + Customer.Vehicle.LicensePlate + ";" + Customer.Vehicle.Brand;
+            return "        " + Id + ";" + Customer.CustomerName + ";" + BookingDate.ToString("yyyy:MM:dd") + ";" + StartTime + ";" + Customer.Email + ";" + Customer.Telephone + ";" + Customer.Vat + ";" + packages + ";" + Customer.Vehicle.LicensePlate + ";" + Customer.Vehicle.Brand;
         }
     }
 }
