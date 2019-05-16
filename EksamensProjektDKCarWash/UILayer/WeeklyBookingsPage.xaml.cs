@@ -183,19 +183,26 @@ namespace UILayer
         // Button - NAVIGATE LEFT
         private void Button_NavigateLeft_Click(object sender, RoutedEventArgs e)
         {
+            updateThread.Abort(); // Stop the thread from updating while changing weeks
+            Grid_Main.Children.Clear();
+
             CurrentMonday = CurrentMonday.AddDays(-7); // The new CurrentMonday
             Label_MonthWeekYear.Content = GetMonthWeekYear(CurrentMonday);
 
-            LoadWeeklyBookings(CurrentMonday);
+            updateThread = new Thread(() => LoadWeeklyBookings(CurrentMonday));
+            updateThread.Start();
         }
 
         // Button - NAVIGATE RIGHT
         private void Button_NavigateRight_Click(object sender, RoutedEventArgs e)
         {
+            updateThread.Abort(); // Stop the thread from updating while changing weeks
+
             CurrentMonday = CurrentMonday.AddDays(+7); // The new CurrentMonday
             Label_MonthWeekYear.Content = GetMonthWeekYear(CurrentMonday);
 
-            LoadWeeklyBookings(CurrentMonday);
+            updateThread = new Thread(() => LoadWeeklyBookings(CurrentMonday));
+            updateThread.Start();
         }
         
 
