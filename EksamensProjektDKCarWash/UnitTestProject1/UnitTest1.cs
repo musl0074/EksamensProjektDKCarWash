@@ -98,7 +98,7 @@ namespace UnitTestProject1
         public void TestCreatePickUpDealId()
         {
             puaT = dbcT.Sp_CreatePickUpAgreement("Mathias", "Autotransporter 1", 5000, "43ty545", "BMW", 500, "Rødegårdsvej 273", new DateTime(2019, 9, 24, 10, 00, 00), "10:30");
-            Assert.IsTrue(puaT.PickUpAgreementID > 0);
+            Assert.IsTrue(puaT.PickUpAgreementId > 0);
         }
 
         [TestMethod]
