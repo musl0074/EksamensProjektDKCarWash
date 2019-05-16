@@ -25,7 +25,7 @@ namespace UILayer
         private BookingController bc = new BookingController();
         public DateTime CurrentDateTime { get; set; }
         private int fontSize = 20;
-        Thread UpdateThread;
+        public Thread updateThread;
 
         public DailyBookingsPage(DateTime currentDateTime, string day)
         {
@@ -34,8 +34,8 @@ namespace UILayer
             CurrentDateTime = currentDateTime;
 
             Label_Day.Content = day;
-            Thread UpdateThread = new Thread(LoadDay);
-            UpdateThread.Start();
+            updateThread = new Thread(LoadDay);
+            updateThread.Start();
 
 
         }
