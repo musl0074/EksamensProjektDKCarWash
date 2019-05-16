@@ -37,6 +37,14 @@ namespace UILayer
         {
             string specificBooking = bc.GetBooking(bookingId);
             string[] split = specificBooking.Split(';');
+            string[] dateSplit = split[2].Split(':');
+            TextBox_CustomerName.Text = split[1];
+            TextBox_Email.Text = split[4];
+            Textbox_Licensplate.Text = split[8];
+            TextBox_Phonenumber.Text = split[5];
+            TextBox_VAT.Text = split[6];
+            Calendar_Main.SelectedDate = new DateTime(int.Parse(dateSplit[0]), int.Parse(dateSplit[1]), int.Parse(dateSplit[2]));
+            
 
         }
 
