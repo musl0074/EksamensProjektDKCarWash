@@ -43,17 +43,36 @@ namespace ApplicationLayer
             }
         }
 
+        public string GetPickUpAgreementWithId (int pickUpAgreementId)
+        {
+            CurrentPickUpAgreement = puar.GetSinglePickUpAgreement(pickUpAgreementId);
+            return CurrentPickUpAgreement.ToString();
+        }
+
         public string UpdatePickUpAgreement(int pickUpAgreementID, int vehicleID, string driverName, string pickUpTruckName, int postalCode, string licensePlate, 
             string brand, string streetName, DateTime pickUpDate, string pickUpTime, double price)
         {
             string city = dbc.Sp_GetCityByPostalCode(postalCode);
-            PickUpTruck put = new PickUpTruck(pickUpTruckName);
+            PickUpTruck pickUpTruck = new PickUpTruck(pickUpTruckName);
             Driver driver = new Driver(driverName);
             Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleID);
-            CurrentPickUpAgreement = new PickUpAgreement(pickUpAgreementID, driver, put, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
-            CurrentPickUpAgreement.UpdatePickUpAgreement(driver, put, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
+            CurrentPickUpAgreement.UpdatePickUpAgreement(driver, pickUpTruck, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
             dbc.Sp_UpdatePickUpAgreement(CurrentPickUpAgreement);
             return puar.UpdatePickUpAgreement(CurrentPickUpAgreement);
+        }
+
+        public List<string> GetAllPickUpAgreements()
+        {
+            string pickUpAgreementString;
+            List<string> stringPickUpAgreements = null;
+            List<PickUpAgreement> pickUpAgreements = dbc.Sp_GetAllPickUpAgreements();
+            foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
+            {
+                pickUpAgreementString = pickUpAgreement.ToString();
+                stringPickUpAgreements.Add(pickUpAgreementString);
+            }
+
+            return stringPickUpAgreements;
         }
     }
 }

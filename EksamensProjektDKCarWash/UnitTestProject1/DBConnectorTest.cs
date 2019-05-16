@@ -167,7 +167,7 @@ namespace UnitTestProject1
                     con.Open();
                     SqlCommand cmd1 = new SqlCommand("Sp_UpdatePickUpAgreement", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Parameters.Add(new SqlParameter("@PickUpAgreementID", currentPickUpAgreement.PickUpAgreementID));
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpAgreementID", currentPickUpAgreement.PickUpAgreementId));
                     cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentPickUpAgreement.Vehicle.VehicleID));
                     cmd1.Parameters.Add(new SqlParameter("@DriverName", currentPickUpAgreement.Driver.Name));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpTruckName", currentPickUpAgreement.PickUpTruck.PickUpTruckName));
@@ -453,36 +453,47 @@ namespace UnitTestProject1
             return bookings;
         }
 
-        public int Sp_FindSingleBookingWithID(int bookingId)
+       
+
+        public List<PickUpAgreement> Sp_GetAllPickUpAgreements()
         {
-            int result = 0;
+            List<PickUpAgreement> pickUpAgreements = new List<PickUpAgreement>();
+            PickUpAgreement pickUpAgreement;
+
+
+
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
                 {
                     con.Open();
-                    SqlCommand cmd1 = new SqlCommand("Sp_GetBookingWithId", con);
+                    SqlCommand cmd1 = new SqlCommand("Sp_GetAllPickUpAgreements", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Parameters.Add(new SqlParameter("@BookingID", bookingId));
 
                     SqlDataReader reader = cmd1.ExecuteReader();
+
                     if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
-                            result = int.Parse(reader["BookingID"].ToString());
+                            int pickUpAgreementId = int.Parse(reader["PickUpAgreementId"].ToString());
+                            string startTime = reader["StartTime"].ToString();
+                            string customerName = reader["CustomerName"].ToString();
+                            DateTime bookingDate = reader.GetFieldValue<DateTime>(reader.GetOrdinal("BookingDate"));
+                            string email = reader["Email"].ToString();
+                            string telephone = reader["PhoneNumber"].ToString();
+                            string VAT = reader["VAT"].ToString();
+                            string licensePlate = reader["LicensePlate"].ToString();
+                            string brand = reader["Brand"].ToString();
+                            int vehicleId = int.Parse(reader["VechicleID"].ToString());
 
                         }
                     }
-
                 }
                 catch (SqlException e)
                 {
                     Console.WriteLine("Ups" + e.Message);
                 }
-                return result;
-
-
             }
         }
 
@@ -606,6 +617,39 @@ namespace UnitTestProject1
 
             }
             return packages;
+        }
+
+        public int Sp_FindSingleBookingWithID(int bookingId)
+        {
+            int result = 0;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_GetBookingWithId", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@BookingID", bookingId));
+
+                    SqlDataReader reader = cmd1.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            result = int.Parse(reader["BookingID"].ToString());
+
+                        }
+                    }
+
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+                return result;
+
+
+            }
         }
     }
 }
