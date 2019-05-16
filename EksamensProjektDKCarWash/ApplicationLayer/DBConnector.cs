@@ -127,7 +127,7 @@ namespace ApplicationLayer
                     {
                         while (reader.Read())
                         {
-                            pickUpId = int.Parse(reader["PickUpID"].ToString());
+                            pickUpId = int.Parse(reader["PickUpAgreementID"].ToString());
                             city = reader["City"].ToString();
                             vehicleId = int.Parse(reader["VehicleID"].ToString());
                         }
@@ -168,7 +168,7 @@ namespace ApplicationLayer
                     con.Open();
                     SqlCommand cmd1 = new SqlCommand("Sp_UpdatePickUpAgreement", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Parameters.Add(new SqlParameter("@PickUpAgreementID", currentPickUpAgreement.PickUpAgreementID));
+                    cmd1.Parameters.Add(new SqlParameter("@PickUpAgreementID", currentPickUpAgreement.PickUpAgreementId));
                     cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentPickUpAgreement.Vehicle.VehicleID));
                     cmd1.Parameters.Add(new SqlParameter("@DriverName", currentPickUpAgreement.Driver.Name));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpTruckName", currentPickUpAgreement.PickUpTruck.PickUpTruckName));
@@ -188,7 +188,7 @@ namespace ApplicationLayer
 
             }
         }
-    
+
 
         public void Sp_UpdateBooking(Booking currentBooking)
         {
@@ -255,10 +255,38 @@ namespace ApplicationLayer
             }
         }
 
-        public void Sp_DeleteBooking(int bookingId)
+        public void Sp_DeleteBooking(int bookingId, int vehicleId, int customerId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_DeleteVehicle", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@VehicleId", vehicleId));
+                    cmd1.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_DeleteCustomer", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.Add(new SqlParameter("@CustomerId", customerId));
+                    cmd1.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+
                 try
                 {
                     con.Open();
@@ -325,7 +353,7 @@ namespace ApplicationLayer
                 return city;
             }
         }
-    
+
 
         public void Sp_DeletePackagesFromBooking(int bookingId)
         {
@@ -347,7 +375,6 @@ namespace ApplicationLayer
             }
         }
 
-
         public List<Booking> Sp_ShowBooking(DateTime bookingDate)
         {
             List<Booking> bookings = new List<Booking>();
@@ -359,8 +386,8 @@ namespace ApplicationLayer
             string packageName = "";
             string bookingId = "";
             pr.AddPackageFromDBToList(Sp_GetAllPackages());
-            
-            
+
+
 
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -389,7 +416,7 @@ namespace ApplicationLayer
                                     SqlCommand cmd2 = new SqlCommand("Sp_FindAllPackagesForBooking", con2);
                                     cmd2.CommandType = CommandType.StoredProcedure;
                                     cmd2.Parameters.Add(new SqlParameter("@BookingID", bookingId));
-                                    
+
                                     using (SqlDataReader reader2 = cmd2.ExecuteReader())
                                     {
                                         if (reader2.HasRows)
@@ -408,65 +435,85 @@ namespace ApplicationLayer
                                 {
                                     Console.WriteLine("Ups" + e.Message);
                                 }
-                             
+
                             }
 
                             Customer customer = new Customer(customerName);
-                            b = new Booking(customer, startTime, bookingDate, packages, Int32.Parse(bookingId));
+                            b = new Booking(customer, startTime, bookingDate, packages);
                             bookings.Add(b);
                         }
-                        
+
                     }
                 }
 
                 catch (SqlException e)
                 {
                     Console.WriteLine("Ups" + e.Message);
-                }                         
+                }
             }
             return bookings;
         }
 
 
-        // Bruges til test - DeleteBooking
-        public int Sp_FindSingleBookingWithID(int bookingId)
+
+        public List<PickUpAgreement> Sp_GetAllPickUpAgreements()
         {
-            int result = 0;
+            List<PickUpAgreement> pickUpAgreements = new List<PickUpAgreement>();
+            PickUpAgreement pickUpAgreement;
+
+
+
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
                 {
                     con.Open();
-                    SqlCommand cmd1 = new SqlCommand("Sp_GetBookingWithId", con);
+                    SqlCommand cmd1 = new SqlCommand("Sp_GetAllPickUpAgreements", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Parameters.Add(new SqlParameter("@BookingID", bookingId));
 
                     SqlDataReader reader = cmd1.ExecuteReader();
+
                     if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
-                            result = int.Parse(reader["BookingID"].ToString());
+                            int pickUpAgreementId = int.Parse(reader["PickUpAgreementId"].ToString());
+                            string driverName = reader["DriverName"].ToString();
+                            string pickUpTruckName = reader["PickUpTruckName"].ToString();
+                            string streetName = reader["StreetName"].ToString();
+                            int postalCode = int.Parse(reader["PostalCode"].ToString());
+                            string city = reader["City"].ToString();
+                            string pickUpTime = reader["PickUpTime"].ToString();
+                            DateTime pickUpDate = reader.GetFieldValue<DateTime>(reader.GetOrdinal("PickUpDate"));
+                            string licensePlate = reader["LicensePlate"].ToString();
+                            string brand = reader["Brand"].ToString();
+                            double price = double.Parse(reader["Price"].ToString());
+                            int vehicleId = int.Parse(reader["VechicleID"].ToString());
 
+                            Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
+                            Driver driver = new Driver(driverName);
+                            PickUpTruck pickUpTruck = new PickUpTruck(pickUpTruckName);
+                            pickUpAgreement = new PickUpAgreement(pickUpAgreementId, driver, pickUpTruck, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
+                            pickUpAgreements.Add(pickUpAgreement);
                         }
                     }
-
                 }
                 catch (SqlException e)
                 {
                     Console.WriteLine("Ups" + e.Message);
                 }
-                return result;
-
-
             }
+
+            return pickUpAgreements;
         }
 
-       
-        // Bruger vi
+
+
         public List<Booking> Sp_GetAllBookings()
         {
             List<Booking> bookings = new List<Booking>();
+            List<Package> packages = new List<Package>();
+            Booking b;
             pr.AddPackageFromDBToList(Sp_GetAllPackages());
             string packageName = "";
 
@@ -495,10 +542,8 @@ namespace ApplicationLayer
                             string VAT = reader["VAT"].ToString();
                             string licensePlate = reader["LicensePlate"].ToString();
                             string brand = reader["Brand"].ToString();
-                            int vehicleId = int.Parse(reader["CustomerID"].ToString());
-                            int customerId = int.Parse(reader["VehicleID"].ToString());
-
-                            List<Package> packages = new List<Package>(); // List to hold the packages
+                            int vehicleId = int.Parse(reader["VehicleID"].ToString());
+                            int customerId = int.Parse(reader["CustomerID"].ToString());
 
                             using (SqlConnection con2 = new SqlConnection(connectionString2))
                             {
@@ -508,7 +553,6 @@ namespace ApplicationLayer
                                     SqlCommand cmd2 = new SqlCommand("Sp_FindAllPackagesForBooking", con2);
                                     cmd2.CommandType = CommandType.StoredProcedure;
                                     cmd2.Parameters.Add(new SqlParameter("@BookingID", bookingId));
-
 
                                     using (SqlDataReader reader2 = cmd2.ExecuteReader())
                                     {
@@ -533,7 +577,7 @@ namespace ApplicationLayer
 
                             Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
                             Customer customer = new Customer(customerName, email, telephone, vehicle, customerId, VAT);
-                            Booking b = new Booking(customer, startTime, bookingDate, packages, bookingId);
+                            b = new Booking(customer, startTime, bookingDate, packages, bookingId);
                             bookings.Add(b);
                         }
                     }
@@ -585,4 +629,5 @@ namespace ApplicationLayer
             return packages;
         }
     }
+    
 }

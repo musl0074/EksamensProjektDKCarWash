@@ -8,7 +8,7 @@ namespace DomainLayer
 {
     public class PickUpAgreement
     {
-        public int PickUpAgreementID { get; private set; }
+        public int PickUpAgreementId { get; private set; }
         public Driver Driver { get; private set; }
         public PickUpTruck PickUpTruck { get; private set; }
         public string City { get; private set; }
@@ -19,9 +19,9 @@ namespace DomainLayer
         public DateTime PickUpDate { get; private set; }
         public string PickUpTime { get; private set; }
 
-        public PickUpAgreement(int pickUpId, Driver driver, PickUpTruck pickUpTruck, string city, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
+        public PickUpAgreement(int pickUpAgreementId, Driver driver, PickUpTruck pickUpTruck, string city, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
         {
-            PickUpAgreementID = pickUpId;
+            PickUpAgreementId = pickUpAgreementId;
             Driver = driver;
             PickUpTruck = pickUpTruck;
             City = city;
@@ -45,5 +45,12 @@ namespace DomainLayer
             PickUpDate = pickUpDate;
             PickUpTime = pickUpTime;
         }
+
+        public override string ToString()
+        {
+            return Driver.Name + " " + PickUpTruck.PickUpTruckName + " " + City + " " + PostalCode.ToString() + " " +
+                Vehicle.LicensePlate + " " + Vehicle.Brand + " " + Price.ToString() + " " + StreetName + " " + PickUpDate.ToString()
+                + " " + PickUpTime;
+        } 
     }
 }

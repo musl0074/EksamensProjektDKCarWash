@@ -42,7 +42,7 @@ namespace DomainLayer
         {
             foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
             {
-                if(pickUpAgreement.PickUpAgreementID == pickUpAgreementId)
+                if(pickUpAgreement.PickUpAgreementId == pickUpAgreementId)
                 {
                     pickUpAgreements.Remove(pickUpAgreement);
                 }
@@ -53,16 +53,26 @@ namespace DomainLayer
         {
             foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
             {
-                if (currentPickUpAgreement.PickUpAgreementID == pickUpAgreement.PickUpAgreementID)
+                if (currentPickUpAgreement.PickUpAgreementId == pickUpAgreement.PickUpAgreementId)
                 {
                     pickUpAgreements.Remove(pickUpAgreement);
                     pickUpAgreements.Add(currentPickUpAgreement);
-                    return "Booking er ændret!";
+                    return "Afhentnings aftale er ændret!";
                 }
             }
-            return "En fejl er forekommet og booking er ikke ændret!";
+            return "En fejl er forekommet og afhentnings aftale er ikke ændret!";
         }
 
-
+        public PickUpAgreement GetSinglePickUpAgreement(int pickUpAgreementId)
+        {
+            foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
+            {
+                if(pickUpAgreement.PickUpAgreementId == pickUpAgreementId)
+                {
+                    return pickUpAgreement;
+                }
+            }
+            return null;
+        }
     }
 }
