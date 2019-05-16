@@ -53,5 +53,17 @@ namespace UILayer
 
             wbp.updateThread.Abort();
         }
+
+        private void Button_ShowPickUpAgreements_Click(object sender, RoutedEventArgs e)
+        {
+            FrameMain.Content = new PickUpAgreementsPage();
+        }
+
+        private void Button_CreatePickUpAgreement_Click(object sender, RoutedEventArgs e)
+        {
+            Window createPickUpAgreementWindow = new CreatePickUpAgreementWindow();
+            createPickUpAgreementWindow.WindowState = WindowState.Maximized;
+            createPickUpAgreementWindow.Show();
+        }
     }
 }
