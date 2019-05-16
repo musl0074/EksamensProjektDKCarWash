@@ -511,12 +511,10 @@ namespace ApplicationLayer
 
         public List<Booking> Sp_GetAllBookings()
         {
-            List<Booking> bookings = new List<Booking>();
-            List<Package> packages = new List<Package>();
-            Booking b;
-            pr.AddPackageFromDBToList(Sp_GetAllPackages());
-            string packageName = "";
-
+            List<Booking> bookings = new List<Booking>(); // Store all bookings to be returned
+            List<Package> packages = new List<Package>(); // Store packages every time a booking is being read from the database
+            pr.AddPackageFromDBToList(Sp_GetAllPackages()); // Get all available packages from the database
+            
 
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -556,11 +554,13 @@ namespace ApplicationLayer
 
                                     using (SqlDataReader reader2 = cmd2.ExecuteReader())
                                     {
+                                        packages = new List<Package>();
+
                                         if (reader2.HasRows)
                                         {
                                             while (reader2.Read())
                                             {
-                                                packageName = reader2["packageName"].ToString();
+                                                string packageName = reader2["packageName"].ToString();
                                                 packages.Add(pr.FindPackage(packageName));
                                             }
                                         }
@@ -577,7 +577,7 @@ namespace ApplicationLayer
 
                             Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
                             Customer customer = new Customer(customerName, email, telephone, vehicle, customerId, VAT);
-                            b = new Booking(customer, startTime, bookingDate, packages, bookingId);
+                            Booking b = new Booking(customer, startTime, bookingDate, packages, bookingId);
                             bookings.Add(b);
                         }
                     }

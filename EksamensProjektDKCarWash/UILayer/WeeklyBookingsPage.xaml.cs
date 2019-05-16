@@ -33,13 +33,15 @@ namespace UILayer
         public DateTime CurrentMonday { get; set; }
         public Thread updateThread;
         public DailyBookingsPage dailyBookingsPage;
+        private List<Label> LabelsInGrid = new List<Label>();
 
         public WeeklyBookingsPage()
         {
             InitializeComponent();
 
-            Label_MonthWeekYear.Content = GetMondayToSaturday();
             CurrentMonday = GetCurrentMonday();
+            Label_MonthWeekYear.Content = GetMondayToSaturday(CurrentMonday);
+
 
             updateThread = new Thread(() => LoadWeeklyBookings(CurrentMonday));
             updateThread.Start();
@@ -52,12 +54,9 @@ namespace UILayer
         {
             return DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
-        public string GetMondayToSaturday ()
-        {
-            DateTime monday = GetCurrentMonday();
-            return $"Mandag d. {monday.ToString("dd/MM/yyyy")} - Lørdag d. {monday.AddDays(+5).ToString("dd/MM/yyyy")}";
-        }
-        public string GetMonthWeekYear (DateTime dateTime)
+        
+
+        public string GetMondayToSaturday(DateTime dateTime)
         {
             return $"Mandag d. {dateTime.ToString("dd/MM/yyyy")} - Lørdag d. {dateTime.AddDays(+5).ToString("dd/MM/yyyy")}";
         }
@@ -163,6 +162,8 @@ namespace UILayer
             }
         }
 
+
+        // Creates a new label and adds it to the Grid_Main
         private void NewLabelToGrid (int content, int column, int row)
         {
             Dispatcher.Invoke(() =>
@@ -176,6 +177,8 @@ namespace UILayer
                 Grid.SetColumn(l, column);
                 Grid.SetRow(l, row);
                 Grid_Main.Children.Add(l);
+
+                LabelsInGrid.Add(l); // Save the instance, so it can be cleared every update
             });
         }
 
@@ -183,22 +186,37 @@ namespace UILayer
         // Button - NAVIGATE LEFT
         private void Button_NavigateLeft_Click(object sender, RoutedEventArgs e)
         {
-            CurrentMonday = CurrentMonday.AddDays(-7); // The new CurrentMonday
-            Label_MonthWeekYear.Content = GetMonthWeekYear(CurrentMonday);
+            updateThread.Abort(); // Stop the thread from updating while changing weeks
+            ClearGrid();
 
-            LoadWeeklyBookings(CurrentMonday);
+            CurrentMonday = CurrentMonday.AddDays(-7); // The new CurrentMonday
+            Label_MonthWeekYear.Content = GetMondayToSaturday(CurrentMonday);
+
+            updateThread = new Thread(() => LoadWeeklyBookings(CurrentMonday));
+            updateThread.Start();
         }
 
         // Button - NAVIGATE RIGHT
         private void Button_NavigateRight_Click(object sender, RoutedEventArgs e)
         {
-            CurrentMonday = CurrentMonday.AddDays(+7); // The new CurrentMonday
-            Label_MonthWeekYear.Content = GetMonthWeekYear(CurrentMonday);
+            updateThread.Abort(); // Stop the thread from updating while changing weeks
+            ClearGrid();
 
-            LoadWeeklyBookings(CurrentMonday);
+            CurrentMonday = CurrentMonday.AddDays(+7); // The new CurrentMonday
+            Label_MonthWeekYear.Content = GetMondayToSaturday(CurrentMonday);
+
+            updateThread = new Thread(() => LoadWeeklyBookings(CurrentMonday));
+            updateThread.Start();
         }
         
-
+        // Clears the grid for all the labels that has been added
+        private void ClearGrid ()
+        {
+            foreach (Label label in LabelsInGrid)
+            {
+                Grid_Main.Children.Remove(label);
+            }
+        }
 
 
 

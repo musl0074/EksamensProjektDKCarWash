@@ -48,8 +48,13 @@ namespace UILayer
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            if (wbp.dailyBookingsPage.updateThread != null && wbp.dailyBookingsPage != null)
-                wbp.dailyBookingsPage.updateThread.Abort();
+            if (wbp.dailyBookingsPage != null)
+            {
+                if (wbp.dailyBookingsPage.updateThread != null)
+                {
+                    wbp.dailyBookingsPage.updateThread.Abort();
+                }
+            }
 
             wbp.updateThread.Abort();
         }

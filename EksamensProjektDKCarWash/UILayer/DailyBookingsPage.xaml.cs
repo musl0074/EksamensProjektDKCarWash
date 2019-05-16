@@ -26,6 +26,7 @@ namespace UILayer
         public DateTime CurrentDateTime { get; set; }
         private int fontSize = 20;
         public Thread updateThread;
+        private List<Button> buttonsInGrid = new List<Button>();
 
         public DailyBookingsPage(DateTime currentDateTime, string day)
         {
@@ -45,7 +46,7 @@ namespace UILayer
         {
             while (true)
             {
-
+                ClearGrid();
 
                 for (int i = 2; i < 7; i++) // ROw
                 {
@@ -60,8 +61,7 @@ namespace UILayer
                             Grid.SetColumn(b, i2);
                             Grid.SetRow(b, i);
                             Grid_Main.Children.Add(b);
-                        }
-                        );
+                        });
                         
 
                     }
@@ -91,8 +91,7 @@ namespace UILayer
                             {
                                 Button btn = NewButton(1, 2, fontSize, content);
                                 p1 = true;
-                            }
-                            );
+                            });
                         }
                         else if (p2 == false)
                         {
@@ -100,8 +99,7 @@ namespace UILayer
                             {
                                 Button btn = NewButton(2, 2, fontSize, content);
                                 p2 = true;
-                            }
-                               );
+                            });
                         }
                         else if (p3 == false)
                         {
@@ -109,8 +107,7 @@ namespace UILayer
                             {
                                 Button btn = NewButton(3, 2, fontSize, content);
                                 p3 = true;
-                            }
-                             );
+                            });
                         }
                         else if (p4 == false)
                         {
@@ -118,8 +115,7 @@ namespace UILayer
                             {
                                 Button btn = NewButton(4, 2, fontSize, content);
                                 p4 = true;
-                            }
-                             );
+                            });
                         }
                     }
                 }
@@ -139,8 +135,7 @@ namespace UILayer
                             {
                                 Button btn = NewButton(1, 3, fontSize, content);
                                 p1 = true;
-                            }
-                            );
+                            });
                         }
                         else if (p2 == false)
                         {
@@ -148,8 +143,7 @@ namespace UILayer
                             {
                                 Button btn = NewButton(2, 3, fontSize, content);
                                 p2 = true;
-                            }
-                            );
+                            });
                         }
                         else if (p3 == false)
                         {
@@ -157,8 +151,7 @@ namespace UILayer
                             {
                                 Button btn = NewButton(3, 3, fontSize, content);
                                 p3 = true;
-                            }
-                             );
+                            });
                         }
                         else if (p4 == false)
                         {
@@ -166,8 +159,7 @@ namespace UILayer
                             {
                                 Button btn = NewButton(4, 3, fontSize, content);
                                 p1 = true;
-                            }
-                           );
+                            });
                         }
                     }
                 }
@@ -352,6 +344,7 @@ namespace UILayer
             }
             
         }
+
         private Button NewButton(int column,int row,int fontSize, string content)
         {
             Button btn = new Button();
@@ -365,17 +358,28 @@ namespace UILayer
             Grid_Main.Children.Add(btn);
             btn.Click += (o, e) => button_clickEvent(o, e);
 
+            buttonsInGrid.Add(btn); // Store instances, so they can be cleared later
             return btn;
         }
+
         private void button_clickEvent(object sender,RoutedEventArgs e )
         {
             Button b = (Button)sender;
             string btn1 = (string)b.Content;
             string[] split = btn1.Split(':');
+
             Window specificBooking = new SpecificBookingWindow(split[0]);
             specificBooking.Height = 540;
             specificBooking.Width = 520;
             specificBooking.Show();
+        }
+
+        private void ClearGrid()
+        {
+            foreach (Button button in buttonsInGrid)
+            {
+                Dispatcher.Invoke(() => Grid_Main.Children.Remove(button));
+            }
         }
     }
 }

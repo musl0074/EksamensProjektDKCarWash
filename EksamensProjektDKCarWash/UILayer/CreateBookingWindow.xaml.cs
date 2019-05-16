@@ -124,9 +124,7 @@ namespace UILayer
 
             string licensePlate = TextBox_LicensePlate.Text;
             string brand = TextBox_Brand.Text;
-            string model = TextBox_Model.Text;
-            Label typeOfCarLabel = (Label)ComboBox_TypeOfCar.SelectedItem;
-            string typeOfCar = (string)typeOfCarLabel.Content;
+
 
 
             bc.CreateBooking(customerName, startTime, bookingDate, email, telephoneNumber, packages, licensePlate, brand, vat);
@@ -145,10 +143,8 @@ namespace UILayer
                 ComboBox_TimeStamps.SelectedItem != null &&
                 ListBox_Packages.HasItems == true &&
                 TextBox_LicensePlate.Text != string.Empty &&
-                TextBox_Model.Text != string.Empty &&
-                TextBox_Brand.Text != string.Empty &&
-                ComboBox_TypeOfCar.SelectedItem != null
-                )
+
+                TextBox_Brand.Text != string.Empty) 
                 {
                     Button_CreateBooking.IsEnabled = true;
                 }
@@ -164,14 +160,11 @@ namespace UILayer
                 TextBox_Phonenumber.Text != string.Empty &&
                 TextBox_VAT.Text != string.Empty &&
                 ComboBox_TimeStamps.SelectedItem != null &&
-                ListBox_Packages.HasItems == true && 
+                ListBox_Packages.HasItems == true &&
                 TextBox_LicensePlate.Text != string.Empty &&
-                TextBox_Model.Text != string.Empty &&
-                TextBox_Brand.Text != string.Empty &&
-                ComboBox_TypeOfCar.SelectedItem != null)
-                {
-                    Button_CreateBooking.IsEnabled = true;
-                }
+                TextBox_Brand.Text != string.Empty) ;
+
+
                 else
                     Button_CreateBooking.IsEnabled = false;
             }
@@ -207,20 +200,13 @@ namespace UILayer
             CheckEnableCreateButton();
         }
 
-        private void ComboBox_TypeOfCar_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            CheckEnableCreateButton();
-        }
+  
 
         private void TextBox_LicensePlate_TextChanged(object sender, TextChangedEventArgs e)
         {
             CheckEnableCreateButton();
         }
 
-        private void TextBox_Model_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CheckEnableCreateButton();
-        }
 
         private void TextBox_Brand_TextChanged(object sender, TextChangedEventArgs e)
         {
