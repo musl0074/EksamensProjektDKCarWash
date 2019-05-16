@@ -20,11 +20,15 @@ namespace UILayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private WeeklyBookingsPage wbp;
+
+
         public MainWindow()
         {
             InitializeComponent();
 
-            FrameMain.Content = new WeeklyBookingsPage();
+            wbp = new WeeklyBookingsPage();
+            FrameMain.Content = wbp;
         }
 
 
@@ -40,6 +44,14 @@ namespace UILayer
         private void Button_ShowWeeklyBookings_Click(object sender, RoutedEventArgs e)
         {
             FrameMain.Content = new WeeklyBookingsPage();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (wbp.dailyBookingsPage.updateThread != null && wbp.dailyBookingsPage != null)
+                wbp.dailyBookingsPage.updateThread.Abort();
+
+            wbp.updateThread.Abort();
         }
     }
 }

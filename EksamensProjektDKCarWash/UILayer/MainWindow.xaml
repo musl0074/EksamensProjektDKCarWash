@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UILayer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized">
+        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized" Closed="Window_Closed">
     <Grid>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="1049" Margin="254,0,0,0" VerticalAlignment="Top" Width="19" Background="#FF7E7E7E"/>
         <Button x:Name="Button_ShowWeeklyBookings" Content="Vis Ugeplan" HorizontalAlignment="Left" Margin="13,176,0,0" VerticalAlignment="Top" Width="226" Height="96" FontSize="20" Background="#FFFBFBFB" Click="Button_ShowWeeklyBookings_Click"/>
