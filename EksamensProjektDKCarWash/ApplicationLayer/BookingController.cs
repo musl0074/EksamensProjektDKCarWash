@@ -47,7 +47,7 @@ namespace ApplicationLayer
             br.DeleteBooking(bookingId);
             try
             {
-                dbc.Sp_DeleteBooking(bookingId);
+                //dbc.Sp_DeleteBooking(bookingId);
             }
             catch (NullReferenceException e)
             {

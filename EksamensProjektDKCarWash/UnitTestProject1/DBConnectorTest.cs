@@ -453,7 +453,7 @@ namespace UnitTestProject1
             return bookings;
         }
 
-       
+
 
         public List<PickUpAgreement> Sp_GetAllPickUpAgreements()
         {
@@ -477,16 +477,23 @@ namespace UnitTestProject1
                         while (reader.Read())
                         {
                             int pickUpAgreementId = int.Parse(reader["PickUpAgreementId"].ToString());
-                            string startTime = reader["StartTime"].ToString();
-                            string customerName = reader["CustomerName"].ToString();
-                            DateTime bookingDate = reader.GetFieldValue<DateTime>(reader.GetOrdinal("BookingDate"));
-                            string email = reader["Email"].ToString();
-                            string telephone = reader["PhoneNumber"].ToString();
-                            string VAT = reader["VAT"].ToString();
+                            string driverName = reader["DriverName"].ToString();
+                            string pickUpTruckName = reader["PickUpTruckName"].ToString();
+                            string streetName = reader["StreetName"].ToString();
+                            int postalCode = int.Parse(reader["PostalCode"].ToString());
+                            string city = reader["City"].ToString();
+                            string pickUpTime = reader["PickUpTime"].ToString();
+                            DateTime pickUpDate = reader.GetFieldValue<DateTime>(reader.GetOrdinal("PickUpDate"));
                             string licensePlate = reader["LicensePlate"].ToString();
                             string brand = reader["Brand"].ToString();
+                            double price = double.Parse(reader["Price"].ToString());
                             int vehicleId = int.Parse(reader["VechicleID"].ToString());
 
+                            Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
+                            Driver driver = new Driver(driverName);
+                            PickUpTruck pickUpTruck = new PickUpTruck(pickUpTruckName);
+                            pickUpAgreement = new PickUpAgreement(pickUpAgreementId, driver, pickUpTruck, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
+                            pickUpAgreements.Add(pickUpAgreement);
                         }
                     }
                 }
@@ -495,6 +502,8 @@ namespace UnitTestProject1
                     Console.WriteLine("Ups" + e.Message);
                 }
             }
+
+            return pickUpAgreements;
         }
 
 
@@ -617,39 +626,6 @@ namespace UnitTestProject1
 
             }
             return packages;
-        }
-
-        public int Sp_FindSingleBookingWithID(int bookingId)
-        {
-            int result = 0;
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    SqlCommand cmd1 = new SqlCommand("Sp_GetBookingWithId", con);
-                    cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Parameters.Add(new SqlParameter("@BookingID", bookingId));
-
-                    SqlDataReader reader = cmd1.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            result = int.Parse(reader["BookingID"].ToString());
-
-                        }
-                    }
-
-                }
-                catch (SqlException e)
-                {
-                    Console.WriteLine("Ups" + e.Message);
-                }
-                return result;
-
-
-            }
         }
     }
 }
