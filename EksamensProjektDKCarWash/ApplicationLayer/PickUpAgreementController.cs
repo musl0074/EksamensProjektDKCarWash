@@ -14,7 +14,7 @@ namespace ApplicationLayer
         private PickUpAgreementRepo puar = PickUpAgreementRepo.GetInstance();
         public PickUpAgreement CurrentPickUpAgreement;
 
-        public void CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string streetName, string licensePlate, string brand, string model, string typeOfCar, DateTime pickUpDate, string pickUpTime, double price)
+        public void CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string streetName, string licensePlate, string brand, DateTime pickUpDate, string pickUpTime, double price)
         {
 
             PickUpAgreement pua = dbc.Sp_CreatePickUpAgreement(driverName, pickUpTruckName, postalCode, licensePlate, brand, price, streetName, pickUpDate, pickUpTime);
