@@ -45,9 +45,12 @@ namespace ApplicationLayer
         public void DeleteBooking(int bookingId)
         {
             br.DeleteBooking(bookingId);
+            Booking b = br.GetBooking(bookingId);
+
+
             try
             {
-                dbc.Sp_DeleteBooking(bookingId);
+                dbc.Sp_DeleteBooking(b.Id, b.Customer.CustomerId, b.Customer.Vehicle.VehicleID);
             }
             catch (NullReferenceException e)
             {
