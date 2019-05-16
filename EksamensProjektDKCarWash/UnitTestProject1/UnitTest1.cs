@@ -147,7 +147,7 @@ namespace UnitTestProject1
             bcT.CreateBooking("muslim", "14:00", new DateTime(2019, 06, 08, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
             bcT.CreateBooking("muslim", "16:00", new DateTime(2019, 06, 10, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
             bcT.CreateBooking("muslim", "18:00", new DateTime(2019, 06, 11, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
-            bookingStringsT = bcT.ShowBooking(new DateTime(2019, 06, 05, 00, 00, 00));
+            bookingStringsT = bcT.GetWeeklyBookings(new DateTime(2019, 06, 05, 00, 00, 00));
             Assert.IsTrue(bookingStringsT.Count == 6);
         }
 
