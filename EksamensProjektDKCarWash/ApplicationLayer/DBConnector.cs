@@ -347,6 +347,7 @@ namespace ApplicationLayer
             }
         }
 
+
         public List<Booking> Sp_ShowBooking(DateTime bookingDate)
         {
             List<Booking> bookings = new List<Booking>();
@@ -411,7 +412,7 @@ namespace ApplicationLayer
                             }
 
                             Customer customer = new Customer(customerName);
-                            b = new Booking(customer, startTime, bookingDate, packages);
+                            b = new Booking(customer, startTime, bookingDate, packages, Int32.Parse(bookingId));
                             bookings.Add(b);
                         }
                         
@@ -426,6 +427,8 @@ namespace ApplicationLayer
             return bookings;
         }
 
+
+        // Bruges til test - DeleteBooking
         public int Sp_FindSingleBookingWithID(int bookingId)
         {
             int result = 0;
@@ -460,12 +463,10 @@ namespace ApplicationLayer
         }
 
        
-
+        // Bruger vi
         public List<Booking> Sp_GetAllBookings()
         {
             List<Booking> bookings = new List<Booking>();
-            List<Package> packages = new List<Package>();
-            Booking b;
             pr.AddPackageFromDBToList(Sp_GetAllPackages());
             string packageName = "";
 
@@ -494,10 +495,10 @@ namespace ApplicationLayer
                             string VAT = reader["VAT"].ToString();
                             string licensePlate = reader["LicensePlate"].ToString();
                             string brand = reader["Brand"].ToString();
-                            string model = reader["Model"].ToString();
-                            string typeOfCar = reader["typeOfCar"].ToString();
-                            int vehicleId = int.Parse(reader["VechicleID"].ToString());
-                            int customerId = int.Parse(reader["CustomerID"].ToString());
+                            int vehicleId = int.Parse(reader["CustomerID"].ToString());
+                            int customerId = int.Parse(reader["VehicleID"].ToString());
+
+                            List<Package> packages = new List<Package>(); // List to hold the packages
 
                             using (SqlConnection con2 = new SqlConnection(connectionString2))
                             {
@@ -507,6 +508,7 @@ namespace ApplicationLayer
                                     SqlCommand cmd2 = new SqlCommand("Sp_FindAllPackagesForBooking", con2);
                                     cmd2.CommandType = CommandType.StoredProcedure;
                                     cmd2.Parameters.Add(new SqlParameter("@BookingID", bookingId));
+
 
                                     using (SqlDataReader reader2 = cmd2.ExecuteReader())
                                     {
@@ -531,7 +533,7 @@ namespace ApplicationLayer
 
                             Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
                             Customer customer = new Customer(customerName, email, telephone, vehicle, customerId, VAT);
-                            b = new Booking(customer, startTime, bookingDate, packages, bookingId);
+                            Booking b = new Booking(customer, startTime, bookingDate, packages, bookingId);
                             bookings.Add(b);
                         }
                     }
