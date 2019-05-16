@@ -35,6 +35,8 @@ namespace UILayer
         // Load all informations about the booking
         public void LoadBooking(int bookingId)
         {
+            string specificBooking = bc.GetBooking(bookingId);
+            string[] split = specificBooking.Split(';');
 
         }
 
