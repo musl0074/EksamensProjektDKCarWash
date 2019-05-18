@@ -147,8 +147,8 @@ namespace UnitTestProject1
             bcT.CreateBooking("muslim", "10:00", new DateTime(2019, 06, 06, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
             bcT.CreateBooking("muslim", "12:00", new DateTime(2019, 06, 07, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
             bcT.CreateBooking("muslim", "14:00", new DateTime(2019, 06, 08, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
-            bcT.CreateBooking("muslim", "16:00", new DateTime(2019, 06, 10, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
-            bcT.CreateBooking("muslim", "18:00", new DateTime(2019, 06, 11, 00, 00, 00), "muslim@eal.dk", "+4511223344", stringPackagesT, "123xx66", "MERCEDES");
+            bcT.CreateBooking("David", "16:00", new DateTime(2019, 06, 10, 00, 00, 00), "asdad@eal.dk", "+4511223344", stringPackagesT, "987erty", "Porsche");
+            bcT.CreateBooking("Simon", "18:00", new DateTime(2019, 06, 11, 00, 00, 00), "aa123@eal.dk", "+4511223344", stringPackagesT, "678yy33", "BMW");
             bookingStringsT = bcT.GetWeeklyBookings(new DateTime(2019, 06, 05, 00, 00, 00));
             Assert.IsTrue(bookingStringsT.Count == 6);
         }
@@ -156,13 +156,13 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestGetAllPickUpAgreementsFromDB() 
         {
-            dbcT.Sp_CreatePickUpAgreement("Mathias", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100",  new DateTime(2019, 06, 11, 00, 00, 00), "12:00");
-            dbcT.Sp_CreatePickUpAgreement("Adam", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 11, 00, 00, 00), "12:00");
-            dbcT.Sp_CreatePickUpAgreement("Muslim", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 11, 00, 00, 00), "12:00");
-            dbcT.Sp_CreatePickUpAgreement("Muslim", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 11, 00, 00, 00), "12:00");
-            dbcT.Sp_CreatePickUpAgreement("Mathias", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 11, 00, 00, 00), "12:00");
+            dbcT.Sp_CreatePickUpAgreement("Mathias", "Autotransporter 1", 5000, "567ty12", "MERCEDES", 500, "Rødegårdsvej 100",  new DateTime(2019, 06, 12, 00, 00, 00), "12:00");
+            dbcT.Sp_CreatePickUpAgreement("Adam", "Autotransporter 1", 5000, "999ty11", "PORSCHE", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 13, 00, 00, 00), "12:00");
+            dbcT.Sp_CreatePickUpAgreement("Muslim", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 14, 00, 00, 00), "12:00");
+            dbcT.Sp_CreatePickUpAgreement("Muslim", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 15, 00, 00, 00), "12:00");
+            dbcT.Sp_CreatePickUpAgreement("Mathias", "Autotransporter 1", 5000, "567ty12", "MERCEDES", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 16, 00, 00, 00), "12:00");
             pickUpAgreementsT = dbcT.Sp_GetAllPickUpAgreements();
-            Assert.IsTrue(bookingStringsT.Count == 5);
+            Assert.IsTrue(pickUpAgreementsT.Count == 5);
         }
 
 
