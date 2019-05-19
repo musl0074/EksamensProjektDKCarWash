@@ -153,18 +153,21 @@ namespace UnitTestProject1
             Assert.IsTrue(bookingStringsT.Count == 6);
         }
 
+//#if DEBUG
         [TestMethod]
         public void TestGetAllPickUpAgreementsFromDB() 
         {
+            //#region Test Data
             dbcT.Sp_CreatePickUpAgreement("Mathias", "Autotransporter 1", 5000, "567ty12", "MERCEDES", 500, "Rødegårdsvej 100",  new DateTime(2019, 06, 12, 00, 00, 00), "12:00");
-            dbcT.Sp_CreatePickUpAgreement("Adam", "Autotransporter 1", 5000, "999ty11", "PORSCHE", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 13, 00, 00, 00), "12:00");
-            dbcT.Sp_CreatePickUpAgreement("Muslim", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 14, 00, 00, 00), "12:00");
-            dbcT.Sp_CreatePickUpAgreement("Muslim", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 15, 00, 00, 00), "12:00");
-            dbcT.Sp_CreatePickUpAgreement("Mathias", "Autotransporter 1", 5000, "567ty12", "MERCEDES", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 16, 00, 00, 00), "12:00");
+            dbcT.Sp_CreatePickUpAgreement("Adam", "Autotransporter 1", 5000, "999ty11", "PORSCHE", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 13, 00, 00, 00), "18:00");
+            dbcT.Sp_CreatePickUpAgreement("Muslim", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 13, 00, 00, 00), "13:00");
+            dbcT.Sp_CreatePickUpAgreement("Muslim", "Autotransporter 1", 5000, "123yt45", "BMW", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 15, 00, 00, 00), "14:00");
+            dbcT.Sp_CreatePickUpAgreement("Mathias", "Autotransporter 1", 5000, "567ty12", "MERCEDES", 500, "Rødegårdsvej 100", new DateTime(2019, 06, 15, 00, 00, 00), "15:00");
+            //#endregion Test Data
             pickUpAgreementsT = dbcT.Sp_GetAllPickUpAgreements();
             Assert.IsTrue(pickUpAgreementsT.Count == 5);
         }
-
+//#endif
 
 
         [TestMethod]

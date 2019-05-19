@@ -26,15 +26,24 @@ namespace UILayer
         {
             InitializeComponent();
             List<string> stringPickUpAgreements = puac.GetAllPickUpAgreements();
-            string[] pickupagreementsarray = new string[9];
-            
             foreach (string pickupagreement in stringPickUpAgreements)
             {
-
-               pickupagreementsarray = pickupagreement.Split(',');
-              
+                // Populate list
+                string[] pickupagreementsarray =  pickupagreement.Split(',');
+                var currentRow = new
+                                 {
+                                     LicensePlate = pickupagreementsarray[0],
+                                     Name2 = pickupagreementsarray[1],
+                                     Name3 = pickupagreementsarray[2],
+                                     Name4 = pickupagreementsarray[3],
+                                     Name5 = pickupagreementsarray[4],
+                                     Name6 = pickupagreementsarray[5],
+                                     Name7 = pickupagreementsarray[6],
+                                     Name8 = pickupagreementsarray[7],
+                                     Name9 = pickupagreementsarray[8]
+                                 };
+                this.listView.Items.Add(currentRow);
             }
-           
         }
 
         private void UpdatePickUpAgreement_Click(object sender, RoutedEventArgs e)
