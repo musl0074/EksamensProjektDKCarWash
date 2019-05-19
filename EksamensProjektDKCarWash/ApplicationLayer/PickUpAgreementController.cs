@@ -64,7 +64,7 @@ namespace ApplicationLayer
         public List<string> GetAllPickUpAgreements()
         {
             string pickUpAgreementString;
-            List<string> stringPickUpAgreements = null;
+            List<string> stringPickUpAgreements = new List<string>();
             List<PickUpAgreement> pickUpAgreements = dbc.Sp_GetAllPickUpAgreements();
             foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
             {

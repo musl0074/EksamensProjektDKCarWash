@@ -9,7 +9,7 @@
       d:DesignHeight="1049" d:DesignWidth="1639"
       Title="PickUpAgreementsPage">
     <Grid>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Margin="10,80,0,81.8" Width="1619" SelectionChanged="ListView_SelectionChanged">
+        <ListView x:Name="pickUpAgreementsView" HorizontalAlignment="Left" Margin="10,80,0,81.8" Width="1619" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
@@ -19,42 +19,42 @@
                     </GridViewColumn>
                     <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Bilmærke">Bilmærke</GridViewColumnHeader>
+                            <GridViewColumnHeader x:Name="Brand" Tag="Bilmærke">Bilmærke</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="GadeNavn">Gadenavn</GridViewColumnHeader>
+                            <GridViewColumnHeader x:Name="StreetName" Tag="GadeNavn">Gadenavn</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="PostNummer">postnummer</GridViewColumnHeader>
+                            <GridViewColumnHeader x:Name="PostalCode" Tag="PostNummer">postnummer</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="By">By</GridViewColumnHeader>
+                            <GridViewColumnHeader x:Name="City" Tag="By">By</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Chauffør">Chauffør</GridViewColumnHeader>
+                            <GridViewColumnHeader x:Name="Driver" Tag="Chauffør">Chauffør</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Dato">Dato</GridViewColumnHeader>
+                            <GridViewColumnHeader x:Name="PickUpDate" Tag="Dato">Dato</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Tidspunkt">tidspunkt</GridViewColumnHeader>
+                            <GridViewColumnHeader x:Name="PickUpTime" Tag="Tidspunkt">tidspunkt</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn Width="170" DisplayMemberBinding="{Binding Name}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Pris">Pris</GridViewColumnHeader>
+                            <GridViewColumnHeader x:Name="Price" Tag="Pris">Pris</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     
