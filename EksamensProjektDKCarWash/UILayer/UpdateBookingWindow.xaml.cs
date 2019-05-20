@@ -37,7 +37,7 @@ namespace UILayer
         {
             string specificBooking = bc.GetBooking(bookingId);
             string[] split = specificBooking.Split(';');
-            string[] dateSplit = split[2].Split('.');
+            string[] dateSplit = split[2].Split(':');
             string[] packagesSplit = split[7].Split(',');
             TextBox_CustomerName.Text = split[1];
             TextBox_Email.Text = split[4];
