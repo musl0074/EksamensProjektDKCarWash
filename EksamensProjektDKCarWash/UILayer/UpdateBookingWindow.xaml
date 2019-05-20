@@ -34,9 +34,9 @@
 		<TextBox IsEnabled="False" Name="TextBox_Vat" HorizontalAlignment="Left" Height="39" Margin="545,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="308" TextChanged="TextBox_TextChanged"/>
 		<Label Name="Label_Vat" Content="Cvr" HorizontalAlignment="Left" Margin="545,282,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.741,0.538"/>
 		<TextBox Name="Textbox_Licensplate" HorizontalAlignment="Left" Height="39" Margin="887,207,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="411"/>
-		<TextBox Name="Textbox_Model" HorizontalAlignment="Left" Height="39" Margin="887,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="411"/>
+		<TextBox Name="Textbox_Brand" HorizontalAlignment="Left" Height="39" Margin="887,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="411"/>
 		<Label Name="Label_Licensplate" Content="NummerPlade" HorizontalAlignment="Left" Margin="887,176,0,0" VerticalAlignment="Top"/>
-		<Label Name="Label_Model" Content="Bilmærke" HorizontalAlignment="Left" Margin="887,282,0,0" VerticalAlignment="Top"/>
+		<Label Name="Label_Brand" Content="Bilmærke" HorizontalAlignment="Left" Margin="887,282,0,0" VerticalAlignment="Top"/>
 
 	</Grid>
 </Window>

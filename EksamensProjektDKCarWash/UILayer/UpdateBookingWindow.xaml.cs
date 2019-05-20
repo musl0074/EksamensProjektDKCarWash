@@ -22,11 +22,16 @@ namespace UILayer
     {
         private BookingController bc = new BookingController();
         private PackageController pc = new PackageController();
+        int vechleId;
+        int customerId;
+        List<string> UpdatePackage = new List<string>();
+
+
 
         public UpdateBookingWindow(int bookingId)
         {
             InitializeComponent();
-
+            
 
             LoadBooking(bookingId);
             UpdateUpToCurrentDate();
@@ -39,19 +44,25 @@ namespace UILayer
             string[] split = specificBooking.Split(';');
             string[] dateSplit = split[2].Split('.');
             string[] packagesSplit = split[7].Split(',');
+            vechleId = int.Parse(split[11]);
+            customerId = int.Parse(split[10]);
             TextBox_CustomerName.Text = split[1];
             TextBox_Email.Text = split[4];
             Textbox_Licensplate.Text = split[8];
             TextBox_Phonenumber.Text = split[5];
             TextBox_Vat.Text = split[6];
-            Textbox_Model.Text = split[9];
+            Textbox_Brand.Text = split[9];
+            ComboBox_TimeStamps.SelectedItem = split[3];
             Calendar_Main.SelectedDate = new DateTime?(new DateTime(int.Parse(dateSplit[0]), int.Parse(dateSplit[1]), int.Parse(dateSplit[2])));
 
             foreach (var item in packagesSplit)
             {
                 ListBox_Packages.Items.Add(item);
             }
-
+            foreach (var item in ListBox_Packages.Items)
+            {
+                UpdatePackage.Add(item.ToString());
+            }
         }
 
 
@@ -133,7 +144,7 @@ namespace UILayer
         // Button - Update the booking
         private void Button_UpdateBooking_Click(object sender, RoutedEventArgs e)
         {
-
+            bc.UpdateBooking(customerId, vechleId, TextBox_CustomerName.Text,(DateTime) Calendar_Main.SelectedDate, ComboBox_TimeStamps.SelectedItem.ToString(), TextBox_CustomerName.Text, Textbox_Licensplate.Text, Textbox_Brand.Text, TextBox_Phonenumber.Text, TextBox_Vat.Text,UpdatePackage);
         }
 
 
