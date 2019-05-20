@@ -24,7 +24,6 @@ namespace UILayer
         private PackageController pc = new PackageController();
         int vechleId;
         int customerId;
-        List<string> UpdatePackage = new List<string>();
 
 
 
@@ -57,13 +56,31 @@ namespace UILayer
 
             foreach (var item in packagesSplit)
             {
-                ListBox_Packages.Items.Add(item);
+                if (item != string.Empty) // Some splits gives us a "" string
+                {
+                    ListBox_Packages.Items.Add(item.Substring(1)); // Substring(1), because all packages have "\n" infront of them, we dont want that for this function
+                }
             }
-            foreach (var item in ListBox_Packages.Items)
-            {
-                UpdatePackage.Add(item.ToString());
-            }
+            
+
+            LoadPackages();
         }
+
+
+        // Button - Update the booking
+        private void Button_UpdateBooking_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> packagesString = new List<string>();
+
+            foreach (string package in ListBox_Packages.Items)
+            {
+                packagesString.Add(package);
+            }
+
+
+            bc.UpdateBooking(customerId, vechleId, TextBox_CustomerName.Text, (DateTime)Calendar_Main.SelectedDate, (string)ComboBox_TimeStamps.SelectedItem, TextBox_Email.Text, Textbox_Licensplate.Text, Textbox_Brand.Text, TextBox_Phonenumber.Text, TextBox_Vat.Text, packagesString);
+        }
+
 
 
         // RadioButton
@@ -141,11 +158,7 @@ namespace UILayer
 
 
 
-        // Button - Update the booking
-        private void Button_UpdateBooking_Click(object sender, RoutedEventArgs e)
-        {
-            bc.UpdateBooking(customerId, vechleId, TextBox_CustomerName.Text,(DateTime) Calendar_Main.SelectedDate,(string) ComboBox_TimeStamps.SelectedItem, TextBox_CustomerName.Text, Textbox_Licensplate.Text, Textbox_Brand.Text, TextBox_Phonenumber.Text, TextBox_Vat.Text,UpdatePackage);
-        }
+        
 
 
 
