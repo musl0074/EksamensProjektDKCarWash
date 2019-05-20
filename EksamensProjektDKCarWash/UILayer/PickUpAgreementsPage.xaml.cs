@@ -28,8 +28,9 @@ namespace UILayer
         {
             InitializeComponent();
 
-            //Thread pickUpAgreementsThread = new Thread(() => LoadAllPickUpAgreements());
-            //pickUpAgreementsThread.Start();
+            Thread pickUpAgreementsThread = new Thread(() => LoadAllPickUpAgreements());
+            pickUpAgreementsThread.Start();
+        
         }
 
         private void UpdatePickUpAgreement_Click(object sender, RoutedEventArgs e)
@@ -56,7 +57,7 @@ namespace UILayer
                     PickUpTime = pickupagreementsarray[7],
                     Price = pickupagreementsarray[8]
                 };
-                this.pickUpAgreementsView.Items.Add(currentRow);
+                Dispatcher.Invoke(() => this.pickUpAgreementsView.Items.Add(currentRow));
             }
         }
 
