@@ -66,8 +66,8 @@ namespace UILayer
         private void DeletePickUpAgreement_Click(object sender, RoutedEventArgs e)
         {
             string data = pickUpAgreementsView.SelectedItem.ToString();
-            string pickUpAgreementId = data.Split(',')[0];
-            puac.DeletePickUpAgreement(int.Parse(pickUpAgreementId.Split('=')[1]));
+            string pickUpAgreementId = data.Split(',')[0].Split('=')[1];
+            puac.DeletePickUpAgreement(int.Parse(pickUpAgreementId));
            
         }
 
