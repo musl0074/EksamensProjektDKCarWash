@@ -32,15 +32,8 @@ namespace ApplicationLayer
         public void DeletePickUpAgreement(int pickUpAgreementId)
         {
             puar.DeletePickUpAgreement(pickUpAgreementId);
-            try
-            {
-                dbc.Sp_DeletePickUpAgreement(pickUpAgreementId);
-            }
-            catch (NullReferenceException e)
-            {
-                //MessageBox.Show(e.Message);
-                throw;
-            }
+            dbc.Sp_DeletePickUpAgreement(pickUpAgreementId);
+            
         }
 
         public string GetPickUpAgreementWithId (int pickUpAgreementId)
