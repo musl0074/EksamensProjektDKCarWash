@@ -24,6 +24,7 @@ namespace UILayer
         
         BookingController bc = new BookingController();
         string CurrentBooking;
+        int specficbookingId;
         public SpecificBookingWindow(string bookingId)
         {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace UILayer
             string email = split[4];
             string telephone = split[5];
             string vat = split[6];
-
+            specficbookingId = int.Parse(split[0]);
             TextBox_CustomerName.Text = customerName;
             TextBox_Email.Text = email;
             TextBox_Phonenumber.Text = telephone;
@@ -63,7 +64,7 @@ namespace UILayer
 
         private void Button_Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            bc.DeleteBooking(specficbookingId);
         }
     }
 }
