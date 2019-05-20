@@ -129,7 +129,7 @@ namespace ApplicationLayer
                         {
                             pickUpId = int.Parse(reader["PickUpAgreementID"].ToString());
                             city = reader["City"].ToString();
-                            vehicleId = int.Parse(reader["vehicleID"].ToString());
+                            vehicleId = int.Parse(reader["VehicleID"].ToString());
                         }
                     }
                     Driver driver = new Driver(driverName);
@@ -423,7 +423,7 @@ namespace ApplicationLayer
                                         {
                                             while (reader2.Read())
                                             {
-                                                packageName = reader2["packageName"].ToString();
+                                                packageName = reader2["PackageName"].ToString();
                                                 packages.Add(pr.FindPackage(packageName));
                                             }
                                         }
@@ -560,7 +560,7 @@ namespace ApplicationLayer
                                         {
                                             while (reader2.Read())
                                             {
-                                                packageName = reader2["packageName"].ToString();
+                                                packageName = reader2["PackageName"].ToString();
                                                 packages.Add(pr.FindPackage(packageName));
                                             }
                                         }
