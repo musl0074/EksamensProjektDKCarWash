@@ -66,6 +66,8 @@ namespace UILayer
             bool running = true;
             while(running)
             {
+                ClearGrid(); // Clear the labels in grid, before updating it.
+
                 // Draw the grid
                 for (int i = 1; i < 7; i++)
                 {
@@ -183,6 +185,8 @@ namespace UILayer
         }
 
         
+        
+
         // Button - NAVIGATE LEFT
         private void Button_NavigateLeft_Click(object sender, RoutedEventArgs e)
         {
@@ -214,7 +218,7 @@ namespace UILayer
         {
             foreach (Label label in LabelsInGrid)
             {
-                Grid_Main.Children.Remove(label);
+                Dispatcher.Invoke(() => Grid_Main.Children.Remove(label));
             }
         }
 
@@ -261,10 +265,8 @@ namespace UILayer
 
         public void LoadDay (DateTime date, string day)
         {
-            Window dailyBookingsWindow = new Window();
+            Window dailyBookingsWindow = new DailyBookingsPage(date, day);
             dailyBookingsWindow.WindowState = WindowState.Maximized;
-
-            dailyBookingsPage = new DailyBookingsPage(date, day);
             dailyBookingsWindow.Content = dailyBookingsPage;  
             dailyBookingsWindow.Show();
         }
