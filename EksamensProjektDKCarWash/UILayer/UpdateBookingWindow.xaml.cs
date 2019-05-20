@@ -42,7 +42,7 @@ namespace UILayer
         {
             string specificBooking = bc.GetBooking(bookingId);
             string[] split = specificBooking.Split(';');
-            string[] dateSplit = split[2].Split('.');
+            string[] dateSplit = split[2].Split(':');
             string[] packagesSplit = split[7].Split(',');
             vechleId = int.Parse(split[11]);
             customerId = int.Parse(split[10]);

@@ -59,6 +59,8 @@ namespace UILayer
             UpdateWindow.Show();
         }
 
+
+
         private void Button_Delete_Click(object sender, RoutedEventArgs e)
         {
 
