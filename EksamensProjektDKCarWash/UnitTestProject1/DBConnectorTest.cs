@@ -128,7 +128,7 @@ namespace UnitTestProject1
                         {
                             pickUpId = int.Parse(reader["PickUpAgreementID"].ToString());
                             city = reader["City"].ToString();
-                            vehicleId = int.Parse(reader["VehicleID"].ToString());
+                            vehicleId = int.Parse(reader["vehicleID"].ToString());
                         }
                     }
                     Driver driver = new Driver(driverName);
@@ -487,7 +487,7 @@ namespace UnitTestProject1
                             string licensePlate = reader["LicensePlate"].ToString();
                             string brand = reader["Brand"].ToString();
                             double price = double.Parse(reader["Price"].ToString());
-                            int vehicleId = int.Parse(reader["VechicleID"].ToString());
+                            int vehicleId = int.Parse(reader["VehicleID"].ToString());
 
                             Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
                             Driver driver = new Driver(driverName);

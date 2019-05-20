@@ -8,8 +8,61 @@
       mc:Ignorable="d" 
       d:DesignHeight="1049" d:DesignWidth="1639"
       Title="PickUpAgreementsPage">
-
     <Grid>
-        
+        <ListView x:Name="pickUpAgreementsView" HorizontalAlignment="Left" Margin="10,80,0,81.8" Width="1619" SelectionChanged="ListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader x:Name="LicensePlate" Tag="NummerPlade">Nummerplade</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader x:Name="Brand" Tag="Bilmærke">Bilmærke</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader x:Name="StreetName" Tag="GadeNavn">Gadenavn</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader x:Name="PostalCode" Tag="PostNummer">postnummer</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader x:Name="City" Tag="By">By</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader x:Name="Driver" Tag="Chauffør">Chauffør</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader x:Name="PickUpDate" Tag="Dato">Dato</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader x:Name="PickUpTime" Tag="Tidspunkt">tidspunkt</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="170" DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader x:Name="Price" Tag="Pris">Pris</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="DeletePickUpAgreement" Content="Slet" HorizontalAlignment="Left" Margin="10,989,0,0" VerticalAlignment="Top" Width="127" Height="50" Click="DeletePickUpAgreement_Click"/>
+        <Button x:Name="UpdatePickUpAgreement" Content="Ændre" HorizontalAlignment="Left" Margin="1502,989,0,0" VerticalAlignment="Top" Width="127" Height="50" Click="UpdatePickUpAgreement_Click"/>
+        <TextBox x:Name="SearchPickUpAgreement" Margin="1453,25,0,990.8" TextWrapping="Wrap" Text="Søg" HorizontalAlignment="Left" Width="160" FontSize="20" TextChanged="SearchPickUpAgreement_TextChanged"/>
     </Grid>
 </Page>
