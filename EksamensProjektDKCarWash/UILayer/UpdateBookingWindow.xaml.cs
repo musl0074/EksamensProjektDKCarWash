@@ -144,7 +144,7 @@ namespace UILayer
         // Button - Update the booking
         private void Button_UpdateBooking_Click(object sender, RoutedEventArgs e)
         {
-            bc.UpdateBooking(customerId, vechleId, TextBox_CustomerName.Text,(DateTime) Calendar_Main.SelectedDate, ComboBox_TimeStamps.SelectedItem.ToString(), TextBox_CustomerName.Text, Textbox_Licensplate.Text, Textbox_Brand.Text, TextBox_Phonenumber.Text, TextBox_Vat.Text,UpdatePackage);
+            bc.UpdateBooking(customerId, vechleId, TextBox_CustomerName.Text,(DateTime) Calendar_Main.SelectedDate,(string) ComboBox_TimeStamps.SelectedItem, TextBox_CustomerName.Text, Textbox_Licensplate.Text, Textbox_Brand.Text, TextBox_Phonenumber.Text, TextBox_Vat.Text,UpdatePackage);
         }
 
 
