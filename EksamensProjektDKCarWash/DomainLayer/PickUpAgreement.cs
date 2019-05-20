@@ -48,9 +48,8 @@ namespace DomainLayer
 
         public override string ToString()
         {
-            return Driver.Name + ","  + City + "," + PostalCode.ToString() + "," +
-                Vehicle.LicensePlate + "," + Vehicle.Brand + "," + Price.ToString() + "," + StreetName + "," + PickUpDate.ToString()
-                + "," + PickUpTime;
+            return Vehicle.LicensePlate + "," + Vehicle.Brand + "," + StreetName + "," + PostalCode.ToString() 
+                + "," + City + "," + Driver.Name + "," + PickUpDate.ToString() + "," + PickUpTime + "," + Price.ToString();
         } 
     }
 }

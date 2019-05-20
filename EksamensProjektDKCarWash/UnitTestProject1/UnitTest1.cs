@@ -121,14 +121,7 @@ namespace UnitTestProject1
             List<Booking> bookingDBList = dbcT.Sp_GetAllBookings();
             brT.UpdateAllBookings(bookingDBList);
             brT.DeleteBooking(1);
-            foreach (Booking booking in bookingDBList)
-            {
-                if (booking.Id == 1)
-                {
-                    b4 = booking;
-                }
-            }
-            dbcT.Sp_DeleteBooking(b4.Id, b4.Customer.Vehicle.VehicleID, b4.Customer.CustomerId);
+            dbcT.Sp_DeleteBooking(1);
             bookingDBList = dbcT.Sp_GetAllBookings();
             List<Booking> bookingRepoList = brT.GetBookings();
             Assert.AreEqual(bookingDBList.Count, bookingRepoList.Count);
