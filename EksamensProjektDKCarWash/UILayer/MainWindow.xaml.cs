@@ -48,12 +48,10 @@ namespace UILayer
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            if (wbp.dailyBookingsPage != null)
+            // Close all open windows
+            if (wbp.dailyBookingsPage.IsActive)
             {
-                if (wbp.dailyBookingsPage.updateThread != null)
-                {
-                    wbp.dailyBookingsPage.updateThread.Abort();
-                }
+                wbp.dailyBookingsPage.Close(); // This also aborts the dailyBookingsPage.updateThread due to Closed Event
             }
 
             wbp.updateThread.Abort();

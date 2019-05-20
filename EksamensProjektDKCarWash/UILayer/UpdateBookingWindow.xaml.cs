@@ -22,11 +22,15 @@ namespace UILayer
     {
         private BookingController bc = new BookingController();
         private PackageController pc = new PackageController();
+        int vechleId;
+        int customerId;
+
+
 
         public UpdateBookingWindow(int bookingId)
         {
             InitializeComponent();
-
+            
 
             LoadBooking(bookingId);
             UpdateUpToCurrentDate();
@@ -35,23 +39,63 @@ namespace UILayer
         // Load all informations about the booking
         public void LoadBooking(int bookingId)
         {
+            string specificBooking = bc.GetBooking(bookingId);
+            string[] split = specificBooking.Split(';');
+            string[] dateSplit = split[2].Split(':');
+            string[] packagesSplit = split[7].Split(',');
+            vechleId = int.Parse(split[11]);
+            customerId = int.Parse(split[10]);
+            TextBox_CustomerName.Text = split[1];
+            TextBox_Email.Text = split[4];
+            Textbox_Licensplate.Text = split[8];
+            TextBox_Phonenumber.Text = split[5];
+            TextBox_Vat.Text = split[6];
+            Textbox_Brand.Text = split[9];
+            ComboBox_TimeStamps.SelectedItem = split[3];
+            Calendar_Main.SelectedDate = new DateTime?(new DateTime(int.Parse(dateSplit[0]), int.Parse(dateSplit[1]), int.Parse(dateSplit[2])));
 
+            foreach (var item in packagesSplit)
+            {
+                if (item != string.Empty) // Some splits gives us a "" string
+                {
+                    ListBox_Packages.Items.Add(item.Substring(1)); // Substring(1), because all packages have "\n" infront of them, we dont want that for this function
+                }
+            }
+            
+
+            LoadPackages();
         }
+
+
+        // Button - Update the booking
+        private void Button_UpdateBooking_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> packagesString = new List<string>();
+
+            foreach (string package in ListBox_Packages.Items)
+            {
+                packagesString.Add(package);
+            }
+
+
+            bc.UpdateBooking(customerId, vechleId, TextBox_CustomerName.Text, (DateTime)Calendar_Main.SelectedDate, (string)ComboBox_TimeStamps.SelectedItem, TextBox_Email.Text, Textbox_Licensplate.Text, Textbox_Brand.Text, TextBox_Phonenumber.Text, TextBox_Vat.Text, packagesString);
+        }
+
 
 
         // RadioButton
         private void RadioButton_Corporate_Checked(object sender, RoutedEventArgs e)
         {
-            Label_VAT.Visibility = Visibility.Visible;
-            TextBox_VAT.Visibility = Visibility.Visible;
+            //Label_VAT.Visibility = Visibility.Visible;
+            //TextBox_VAT.Visibility = Visibility.Visible;
 
             CheckEnableCreateButton();
         }
 
         private void RadioButton_Private_Checked(object sender, RoutedEventArgs e)
         {
-            Label_VAT.Visibility = Visibility.Collapsed;
-            TextBox_VAT.Visibility = Visibility.Collapsed;
+            //Label_VAT.Visibility = Visibility.Collapsed;
+            //TextBox_VAT.Visibility = Visibility.Collapsed;
 
             CheckEnableCreateButton();
         }
@@ -114,11 +158,7 @@ namespace UILayer
 
 
 
-        // Button - Update the booking
-        private void Button_UpdateBooking_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
 
 
@@ -149,7 +189,7 @@ namespace UILayer
                 if (TextBox_CustomerName.Text != string.Empty &&
                 TextBox_Email.Text != string.Empty &&
                 TextBox_Phonenumber.Text != string.Empty &&
-                TextBox_VAT.Text != string.Empty &&
+                //TextBox_VAT.Text != string.Empty &&
                 ComboBox_TimeStamps.SelectedItem != null &&
                 ListBox_Packages.HasItems == true)
                 {

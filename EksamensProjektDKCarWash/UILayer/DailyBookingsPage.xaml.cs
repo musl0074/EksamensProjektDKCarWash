@@ -20,7 +20,7 @@ namespace UILayer
     /// <summary>
     /// Interaction logic for DailyBookingsPage.xaml
     /// </summary>
-    public partial class DailyBookingsPage : Page
+    public partial class DailyBookingsPage : Window
     {
         private BookingController bc = new BookingController();
         public DateTime CurrentDateTime { get; set; }
@@ -38,7 +38,7 @@ namespace UILayer
             updateThread = new Thread(LoadDay);
             updateThread.Start();
 
-
+            
         }
 
         // Load all the bookings for this day
@@ -215,7 +215,7 @@ namespace UILayer
                 {
                     string[] split = item.Split(';');
                     string content = split[0] + ": " + split[2];
-                    if (split[1] == "12:00")
+                    if (split[1] == "14:00")
                     {
                         if (p1 == false)
                         {
@@ -259,7 +259,7 @@ namespace UILayer
                 {
                     string[] split = item.Split(';');
                     string content = split[0] + ": " + split[2];
-                    if (split[1] == "14:00")
+                    if (split[1] == "16:00")
                     {
                         if (p1 == false)
                         {
@@ -295,51 +295,7 @@ namespace UILayer
                         }
                     }
                 }
-                p1 = false;
-                p2 = false;
-                p3 = false;
-                p4 = false;
-                foreach (string item in listBooking)
-                {
-                    string[] split = item.Split(';');
-                    string content = split[0] + ": " + split[2];
-                    if (split[1] == "16:00")
-                    {
-                        if (p1 == false)
-                        {
-                            Dispatcher.Invoke(() =>
-                            {
-                                Button btn = NewButton(1, 7, fontSize, content);
-                                p1 = true;
-                            });
-                        }
-                        else if (p2 == false)
-                        {
-                            Dispatcher.Invoke(() =>
-                            {
-                                Button btn = NewButton(2, 7, fontSize, content);
-                                p2 = true;
-                            });
-                        }
-                        else if (p3 == false)
-                        {
-                            Dispatcher.Invoke(() =>
-                            {
-                                Button btn = NewButton(3, 7, fontSize, content);
-                                p3 = true;
-                            });
-                        }
-                        else if (p4 == false)
-                        {
-
-                            Dispatcher.Invoke(() =>
-                            {
-                                Button btn = NewButton(4, 7, fontSize, content);
-                                p4 = true;
-                            });
-                        }
-                    }
-                }
+                
                 Thread.Sleep(5000);
             }
             
@@ -380,6 +336,13 @@ namespace UILayer
             {
                 Dispatcher.Invoke(() => Grid_Main.Children.Remove(button));
             }
+        }
+
+
+        // When daily bookings windows is closed
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            updateThread.Abort();
         }
     }
 }

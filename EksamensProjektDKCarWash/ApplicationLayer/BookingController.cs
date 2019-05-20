@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using DomainLayer;
 
 namespace ApplicationLayer
@@ -37,16 +38,15 @@ namespace ApplicationLayer
             }
             catch (NullReferenceException e)
             {
-                //MessageBox.Show(e.Message);
-                throw;
+                MessageBox.Show(e.Message);
             }   
         }
 
         public void DeleteBooking(int bookingId)
         {
+
             br.DeleteBooking(bookingId);
             dbc.Sp_DeleteBooking(bookingId);
-            
             
         }
 
