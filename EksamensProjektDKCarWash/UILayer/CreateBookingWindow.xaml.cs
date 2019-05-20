@@ -29,9 +29,8 @@ namespace UILayer
             InitializeComponent();
 
             UpdateUpToCurrentDate();
-
-            Thread packageThread = new Thread(() => LoadPackages());
-            packageThread.Start();
+            
+            LoadPackages();
         }
 
         // RadioButton
@@ -77,11 +76,11 @@ namespace UILayer
         public void LoadPackages ()
         {
             List<string> packagesString = pc.LoadAllPackagesToString();
-            Dispatcher.BeginInvoke(new Action(() => ComboBox_Packages.Items.Clear()));  // Need to use dispatcher to make changes to UI
+            ComboBox_Packages.Items.Clear();  // Need to use dispatcher to make changes to UI
 
             foreach (string package in packagesString)
             {
-                Dispatcher.BeginInvoke(new Action(() => ComboBox_Packages.Items.Add(package)));
+                ComboBox_Packages.Items.Add(package);
             }
         }
 
