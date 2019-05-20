@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DomainLayer;
 
-namespace DomainLayer
+namespace ApplicationLayer
 {
-   public class PickUpAgreementRepo
+    public class PickUpAgreementRepo
     {
         private static PickUpAgreementRepo instance;
 
         private List<PickUpAgreement> pickUpAgreements = new List<PickUpAgreement>();
 
+        private List<ISubscriber> subscribers = new List<ISubscriber>();
 
-        public static PickUpAgreementRepo GetInstance ()
+
+        public static PickUpAgreementRepo GetInstance()
         {
             if (instance == null)
                 instance = new PickUpAgreementRepo();
@@ -24,6 +27,7 @@ namespace DomainLayer
         public void AddPickUpAgreementToList(PickUpAgreement pua)
         {
             pickUpAgreements.Add(pua);
+            NotifySubscribers();
         }
 
 
@@ -42,11 +46,12 @@ namespace DomainLayer
         {
             foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
             {
-                if(pickUpAgreement.PickUpAgreementId == pickUpAgreementId)
+                if (pickUpAgreement.PickUpAgreementId == pickUpAgreementId)
                 {
                     pickUpAgreements.Remove(pickUpAgreement);
                 }
             }
+            NotifySubscribers();
         }
 
         public string UpdatePickUpAgreement(PickUpAgreement currentPickUpAgreement)
@@ -60,6 +65,7 @@ namespace DomainLayer
                     return "Afhentnings aftale er ændret!";
                 }
             }
+            NotifySubscribers();
             return "En fejl er forekommet og afhentnings aftale er ikke ændret!";
         }
 
@@ -67,12 +73,28 @@ namespace DomainLayer
         {
             foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
             {
-                if(pickUpAgreement.PickUpAgreementId == pickUpAgreementId)
+                if (pickUpAgreement.PickUpAgreementId == pickUpAgreementId)
                 {
                     return pickUpAgreement;
                 }
             }
             return null;
         }
+        public void RegisterSubscriber(ISubscriber subscriber)
+        {
+            subscribers.Add(subscriber);
+        }
+        public void RemoveSubscriber(ISubscriber subscriber)
+        {
+            subscribers.Remove(subscriber);
+        }
+        public void NotifySubscribers()
+        {
+            foreach (ISubscriber subscriber in subscribers)
+            {
+                subscriber.Update();
+            }
+        }
+
     }
 }
