@@ -265,10 +265,8 @@ namespace UILayer
 
         public void LoadDay (DateTime date, string day)
         {
-            Window dailyBookingsWindow = new Window();
+            Window dailyBookingsWindow = new DailyBookingsPage(date, day);
             dailyBookingsWindow.WindowState = WindowState.Maximized;
-
-            dailyBookingsPage = new DailyBookingsPage(date, day);
             dailyBookingsWindow.Content = dailyBookingsPage;  
             dailyBookingsWindow.Show();
         }

@@ -20,7 +20,7 @@ namespace UILayer
     /// <summary>
     /// Interaction logic for DailyBookingsPage.xaml
     /// </summary>
-    public partial class DailyBookingsPage : Page
+    public partial class DailyBookingsPage : Window
     {
         private BookingController bc = new BookingController();
         public DateTime CurrentDateTime { get; set; }
@@ -38,7 +38,7 @@ namespace UILayer
             updateThread = new Thread(LoadDay);
             updateThread.Start();
 
-
+            
         }
 
         // Load all the bookings for this day
@@ -336,6 +336,13 @@ namespace UILayer
             {
                 Dispatcher.Invoke(() => Grid_Main.Children.Remove(button));
             }
+        }
+
+
+        // When daily bookings windows is closed
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            updateThread.Abort();
         }
     }
 }
