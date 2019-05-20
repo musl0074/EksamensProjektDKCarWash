@@ -128,6 +128,8 @@ namespace UILayer
 
 
             bc.CreateBooking(customerName, startTime, bookingDate, email, telephoneNumber, packages, licensePlate, brand, vat);
+            this.Close();
+            
         }
 
 
