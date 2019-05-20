@@ -65,6 +65,7 @@ namespace UILayer
         private void Button_Delete_Click(object sender, RoutedEventArgs e)
         {
             bc.DeleteBooking(specficbookingId);
+            this.Close();
         }
     }
 }
