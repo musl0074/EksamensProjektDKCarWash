@@ -11,7 +11,7 @@ namespace ApplicationLayer
     public class PickUpAgreementController
     {
         private DBConnector dbc = new DBConnector();
-        private PickUpAgreementRepo puar = PickUpAgreementRepo.GetInstance();
+        public PickUpAgreementRepo puar = PickUpAgreementRepo.GetInstance();
         public PickUpAgreement CurrentPickUpAgreement;
 
         public void CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string streetName, string licensePlate, string brand, DateTime pickUpDate, string pickUpTime, double price)
@@ -31,16 +31,8 @@ namespace ApplicationLayer
 
         public void DeletePickUpAgreement(int pickUpAgreementId)
         {
+            dbc.Sp_DeletePickUpAgreement(pickUpAgreementId);
             puar.DeletePickUpAgreement(pickUpAgreementId);
-            try
-            {
-                dbc.Sp_DeletePickUpAgreement(pickUpAgreementId);
-            }
-            catch (NullReferenceException e)
-            {
-                //MessageBox.Show(e.Message);
-                throw;
-            }
         }
 
         public string GetPickUpAgreementWithId (int pickUpAgreementId)

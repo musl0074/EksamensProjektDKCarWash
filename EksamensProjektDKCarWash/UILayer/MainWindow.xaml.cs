@@ -59,6 +59,10 @@ namespace UILayer
 
         private void Button_ShowPickUpAgreements_Click(object sender, RoutedEventArgs e)
         {
+            if(wbp.updateThread.IsAlive == true)
+            {
+                wbp.updateThread.Abort();
+            }
             FrameMain.Content = new PickUpAgreementsPage();
         }
 

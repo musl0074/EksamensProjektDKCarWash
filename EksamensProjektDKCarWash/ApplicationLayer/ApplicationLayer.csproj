@@ -44,9 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookingController.cs" />
+    <Compile Include="BookingRepo.cs" />
     <Compile Include="DBConnector.cs" />
+    <Compile Include="IPublisher.cs" />
+    <Compile Include="ISubscriber.cs" />
     <Compile Include="PackageController.cs" />
+    <Compile Include="PackageRepo.cs" />
     <Compile Include="PickUpAgreementController.cs" />
+    <Compile Include="PickUpAgreementRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

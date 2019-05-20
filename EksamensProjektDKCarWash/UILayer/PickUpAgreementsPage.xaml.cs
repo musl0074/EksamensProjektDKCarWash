@@ -20,16 +20,17 @@ namespace UILayer
     /// <summary>
     /// Interaction logic for PickUpAgreementsPage.xaml
     /// </summary>
-    public partial class PickUpAgreementsPage : Page
+    public partial class PickUpAgreementsPage : Page, ISubscriber
     {
         PickUpAgreementController puac = new PickUpAgreementController();
        
         public PickUpAgreementsPage()
         {
             InitializeComponent();
-
-            //Thread pickUpAgreementsThread = new Thread(() => LoadAllPickUpAgreements());
-            //pickUpAgreementsThread.Start();
+            puac.puar.RegisterSubscriber(this);
+            Thread pickUpAgreementsThread = new Thread(() => LoadAllPickUpAgreements());
+            pickUpAgreementsThread.Start();
+        
         }
 
         private void UpdatePickUpAgreement_Click(object sender, RoutedEventArgs e)
@@ -39,30 +40,35 @@ namespace UILayer
 
         private void LoadAllPickUpAgreements()
         {
+           Dispatcher.Invoke(() => pickUpAgreementsView.Items.Clear());
             List<string> stringPickUpAgreements = puac.GetAllPickUpAgreements();
             foreach (string pickupagreement in stringPickUpAgreements)
             {
-                // Populate list
+                
                 string[] pickupagreementsarray = pickupagreement.Split(',');
                 var currentRow = new
                 {
-                    LicensePlate = pickupagreementsarray[0],
-                    Brand = pickupagreementsarray[1],
-                    StreetName = pickupagreementsarray[2],
-                    PostalCode = pickupagreementsarray[3],
-                    City = pickupagreementsarray[4],
-                    Driver = pickupagreementsarray[5],
-                    PickUpDate = pickupagreementsarray[6],
-                    PickUpTime = pickupagreementsarray[7],
-                    Price = pickupagreementsarray[8]
+                    PickUpAgreementId = pickupagreementsarray[0],
+                    LicensePlate = pickupagreementsarray[1],
+                    Brand = pickupagreementsarray[2],
+                    StreetName = pickupagreementsarray[3],
+                    PostalCode = pickupagreementsarray[4],
+                    City = pickupagreementsarray[5],
+                    Driver = pickupagreementsarray[6],
+                    PickUpDate = pickupagreementsarray[7],
+                    PickUpTime = pickupagreementsarray[8],
+                    Price = pickupagreementsarray[9]
                 };
-                this.pickUpAgreementsView.Items.Add(currentRow);
+                Dispatcher.Invoke(() => this.pickUpAgreementsView.Items.Add(currentRow));
             }
         }
 
         private void DeletePickUpAgreement_Click(object sender, RoutedEventArgs e)
         {
-
+            string data = pickUpAgreementsView.SelectedItem.ToString();
+            string pickUpAgreementId = data.Split(',')[0].Split('=')[1];
+            puac.DeletePickUpAgreement(int.Parse(pickUpAgreementId));
+           
         }
 
         private void SearchPickUpAgreement_TextChanged(object sender, TextChangedEventArgs e)
@@ -83,6 +89,11 @@ namespace UILayer
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        public void Update()
+        {
+            LoadAllPickUpAgreements();
         }
     }
 }

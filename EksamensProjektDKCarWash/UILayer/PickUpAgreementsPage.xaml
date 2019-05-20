@@ -5,64 +5,63 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:UILayer"
-      mc:Ignorable="d" 
-      d:DesignHeight="1049" d:DesignWidth="1639"
-      Title="PickUpAgreementsPage">
-    <Grid>
-        <ListView x:Name="pickUpAgreementsView" HorizontalAlignment="Left" Margin="10,80,0,81.8" Width="1619" SelectionChanged="ListView_SelectionChanged">
+      mc:Ignorable="d" d:DesignWidth="1639"
+      Title="PickUpAgreementsPage" Height="1047">
+    <Grid Margin="0,0,0,23">
+        <ListView x:Name="pickUpAgreementsView" HorizontalAlignment="Left" Margin="10,80,0,100" Width="1619" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding LicensePlate}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader x:Name="LicensePlate" Tag="NummerPlade">Nummerplade</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="NummerPlade">Nummerplade</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Brand}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader x:Name="Brand" Tag="Bilmærke">Bilmærke</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Bilmærke">Bilmærke</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding StreetName}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader x:Name="StreetName" Tag="GadeNavn">Gadenavn</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="GadeNavn">Gadenavn</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding PostalCode}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader x:Name="PostalCode" Tag="PostNummer">postnummer</GridViewColumnHeader>
+                            <GridViewColumnHeader  Tag="PostNummer">postnummer</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding City}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader x:Name="City" Tag="By">By</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="By">By</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Driver}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader x:Name="Driver" Tag="Chauffør">Chauffør</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Chauffør">Chauffør</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding PickUpDate}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader x:Name="PickUpDate" Tag="Dato">Dato</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Dato">Dato</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding PickUpTime}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader x:Name="PickUpTime" Tag="Tidspunkt">tidspunkt</GridViewColumnHeader>
+                            <GridViewColumnHeader  Tag="Tidspunkt">tidspunkt</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="170" DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn Width="170" DisplayMemberBinding="{Binding Price}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader x:Name="Price" Tag="Pris">Pris</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pris">Pris</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    
+
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="DeletePickUpAgreement" Content="Slet" HorizontalAlignment="Left" Margin="10,989,0,0" VerticalAlignment="Top" Width="127" Height="50" Click="DeletePickUpAgreement_Click"/>
-        <Button x:Name="UpdatePickUpAgreement" Content="Ændre" HorizontalAlignment="Left" Margin="1502,989,0,0" VerticalAlignment="Top" Width="127" Height="50" Click="UpdatePickUpAgreement_Click"/>
-        <TextBox x:Name="SearchPickUpAgreement" Margin="1453,25,0,990.8" TextWrapping="Wrap" Text="Søg" HorizontalAlignment="Left" Width="160" FontSize="20" TextChanged="SearchPickUpAgreement_TextChanged"/>
+        <Button x:Name="DeletePickUpAgreement" Content="Slet" HorizontalAlignment="Left" Margin="10,942,0,0" VerticalAlignment="Top" Width="127" Height="50" Click="DeletePickUpAgreement_Click"/>
+        <Button x:Name="UpdatePickUpAgreement" Content="Ændre" HorizontalAlignment="Left" Margin="1502,942,0,0" VerticalAlignment="Top" Width="127" Height="50" Click="UpdatePickUpAgreement_Click"/>
+        <TextBox x:Name="SearchPickUpAgreement" Margin="1453,25,0,974" TextWrapping="Wrap" Text="Søg" HorizontalAlignment="Left" Width="160" FontSize="20" TextChanged="SearchPickUpAgreement_TextChanged"/>
     </Grid>
 </Page>

@@ -1,4 +1,5 @@
-﻿using DomainLayer;
+﻿using ApplicationLayer;
+using DomainLayer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -254,38 +255,10 @@ namespace UnitTestProject1
             }
         }
 
-        public void Sp_DeleteBooking(int bookingId, int vehicleId, int customerId)
+        public void Sp_DeleteBooking(int bookingId)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                try
-                {
-                    con.Open();
-                    SqlCommand cmd1 = new SqlCommand("Sp_DeleteVehicle", con);
-                    cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Parameters.Add(new SqlParameter("@VehicleId", vehicleId));
-                    cmd1.ExecuteNonQuery();
-                    con.Close();
-                }
-                catch (SqlException e)
-                {
-                    Console.WriteLine("Ups" + e.Message);
-                }
-
-                try
-                {
-                    con.Open();
-                    SqlCommand cmd1 = new SqlCommand("Sp_DeleteCustomer", con);
-                    cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Parameters.Add(new SqlParameter("@CustomerId", customerId));
-                    cmd1.ExecuteNonQuery();
-                    con.Close();
-                }
-                catch (SqlException e)
-                {
-                    Console.WriteLine("Ups" + e.Message);
-                }
-
                 try
                 {
                     con.Open();

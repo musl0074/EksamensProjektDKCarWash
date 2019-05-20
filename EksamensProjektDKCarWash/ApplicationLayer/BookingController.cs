@@ -44,18 +44,10 @@ namespace ApplicationLayer
 
         public void DeleteBooking(int bookingId)
         {
-            Booking b = br.GetBooking(bookingId);
+
             br.DeleteBooking(bookingId);
-
-
-            try
-            {
-                dbc.Sp_DeleteBooking(b.Id, b.Customer.CustomerId, b.Customer.Vehicle.VehicleID);
-            }
-            catch (NullReferenceException e)
-            {
-                MessageBox.Show(e.Message);
-            }
+            dbc.Sp_DeleteBooking(bookingId);
+            
         }
 
         // Input er en MANDAG
