@@ -81,22 +81,23 @@ namespace ApplicationLayer
             br.UpdateAllBookings(dbc.Sp_GetAllBookings());
         }
 
-        public string GetBooking(int bookingID)
+        public string GetBooking(int bookingID) 
         {
-            CurrentBooking = br.GetBooking(bookingID);
+            CurrentBooking = br.GetBooking(bookingID);  // Save the current booking for UpdateBooking();
             return CurrentBooking.ToString();
         }
 
         public string UpdateBooking(int customerId, int vehicleId, string customerName, DateTime bookingDate, string startTime, string email, string licensePlate, string brand, string telephone, string vat, List<string> packageNames)
         {
-
             List<Package> packages = new List<Package>();
             foreach (string packageName in packageNames)
             {
                 packages.Add(pr.FindPackage(packageName));
             }
+
             Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
-            Customer customer = new Customer(customerName, email, telephone, vehicle, customerId, vat);
+            Customer customer = new Customer(customerName, email, telephone, vehicle, customerId, vat); // The new customer
+
             CurrentBooking.UpdateBooking(customer, startTime, bookingDate, packages);
             dbc.Sp_UpdateBooking(CurrentBooking);
             return br.UpdateBooking(CurrentBooking);
