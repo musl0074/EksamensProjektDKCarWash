@@ -28,12 +28,12 @@ namespace UILayer
         {
             InitializeComponent();
 
-            UpdateUpToCurrentDate();
+            UpdateUpToCurrentDate(); // Add BlackOutDates to all days prior to "today", makes sure that the user cant accidently create a booking with a faulty date.
             
-            LoadPackages();
+            LoadPackages(); // Loads packages from the repository into the ComboBox. Makes sure that we only have to add new packages in the database.
         }
 
-        // RadioButton
+        // RadioButton - Controls whether or not "VAT" can be set to anything other than string.Empty
         private void RadioButton_Corporate_Checked(object sender, RoutedEventArgs e)
         {
             TextBox_VAT.IsEnabled = true;
@@ -53,10 +53,10 @@ namespace UILayer
         // Calendar - ON SELECTED DATE
         private void Calendar_Main_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            Mouse.Capture(null); // Remove Mouse Focus from Calender, after selecting a date
-            ComboBox_TimeStamps.Items.Clear();
+            Mouse.Capture(null); // Remove Mouse Focus from Calender, after selecting a date so the user doesn't have to double click elsewhere
+            ComboBox_TimeStamps.Items.Clear(); // Clear all current timestamps in the combobox
 
-            List<string> timestamps = bc.GetTimestamps((DateTime)Calendar_Main.SelectedDate);
+            List<string> timestamps = bc.GetTimestamps((DateTime)Calendar_Main.SelectedDate); // Retrieves all available timestamps for the given date
 
             foreach (string timestamp in timestamps)
             {
@@ -75,8 +75,8 @@ namespace UILayer
         // LOAD PACKAGES
         public void LoadPackages ()
         {
-            List<string> packagesString = pc.LoadAllPackagesToString();
-            ComboBox_Packages.Items.Clear();  // Need to use dispatcher to make changes to UI
+            List<string> packagesString = pc.LoadAllPackagesToString(); // Get all packages in string format
+            ComboBox_Packages.Items.Clear(); 
 
             foreach (string package in packagesString)
             {
@@ -89,12 +89,14 @@ namespace UILayer
         {
             if (ComboBox_Packages.SelectedItem != null)
             {
-                string package = (string)ComboBox_Packages.SelectedItem;
+                string package = (string)ComboBox_Packages.SelectedItem;  // Add the selected package in string format 
                 ListBox_Packages.Items.Add(package);
 
                 CheckEnableCreateButton();
             }
         }
+
+
 
         // Button - Remove package from ListBox
         private void Button_RemovePackage_Click(object sender, RoutedEventArgs e)
