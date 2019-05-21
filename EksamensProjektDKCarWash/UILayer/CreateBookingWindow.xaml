@@ -19,7 +19,7 @@
 		<Label Content="Email:" HorizontalAlignment="Left" Margin="531,160,0,0" VerticalAlignment="Top" FontSize="24"/>
 		<TextBox x:Name="TextBox_Phonenumber" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="28,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" TextChanged="TextBox_Phonenumber_TextChanged"/>
 		<Label Content="Telefonnr:" HorizontalAlignment="Left" Margin="28,270,0,0" VerticalAlignment="Top" FontSize="24"/>
-		<TextBox x:Name="TextBox_VAT" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="531,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsEnabled="False" TextChanged="TextBox_VAT_TextChanged"/>
+		<TextBox x:Name="TextBox_VAT" HorizontalAlignment="Left" VerticalContentAlignment="Center" MaxLength="11" FontSize="20" Height="39" Margin="531,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsEnabled="False" TextChanged="TextBox_VAT_TextChanged"/>
 		<Label x:Name="Label_VAT" Content="CVR-nummer:" HorizontalAlignment="Left" Margin="531,275,0,0" VerticalAlignment="Top" FontSize="24"/>
 		<ComboBox x:Name="ComboBox_Packages" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="1511,719,0,0" VerticalAlignment="Top" Width="288" Background="White" BorderBrush="#FFA29494" Height="44" FontSize="20"/>
 		<Label Content="Vælg pakke(r):" HorizontalAlignment="Left" Margin="1511,677,0,0" VerticalAlignment="Top" FontSize="24"/>
@@ -33,7 +33,7 @@
 		</Viewbox>
 		<Button x:Name="Button_CreateBooking" Content="Opret booking" HorizontalAlignment="Left" VerticalAlignment="Top" Width="182" Height="70" FontSize="18" IsEnabled="False" Margin="1681,937,0,0" Click="Button_CreateBooking_Click"/>
 		<Button x:Name="Button_RemovePackage" Content="Fjern" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="39" Margin="1393,203,0,0" Click="Button_RemovePackage_Click" FontSize="16"/>
-		<TextBox x:Name="TextBox_LicensePlate" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="1004,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" TextChanged="TextBox_LicensePlate_TextChanged"/>
+		<TextBox x:Name="TextBox_LicensePlate" HorizontalAlignment="Left" VerticalContentAlignment="Center" MaxLength="7" FontSize="20" Height="39" Margin="1004,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" TextChanged="TextBox_LicensePlate_TextChanged"/>
 		<Label Content="Nummerplade:" HorizontalAlignment="Left" Margin="1004,160,0,0" VerticalAlignment="Top" FontSize="24"/>
 		<TextBox x:Name="TextBox_Brand" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="1004,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="319" TextChanged="TextBox_Brand_TextChanged"/>
         <Label Content="Bilmærke:" HorizontalAlignment="Left" Margin="1004,275,0,0" VerticalAlignment="Top" FontSize="24"/>

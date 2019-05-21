@@ -49,7 +49,12 @@ namespace UILayer
             TextBox_Email.Text = split[4];
             Textbox_Licensplate.Text = split[8];
             TextBox_Phonenumber.Text = split[5];
+
             TextBox_Vat.Text = split[6];
+            if (TextBox_Vat.Text == string.Empty) { RadioButton_Private.IsChecked = true; }
+            else { RadioButton_Corporate.IsChecked = true; }
+
+
             Textbox_Brand.Text = split[9];
             ComboBox_TimeStamps.SelectedItem = split[3];
             Calendar_Main.SelectedDate = new DateTime?(new DateTime(int.Parse(dateSplit[0]), int.Parse(dateSplit[1]), int.Parse(dateSplit[2])));

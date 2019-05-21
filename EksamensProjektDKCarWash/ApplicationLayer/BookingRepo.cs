@@ -7,14 +7,14 @@ using DomainLayer;
 
 namespace ApplicationLayer
 {
-    public class BookingRepo
+    public class BookingRepo : IPublisher
     {
         private static BookingRepo instance;
 
         private List<Booking> bookings = new List<Booking>();
         private List<Booking> showBookingsList = new List<Booking>();
         private List<string> bookingsData = new List<string>();
-
+        private List<ISubscriber> subscribers = new List<ISubscriber>();
 
         public static BookingRepo GetInstance ()
         {
@@ -28,6 +28,8 @@ namespace ApplicationLayer
         public void AddBookingToList(Booking b)
         {
             bookings.Add(b);
+
+            NotifySubscribers();
         }
 
         public List<Booking> GetBookings()
@@ -56,9 +58,11 @@ namespace ApplicationLayer
                     bookings.Remove(item);
                 }
             }
+
+            NotifySubscribers();
         }
 
-        public void AddToShowBookingsList(Booking b)
+        public void AddToShowBookingsList(Booking b) // Tror ikke denne er nødvendig længere??
         {
             showBookingsList.Add(b);
         }
@@ -72,9 +76,13 @@ namespace ApplicationLayer
                 {
                     bookings.Remove(booking);
                     bookings.Add(currentBooking);
+
+                    NotifySubscribers();
+
                     return "Booking er ændret!";
                 }
             }
+
             return "En fejl er forekommet og booking er ikke ændret!";
         }
 
@@ -85,6 +93,7 @@ namespace ApplicationLayer
             {
                 bookings.Add(booking);
             }
+
         }
 
         public void ClearAllBookings()
@@ -100,6 +109,27 @@ namespace ApplicationLayer
         public List<string> GetBookingsData()
         {
             return bookingsData;
+        }
+
+
+
+        // Observer Pattern Specific Methods
+        public void RegisterSubscriber(ISubscriber subscriber)
+        {
+            subscribers.Add(subscriber);
+        }
+
+        public void RemoveSubscriber(ISubscriber subscriber)
+        {
+            subscribers.Remove(subscriber);
+        }
+
+        public void NotifySubscribers()
+        {
+            foreach (ISubscriber subscriber in subscribers)
+            {
+                subscriber.Update();
+            }
         }
     }
 }
