@@ -18,9 +18,13 @@ namespace UILayer
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
+    delegate void ReturnToPickUpAgreementsPage(object sender, RoutedEventArgs e);
     public partial class MainWindow : Window
     {
         private WeeklyBookingsPage wbp;
+        
 
 
         public MainWindow()
@@ -57,7 +61,7 @@ namespace UILayer
             wbp.updateThread.Abort();
         }
 
-        private void Button_ShowPickUpAgreements_Click(object sender, RoutedEventArgs e)
+        public void Button_ShowPickUpAgreements_Click(object sender, RoutedEventArgs e)
         {
             if(wbp.updateThread.IsAlive == true)
             {
@@ -66,9 +70,17 @@ namespace UILayer
             FrameMain.Content = new PickUpAgreementsPage();
         }
 
+
+
         private void Button_CreatePickUpAgreement_Click(object sender, RoutedEventArgs e)
         {
-            Window createPickUpAgreementWindow = new CreatePickUpAgreementWindow();
+            Window createPickUpAgreementWindow = new CreatePickUpAgreementWindow(() => {
+                if (wbp.updateThread.IsAlive == true)
+                {
+                    wbp.updateThread.Abort();
+                }
+                FrameMain.Content = new PickUpAgreementsPage();
+            });
             createPickUpAgreementWindow.WindowState = WindowState.Maximized;
             createPickUpAgreementWindow.Show();
         }

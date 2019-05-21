@@ -74,6 +74,9 @@
     <Compile Include="UpdateBookingWindow.xaml.cs">
       <DependentUpon>UpdateBookingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdatePickUpAgreement.xaml.cs">
+      <DependentUpon>UpdatePickUpAgreement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WeeklyBookingsPage.xaml.cs">
       <DependentUpon>WeeklyBookingsPage.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateBookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdatePickUpAgreement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

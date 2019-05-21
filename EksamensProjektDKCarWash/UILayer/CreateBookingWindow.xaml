@@ -36,7 +36,6 @@
 		<TextBox x:Name="TextBox_LicensePlate" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="1004,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" TextChanged="TextBox_LicensePlate_TextChanged"/>
 		<Label Content="Nummerplade:" HorizontalAlignment="Left" Margin="1004,160,0,0" VerticalAlignment="Top" FontSize="24"/>
 		<TextBox x:Name="TextBox_Brand" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="1004,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="319" TextChanged="TextBox_Brand_TextChanged"/>
-		<Label Content="Bilmærke:" HorizontalAlignment="Left" Margin="1004,275,0,0" VerticalAlignment="Top" FontSize="24"/>
-
-	</Grid>
+        <Label Content="Bilmærke:" HorizontalAlignment="Left" Margin="1004,275,0,0" VerticalAlignment="Top" FontSize="24"/>
+    </Grid>
 </Window>

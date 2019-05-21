@@ -178,6 +178,7 @@ namespace ApplicationLayer
                     cmd1.Parameters.Add(new SqlParameter("@PickUpDate", currentPickUpAgreement.PickUpDate));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpTime", currentPickUpAgreement.PickUpTime));
                     cmd1.Parameters.Add(new SqlParameter("@Price", currentPickUpAgreement.Price));
+                    cmd1.Parameters.Add(new SqlParameter("StreetName", currentPickUpAgreement.StreetName));
                     cmd1.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -599,6 +600,77 @@ namespace ApplicationLayer
 
             }
             return packages;
+        }
+
+
+        public List<Driver> Sp_GetAllDrivers()
+        {
+            List<Driver> drivers = new List<Driver>();
+            Driver d;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_GetAllDrivers", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataReader reader = cmd1.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string driverName = reader["DriverName"].ToString();
+                            d = new Driver(driverName);
+                            drivers.Add(d);
+                        }
+                    }
+                }
+
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+
+            }
+            return drivers;
+        }
+
+        public List<PickUpTruck> Sp_GetAllPickUpTrucks()
+        {
+            List<PickUpTruck> pickUpTrucks = new List<PickUpTruck>();
+            PickUpTruck p;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Sp_GetAllPickUpTrucks", con);
+                    cmd1.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataReader reader = cmd1.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string pickUpTruckName = reader["PickUpTruckName"].ToString();
+                            p = new PickUpTruck(pickUpTruckName);
+                            pickUpTrucks.Add(p);
+                        }
+                    }
+                }
+
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Ups" + e.Message);
+                }
+
+            }
+            return pickUpTrucks;
         }
     }
 }

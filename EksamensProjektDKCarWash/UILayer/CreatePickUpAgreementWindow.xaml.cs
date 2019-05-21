@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,132 @@ namespace UILayer
     /// </summary>
     public partial class CreatePickUpAgreementWindow : Window
     {
-        public CreatePickUpAgreementWindow()
+        PickUpAgreementController puac = new PickUpAgreementController();
+    
+        private Action ActionNow;
+
+        public CreatePickUpAgreementWindow(Action action)
         {
+            ActionNow = action;
             InitializeComponent();
+            UpdateUpToCurrentDate();
+            LoadDrivers();
+            LoadPickUpTrucks();
+            CreatePickUpAgreementButton.IsEnabled = false;
+
         }
+
+
+        
+
+        private void TextBox_Address_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
+
+        private void TextBox_PostalCode_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
+
+        private void TextBox_City_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
+
+        private void TextBox_Price_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
+
+        private void TextBox_TimeStamp_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
+
+        public void UpdateUpToCurrentDate()
+        {
+            Calendar_Main.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, DateTime.Today.AddDays(-1)));
+        }
+
+        private void TextBox_LicensePlate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
+
+        private void TextBox_Brand_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckEnableCreateButton();
+        }
+
+        private void Calendar_Main_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Mouse.Capture(null);
+            CheckEnableCreateButton();
+        }
+
+        private void CreatePickUpAgreementButton_Click(object sender, RoutedEventArgs e)
+        {
+            string licensePlate = TextBox_LicensePlate.Text;
+            string pickUpTime = TextBox_TimeStamp.Text;
+            DateTime bookingDate = (DateTime)Calendar_Main.SelectedDate;
+            string brand = TextBox_Brand.Text;
+            string address = TextBox_Address.Text;
+            string postalCode = TextBox_PostalCode.Text;
+            string price = TextBox_Price.Text;
+            string driver = (string)DriverComboBox.SelectedItem;
+            string pickUpTruck = (string)PickUpTruckComboBox.SelectedItem;
+
+
+
+            puac.CreatePickUpAgreement(driver, pickUpTruck, Convert.ToInt32(postalCode), address, licensePlate, brand, bookingDate, pickUpTime, Convert.ToDouble(price));
+            this.Close();
+            ActionNow();
+            
+        }
+
+        public void LoadDrivers()
+        {
+            List<string> driversString = puac.LoadAllDriversToString();
+            DriverComboBox.Items.Clear();  // Need to use dispatcher to make changes to UI
+
+            foreach (string driver in driversString)
+            {
+                DriverComboBox.Items.Add(driver);
+            }
+        }
+
+        public void LoadPickUpTrucks()
+        {
+            List<string> pickUpTrucksString = puac.LoadAllPickUpTrucksToString();
+            PickUpTruckComboBox.Items.Clear();  // Need to use dispatcher to make changes to UI
+
+            foreach (string pickUpTruck in pickUpTrucksString)
+            {
+                PickUpTruckComboBox.Items.Add(pickUpTruck);
+            }
+        }
+
+        public void CheckEnableCreateButton()
+        {
+           
+                if (TextBox_LicensePlate.Text != string.Empty &&
+                TextBox_Brand.Text != string.Empty &&
+                TextBox_PostalCode.Text != string.Empty &&
+                TextBox_TimeStamp.Text != string.Empty &&
+                TextBox_City.Text != string.Empty &&
+                TextBox_Price.Text != string.Empty &&
+                DriverComboBox.SelectedItem != null &&
+                PickUpTruckComboBox.SelectedItem != null)
+                {
+                    CreatePickUpAgreementButton.IsEnabled = true;
+                }
+                else
+                {
+                    CreatePickUpAgreementButton.IsEnabled = false;
+                }
+        }
+
+            
     }
 }

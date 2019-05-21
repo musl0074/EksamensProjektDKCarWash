@@ -35,7 +35,11 @@ namespace UILayer
 
         private void UpdatePickUpAgreement_Click(object sender, RoutedEventArgs e)
         {
+            string data = pickUpAgreementsView.SelectedItem.ToString();
+            Window updatePickUpAgreementsWindow = new UpdatePickUpAgreement(data);
 
+            updatePickUpAgreementsWindow.WindowState = WindowState.Maximized;
+            updatePickUpAgreementsWindow.Show();
         }
 
         private void LoadAllPickUpAgreements()
@@ -57,7 +61,9 @@ namespace UILayer
                     Driver = pickupagreementsarray[6],
                     PickUpDate = pickupagreementsarray[7],
                     PickUpTime = pickupagreementsarray[8],
-                    Price = pickupagreementsarray[9]
+                    Price = pickupagreementsarray[9],
+                    VehicleId = pickupagreementsarray[10]
+                    
                 };
                 Dispatcher.Invoke(() => this.pickUpAgreementsView.Items.Add(currentRow));
             }
