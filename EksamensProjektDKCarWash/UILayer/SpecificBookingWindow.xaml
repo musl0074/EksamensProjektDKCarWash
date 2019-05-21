@@ -8,7 +8,7 @@
       d:DesignHeight="540" d:DesignWidth="520" Background="White" ResizeMode="NoResize"
       Title="BookingWindow">
 
-	<Grid>
+    <Grid Background="AliceBlue">
 		<Button x:Name="Button_Delete" Content="Slet booking" Margin="26,437,381,26" Click="Button_Delete_Click"/>
 		<Button x:Name="Button_Update" Content="Ændre booking" Margin="381,437,26,26" Click="Button_Update_Click"/>
 

@@ -8,7 +8,7 @@
       d:DesignHeight="1049" d:DesignWidth="1639" Background="White"
       Title="WeeklyBookingsPage">
 
-    <Grid x:Name="Grid_Main">
+    <Grid x:Name="Grid_Main" Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition/>

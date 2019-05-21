@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:UILayer"
       mc:Ignorable="d" d:DesignWidth="1639"
       Title="PickUpAgreementsPage" Height="1047">
-    <Grid Margin="0,0,0,23">
+    <Grid Margin="0,0,0,23" Background="AliceBlue">
         <ListView x:Name="pickUpAgreementsView" HorizontalAlignment="Left" Margin="10,80,0,100" Width="1619" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
