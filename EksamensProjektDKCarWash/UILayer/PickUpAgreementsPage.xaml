@@ -8,7 +8,7 @@
       mc:Ignorable="d" d:DesignWidth="1639"
       Title="PickUpAgreementsPage" Height="1047">
     <Grid Margin="0,0,0,23" Background="AliceBlue">
-        <ListView x:Name="pickUpAgreementsView" HorizontalAlignment="Left" Margin="10,80,0,100" Width="1619" SelectionChanged="ListView_SelectionChanged">
+        <ListView x:Name="pickUpAgreementsView" HorizontalAlignment="Left" Margin="10,80,0,100" Width="1619">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="180" DisplayMemberBinding="{Binding LicensePlate}">
@@ -62,6 +62,6 @@
         </ListView>
         <Button x:Name="DeletePickUpAgreement" Content="Slet" HorizontalAlignment="Left" Margin="10,942,0,0" VerticalAlignment="Top" Width="127" Height="50" Click="DeletePickUpAgreement_Click"/>
         <Button x:Name="UpdatePickUpAgreement" Content="Ændre" HorizontalAlignment="Left" Margin="1502,942,0,0" VerticalAlignment="Top" Width="127" Height="50" Click="UpdatePickUpAgreement_Click"/>
-        <TextBox x:Name="SearchPickUpAgreement" Margin="1453,25,0,974" TextWrapping="Wrap" Text="Søg" HorizontalAlignment="Left" Width="160" FontSize="20" TextChanged="SearchPickUpAgreement_TextChanged"/>
+        <TextBox x:Name="SearchPickUpAgreement" Margin="1453,25,0,967" TextWrapping="Wrap" Text="Søg" HorizontalAlignment="Left" Width="160" FontSize="20" TextChanged="SearchPickUpAgreement_TextChanged"/>
     </Grid>
 </Page>

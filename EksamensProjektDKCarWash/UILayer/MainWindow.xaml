@@ -14,6 +14,5 @@
         <Button x:Name="Button_CreatePickUpAgreement" Content="Opret afhentningsaftale" HorizontalAlignment="Left" Margin="13,285,0,0" VerticalAlignment="Top" Width="226" Height="96" FontSize="20" Background="#FFFBFBFB" Click="Button_CreatePickUpAgreement_Click"/>
         <Button x:Name="Button_ShowPickUpAgreements" Content="Vis afhentningsaftaler" HorizontalAlignment="Left" Margin="13,395,0,0" VerticalAlignment="Top" Width="226" Height="96" FontSize="20" Background="#FFFBFBFB" Click="Button_ShowPickUpAgreements_Click"/>
         <Image Margin="13,844,1681,100" Source="Image5.png" Stretch="Fill"/>
-
     </Grid>
 </Window>

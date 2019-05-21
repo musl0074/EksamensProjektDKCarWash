@@ -44,7 +44,7 @@ namespace UILayer
 
         private void LoadAllPickUpAgreements()
         {
-           Dispatcher.Invoke(() => pickUpAgreementsView.Items.Clear());
+            Dispatcher.Invoke(() => pickUpAgreementsView.Items.Clear());
             List<string> stringPickUpAgreements = puac.GetAllPickUpAgreements();
             foreach (string pickupagreement in stringPickUpAgreements)
             {
@@ -66,7 +66,14 @@ namespace UILayer
                     
                 };
                 Dispatcher.Invoke(() => this.pickUpAgreementsView.Items.Add(currentRow));
+               
             }
+        }
+
+        private void SearchPickUpAgreement_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+          
         }
 
         private void DeletePickUpAgreement_Click(object sender, RoutedEventArgs e)
@@ -75,26 +82,6 @@ namespace UILayer
             string pickUpAgreementId = data.Split(',')[0].Split('=')[1];
             puac.DeletePickUpAgreement(int.Parse(pickUpAgreementId));
            
-        }
-
-        private void SearchPickUpAgreement_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void GridViewColumnHeader_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void hej_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         public void Update()
