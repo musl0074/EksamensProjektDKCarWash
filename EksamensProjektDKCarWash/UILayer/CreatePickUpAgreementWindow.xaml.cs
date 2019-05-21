@@ -22,13 +22,17 @@ namespace UILayer
     public partial class CreatePickUpAgreementWindow : Window
     {
         PickUpAgreementController puac = new PickUpAgreementController();
+    
+        private Action ActionNow;
 
-        public CreatePickUpAgreementWindow()
+        public CreatePickUpAgreementWindow(Action action)
         {
+            ActionNow = action;
             InitializeComponent();
             UpdateUpToCurrentDate();
             LoadDrivers();
             LoadPickUpTrucks();
+            CreatePickUpAgreementButton.IsEnabled = false;
 
         }
 
@@ -37,32 +41,27 @@ namespace UILayer
 
         private void TextBox_Address_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            CheckEnableCreateButton();
         }
 
         private void TextBox_PostalCode_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            CheckEnableCreateButton();
         }
 
         private void TextBox_City_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            CheckEnableCreateButton();
         }
 
         private void TextBox_Price_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-        }
-
-        private void ComboBox_TimeStamps_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            CheckEnableCreateButton();
         }
 
         private void TextBox_TimeStamp_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            CheckEnableCreateButton();
         }
 
         public void UpdateUpToCurrentDate()
@@ -72,17 +71,18 @@ namespace UILayer
 
         private void TextBox_LicensePlate_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            CheckEnableCreateButton();
         }
 
         private void TextBox_Brand_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            CheckEnableCreateButton();
         }
 
         private void Calendar_Main_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Mouse.Capture(null);
+            CheckEnableCreateButton();
         }
 
         private void CreatePickUpAgreementButton_Click(object sender, RoutedEventArgs e)
@@ -101,6 +101,8 @@ namespace UILayer
 
             puac.CreatePickUpAgreement(driver, pickUpTruck, Convert.ToInt32(postalCode), address, licensePlate, brand, bookingDate, pickUpTime, Convert.ToDouble(price));
             this.Close();
+            ActionNow();
+            
         }
 
         public void LoadDrivers()
@@ -124,5 +126,27 @@ namespace UILayer
                 PickUpTruckComboBox.Items.Add(pickUpTruck);
             }
         }
+
+        public void CheckEnableCreateButton()
+        {
+           
+                if (TextBox_LicensePlate.Text != string.Empty &&
+                TextBox_Brand.Text != string.Empty &&
+                TextBox_PostalCode.Text != string.Empty &&
+                TextBox_TimeStamp.Text != string.Empty &&
+                TextBox_City.Text != string.Empty &&
+                TextBox_Price.Text != string.Empty &&
+                DriverComboBox.SelectedItem != null &&
+                PickUpTruckComboBox.SelectedItem != null)
+                {
+                    CreatePickUpAgreementButton.IsEnabled = true;
+                }
+                else
+                {
+                    CreatePickUpAgreementButton.IsEnabled = false;
+                }
+        }
+
+            
     }
 }

@@ -30,6 +30,12 @@ namespace ApplicationLayer
             NotifySubscribers();
         }
 
+        public void AddAllPickUpAgreementToList(PickUpAgreement pua)
+        {
+            pickUpAgreements.Add(pua);
+
+        }
+
 
         public List<PickUpAgreement> GetPickUpAgreements()
         {

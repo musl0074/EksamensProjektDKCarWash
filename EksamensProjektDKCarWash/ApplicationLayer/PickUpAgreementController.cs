@@ -35,22 +35,17 @@ namespace ApplicationLayer
             puar.DeletePickUpAgreement(pickUpAgreementId);
         }
 
-        public string GetPickUpAgreementWithId (int pickUpAgreementId)
-        {
-            CurrentPickUpAgreement = puar.GetSinglePickUpAgreement(pickUpAgreementId);
-            return CurrentPickUpAgreement.ToString();
-        }
-
-        public string UpdatePickUpAgreement(int pickUpAgreementID, int vehicleID, string driverName, string pickUpTruckName, int postalCode, string licensePlate, 
+        public string UpdatePickUpAgreement(int pickUpAgreementId, int vehicleID, string driverName, string pickUpTruckName, int postalCode, string licensePlate, 
             string brand, string streetName, DateTime pickUpDate, string pickUpTime, double price)
         {
             string city = dbc.Sp_GetCityByPostalCode(postalCode);
             PickUpTruck pickUpTruck = new PickUpTruck(pickUpTruckName);
             Driver driver = new Driver(driverName);
             Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleID);
-            CurrentPickUpAgreement.UpdatePickUpAgreement(driver, pickUpTruck, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
-            dbc.Sp_UpdatePickUpAgreement(CurrentPickUpAgreement);
-            return puar.UpdatePickUpAgreement(CurrentPickUpAgreement);
+            PickUpAgreement pickUpAgreement = puar.GetSinglePickUpAgreement(pickUpAgreementId);
+            pickUpAgreement.UpdatePickUpAgreement(driver, pickUpTruck, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
+            dbc.Sp_UpdatePickUpAgreement(pickUpAgreement);
+            return puar.UpdatePickUpAgreement(pickUpAgreement);
         }
 
         public List<string> GetAllPickUpAgreements()
@@ -58,12 +53,16 @@ namespace ApplicationLayer
             string pickUpAgreementString;
             List<string> stringPickUpAgreements = new List<string>();
             List<PickUpAgreement> pickUpAgreements = dbc.Sp_GetAllPickUpAgreements();
+            puar.ClearPickUpAgreements();
+            foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
+            {
+                puar.AddAllPickUpAgreementToList(pickUpAgreement);
+            }
             foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
             {
                 pickUpAgreementString = pickUpAgreement.ToString();
                 stringPickUpAgreements.Add(pickUpAgreementString);
             }
-
             return stringPickUpAgreements;
         }
 
