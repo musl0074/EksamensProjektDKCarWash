@@ -8,6 +8,30 @@
       Title="CreatePickUpAgreementWindow" Height="1080" Width="1920">
 
     <Grid>
-        
+        <Viewbox HorizontalAlignment="Left" Height="33" Margin="164,82,0,0" VerticalAlignment="Top" Width="140"/>
+        <Viewbox HorizontalAlignment="Left" Height="30" Margin="322,85,0,0" VerticalAlignment="Top" Width="132"/>
+        <Label Content="Chauffør:" HorizontalAlignment="Left" Margin="1051,226,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="Autotransporter" HorizontalAlignment="Left" Margin="1051,103,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="TextBox_Address" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="416,394,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" TextChanged="TextBox_Address_TextChanged"/>
+        <Label Content="Addresse" HorizontalAlignment="Left" Margin="416,347,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="Vælg tidspunkt:" HorizontalAlignment="Left" Margin="1386,675,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Viewbox HorizontalAlignment="Left" Height="275" Margin="1051,509,0,0" VerticalAlignment="Top" Width="335">
+            <Calendar x:Name="Calendar_Main" SelectedDatesChanged="Calendar_Main_SelectedDatesChanged" FirstDayOfWeek="Monday" Height="168"/>
+        </Viewbox>
+        <TextBox x:Name="TextBox_LicensePlate" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="416,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" TextChanged="TextBox_LicensePlate_TextChanged"/>
+        <Label Content="Nummerplade:" HorizontalAlignment="Left" Margin="416,103,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="TextBox_Brand" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="416,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" TextChanged="TextBox_Brand_TextChanged"/>
+        <Label Content="Bilmærke:" HorizontalAlignment="Left" Margin="416,226,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <ComboBox x:Name="DriverComboBox" HorizontalAlignment="Left" Margin="1051,273,0,0" VerticalAlignment="Top" Width="444" Height="39"/>
+        <ComboBox x:Name="PickUpTruckComboBox" HorizontalAlignment="Left" Margin="1051,150,0,0" VerticalAlignment="Top" Width="444" Height="39" RenderTransformOrigin="0.5,0.5"/>
+        <TextBox x:Name="TextBox_PostalCode" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="416,522,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" TextChanged="TextBox_PostalCode_TextChanged"/>
+        <Label Content="Post Nummer" HorizontalAlignment="Left" Margin="416,475,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="TextBox_City" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="581,522,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" TextChanged="TextBox_City_TextChanged"/>
+        <Label Content="By" HorizontalAlignment="Left" Margin="600,475,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="TextBox_Price" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="1051,394,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" TextChanged="TextBox_Price_TextChanged"/>
+        <Label Content="Pris" HorizontalAlignment="Left" Margin="1051,347,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="TextBox_TimeStamp" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="1386,745,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" TextChanged="TextBox_TimeStamp_TextChanged"/>
+        <Button x:Name="CreatePickUpAgreementButton" Content="Opret Afhentningsaftale" FontSize="20" HorizontalAlignment="Left" Margin="1591,918,0,0" VerticalAlignment="Top" Width="241" Height="70" RenderTransformOrigin="0.54,0.029" Click="CreatePickUpAgreementButton_Click"/>
+
     </Grid>
 </Window>

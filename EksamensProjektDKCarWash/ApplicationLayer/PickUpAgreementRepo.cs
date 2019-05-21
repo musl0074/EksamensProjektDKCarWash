@@ -62,10 +62,11 @@ namespace ApplicationLayer
                 {
                     pickUpAgreements.Remove(pickUpAgreement);
                     pickUpAgreements.Add(currentPickUpAgreement);
-                    return "Afhentnings aftale er ændret!";
+                    NotifySubscribers();
+                    return "Afhentnings aftale er ændret!";                   
                 }
             }
-            NotifySubscribers();
+           
             return "En fejl er forekommet og afhentnings aftale er ikke ændret!";
         }
 

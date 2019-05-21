@@ -66,5 +66,31 @@ namespace ApplicationLayer
 
             return stringPickUpAgreements;
         }
+
+        public List<string> LoadAllDriversToString()
+        {
+            string stringDriver;
+            List<string> stringDrivers = new List<string>();
+            List<Driver> drivers = dbc.Sp_GetAllDrivers();
+            foreach (Driver driver in drivers)
+            {
+                stringDriver = driver.Name;
+                stringDrivers.Add(stringDriver);
+            }
+            return stringDrivers;
+        }
+
+        public List<string> LoadAllPickUpTrucksToString()
+        {
+            string stringPickUpTruck;
+            List<string> stringPickUpTrucks = new List<string>();
+            List<PickUpTruck> pickUpTrucks = dbc.Sp_GetAllPickUpTrucks();
+            foreach (PickUpTruck pickUpTruck in pickUpTrucks)
+            {
+                stringPickUpTruck = pickUpTruck.PickUpTruckName;
+                stringPickUpTrucks.Add(stringPickUpTruck);
+            }
+            return stringPickUpTrucks;
+        }
     }
 }
