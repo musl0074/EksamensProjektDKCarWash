@@ -82,7 +82,7 @@ namespace UILayer
         private void Calendar_Main_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             Mouse.Capture(null);
-            CheckEnableCreateButton();
+          
         }
 
         private void CreatePickUpAgreementButton_Click(object sender, RoutedEventArgs e)

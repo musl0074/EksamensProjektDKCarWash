@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UILayer"
         mc:Ignorable="d"
         Title="UpdateBookingWindow" Height="1080" Width="1920">
-	<Grid>
+    <Grid Background="AliceBlue">
 		<Viewbox HorizontalAlignment="Left" Height="33" Margin="164,82,0,0" VerticalAlignment="Top" Width="140">
 			<RadioButton x:Name="RadioButton_Private" Content="Privat" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="CustomerType" Height="14" Width="51" Checked="RadioButton_Private_Checked"/>
 		</Viewbox>

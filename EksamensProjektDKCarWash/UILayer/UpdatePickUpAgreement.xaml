@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       Title="CreatePickUpAgreementWindow" Height="1080" Width="1920">
 
-    <Grid>
+    <Grid Background="AliceBlue">
         <Viewbox HorizontalAlignment="Left" Height="33" Margin="164,82,0,0" VerticalAlignment="Top" Width="140"/>
         <Viewbox HorizontalAlignment="Left" Height="30" Margin="322,85,0,0" VerticalAlignment="Top" Width="132"/>
         <Label Content="Chauffør:" HorizontalAlignment="Left" Margin="1051,226,0,0" VerticalAlignment="Top" FontSize="24"/>
