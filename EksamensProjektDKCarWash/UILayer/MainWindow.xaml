@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:UILayer"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized" Closed="Window_Closed">
-    <Grid>
+    <Grid Background="AliceBlue">
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="1049" Margin="254,0,0,0" VerticalAlignment="Top" Width="19" Background="#FF7E7E7E"/>
         <Button x:Name="Button_ShowWeeklyBookings" Content="Vis Ugeplan" HorizontalAlignment="Left" Margin="13,176,0,0" VerticalAlignment="Top" Width="226" Height="96" FontSize="20" Background="#FFFBFBFB" Click="Button_ShowWeeklyBookings_Click"/>
         <Button x:Name="Button_CreateBooking" Content="Aftal Booking" HorizontalAlignment="Left" Margin="13,66,0,0" VerticalAlignment="Top" Width="226" Height="96" FontSize="20" Background="#FFFBFBFB" Click="Button_CreateBooking_Click"/>
         <Frame x:Name="FrameMain" HorizontalAlignment="Left" Height="1049" Margin="273,0,0,0" VerticalAlignment="Top" Width="1639" NavigationUIVisibility="Hidden"/>
         <Button x:Name="Button_CreatePickUpAgreement" Content="Opret afhentningsaftale" HorizontalAlignment="Left" Margin="13,285,0,0" VerticalAlignment="Top" Width="226" Height="96" FontSize="20" Background="#FFFBFBFB" Click="Button_CreatePickUpAgreement_Click"/>
         <Button x:Name="Button_ShowPickUpAgreements" Content="Vis afhentningsaftaler" HorizontalAlignment="Left" Margin="13,395,0,0" VerticalAlignment="Top" Width="226" Height="96" FontSize="20" Background="#FFFBFBFB" Click="Button_ShowPickUpAgreements_Click"/>
-
+        <Image Margin="13,844,1681,100" Source="Image5.png" Stretch="Fill"/>
     </Grid>
 </Window>

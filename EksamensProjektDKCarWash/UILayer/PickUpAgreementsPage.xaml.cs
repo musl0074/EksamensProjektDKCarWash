@@ -35,12 +35,16 @@ namespace UILayer
 
         private void UpdatePickUpAgreement_Click(object sender, RoutedEventArgs e)
         {
+            string data = pickUpAgreementsView.SelectedItem.ToString();
+            Window updatePickUpAgreementsWindow = new UpdatePickUpAgreement(data);
 
+            updatePickUpAgreementsWindow.WindowState = WindowState.Maximized;
+            updatePickUpAgreementsWindow.Show();
         }
 
         private void LoadAllPickUpAgreements()
         {
-           Dispatcher.Invoke(() => pickUpAgreementsView.Items.Clear());
+            Dispatcher.Invoke(() => pickUpAgreementsView.Items.Clear());
             List<string> stringPickUpAgreements = puac.GetAllPickUpAgreements();
             foreach (string pickupagreement in stringPickUpAgreements)
             {
@@ -57,10 +61,19 @@ namespace UILayer
                     Driver = pickupagreementsarray[6],
                     PickUpDate = pickupagreementsarray[7],
                     PickUpTime = pickupagreementsarray[8],
-                    Price = pickupagreementsarray[9]
+                    Price = pickupagreementsarray[9],
+                    VehicleId = pickupagreementsarray[10]
+                    
                 };
                 Dispatcher.Invoke(() => this.pickUpAgreementsView.Items.Add(currentRow));
+               
             }
+        }
+
+        private void SearchPickUpAgreement_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+          
         }
 
         private void DeletePickUpAgreement_Click(object sender, RoutedEventArgs e)
@@ -69,26 +82,6 @@ namespace UILayer
             string pickUpAgreementId = data.Split(',')[0].Split('=')[1];
             puac.DeletePickUpAgreement(int.Parse(pickUpAgreementId));
            
-        }
-
-        private void SearchPickUpAgreement_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void GridViewColumnHeader_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void hej_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         public void Update()

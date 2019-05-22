@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UILayer"
         mc:Ignorable="d"
         Title="CreateBookingWindow" Height="1080" Width="1920">
-	<Grid>
+    <Grid Background="AliceBlue">
 		<Viewbox HorizontalAlignment="Left" Height="33" Margin="164,82,0,0" VerticalAlignment="Top" Width="140">
 			<RadioButton x:Name="RadioButton_Private" Content="Privat" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="CustomerType" Height="14" Width="51" Checked="RadioButton_Private_Checked"/>
 		</Viewbox>
@@ -36,7 +36,6 @@
 		<TextBox x:Name="TextBox_LicensePlate" HorizontalAlignment="Left" VerticalContentAlignment="Center" MaxLength="7" FontSize="20" Height="39" Margin="1004,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" TextChanged="TextBox_LicensePlate_TextChanged"/>
 		<Label Content="Nummerplade:" HorizontalAlignment="Left" Margin="1004,160,0,0" VerticalAlignment="Top" FontSize="24"/>
 		<TextBox x:Name="TextBox_Brand" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="20" Height="39" Margin="1004,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="319" TextChanged="TextBox_Brand_TextChanged"/>
-		<Label Content="Bilmærke:" HorizontalAlignment="Left" Margin="1004,275,0,0" VerticalAlignment="Top" FontSize="24"/>
-
-	</Grid>
+        <Label Content="Bilmærke:" HorizontalAlignment="Left" Margin="1004,275,0,0" VerticalAlignment="Top" FontSize="24"/>
+    </Grid>
 </Window>

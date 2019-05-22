@@ -8,7 +8,7 @@
       d:DesignHeight="1049" d:DesignWidth="1639" Background="White"
       Title="WeeklyBookingsPage">
 
-    <Grid x:Name="Grid_Main">
+    <Grid x:Name="Grid_Main" Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
@@ -49,13 +49,13 @@
                 Content="LØRDAG" FontSize="24" Click="Button_Saturday_Click"/>
 
         <!-- WEEK NAVIGATION -->
-        <Button x:Name="Button_NavigateLeft" Grid.Row="0" Grid.Column="5" Width="100" Height="100" BorderBrush="White" Click="Button_NavigateLeft_Click">
+        <Button x:Name="Button_NavigateLeft" Grid.Row="0" Grid.Column="5" Width="100" Height="100" BorderBrush="AliceBlue" Click="Button_NavigateLeft_Click">
             <Button.Background>
                 <ImageBrush ImageSource="Images/left-arrow.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="Button_NavigateRight" Grid.Row="0" Grid.Column="6" Height="100" Width="100" BorderBrush="White" Click="Button_NavigateRight_Click">
-            <Button.Background>
+        <Button x:Name="Button_NavigateRight"  Grid.Row="0" Grid.Column="6" Height="100" Width="100" BorderBrush="White" Click="Button_NavigateRight_Click">
+            <Button.Background >
                 <ImageBrush ImageSource="Images/right-arrow.png"/>
             </Button.Background>
         </Button>
