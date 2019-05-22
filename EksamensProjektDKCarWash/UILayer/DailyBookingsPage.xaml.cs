@@ -20,7 +20,7 @@ namespace UILayer
     /// <summary>
     /// Interaction logic for DailyBookingsPage.xaml
     /// </summary>
-    public partial class DailyBookingsPage : Window
+    public partial class DailyBookingsPage : Window, ISubscriber
     {
         private BookingController bc = new BookingController();
         public DateTime CurrentDateTime { get; set; }
@@ -31,20 +31,21 @@ namespace UILayer
         public DailyBookingsPage(DateTime currentDateTime, string day)
         {
             InitializeComponent();
+            bc.br.RegisterSubscriber(this); // Subscribe to repository, to get booking updates
+
 
             CurrentDateTime = currentDateTime;
 
             Label_Day.Content = day;
-            updateThread = new Thread(LoadDay);
+            updateThread = new Thread(() => LoadDay());
             updateThread.Start();
-
-            
         }
 
         // Load all the bookings for this day
-        public void LoadDay()
+        public void LoadDay(bool runOnce = false)
         {
-            while (true)
+            bool running = true;
+            while (running)
             {
                 ClearGrid();
 
@@ -295,7 +296,10 @@ namespace UILayer
                         }
                     }
                 }
-                
+
+                if (runOnce == true)
+                    running = false;
+
                 Thread.Sleep(5000);
             }
             
@@ -343,6 +347,15 @@ namespace UILayer
         private void Window_Closed(object sender, EventArgs e)
         {
             updateThread.Abort();
+        }
+
+
+
+        // Observer Pattern Specific Method
+        public void Update()
+        {
+            Thread t = new Thread(() => LoadDay(true));
+            t.Start();
         }
     }
 }

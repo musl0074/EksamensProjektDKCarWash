@@ -84,6 +84,8 @@ namespace UILayer
 
 
             bc.UpdateBooking(customerId, vechleId, TextBox_CustomerName.Text, (DateTime)Calendar_Main.SelectedDate, (string)ComboBox_TimeStamps.SelectedItem, TextBox_Email.Text, Textbox_Licensplate.Text, Textbox_Brand.Text, TextBox_Phonenumber.Text, TextBox_Vat.Text, packagesString);
+
+            this.Close();
         }
 
 
