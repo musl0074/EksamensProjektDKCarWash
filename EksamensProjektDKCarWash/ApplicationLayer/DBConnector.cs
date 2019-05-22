@@ -97,7 +97,7 @@ namespace ApplicationLayer
         }
 
 
-        public PickUpAgreement Sp_CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string licensePlate, string brand, double price, string streetName, DateTime pickUpDate, string pickUpTime)
+        public PickUpAgreement Sp_CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string licensePlate, string brand, double price, string address, DateTime pickUpDate, string pickUpTime)
         {
             PickUpAgreement pua = null;
             int pickUpId = 0;
@@ -117,7 +117,7 @@ namespace ApplicationLayer
                     cmd1.Parameters.Add(new SqlParameter("@LicensePlate", licensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@Brand", brand));
                     cmd1.Parameters.Add(new SqlParameter("@Price", price));
-                    cmd1.Parameters.Add(new SqlParameter("@StreetName", streetName));
+                    cmd1.Parameters.Add(new SqlParameter("@StreetName", address));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpDate", pickUpDate));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpTime", pickUpTime));
 
@@ -135,7 +135,7 @@ namespace ApplicationLayer
                     Driver driver = new Driver(driverName);
                     PickUpTruck put = new PickUpTruck(pickUpTruckName);
                     Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
-                    pua = new PickUpAgreement(pickUpId, driver, put, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
+                    pua = new PickUpAgreement(pickUpId, driver, put, city, postalCode, vehicle, price, ad, pickUpDate, pickUpTime);
                 }
 
                 catch (SqlException e)
@@ -146,18 +146,7 @@ namespace ApplicationLayer
             return pua;
         }
 
-        //public Booking Sp_CreateBookingStump(string customerName, DateTime startTime, string email, string telephone, int package)
-        //{
-        //    try
-        //    {
-        //        return new Booking(customerName, startTime, email, telephone, package,3);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        MessageBox.Show(e.Message); 
-        //        throw;
-        //    } 
-        //}
+     
 
         public void Sp_UpdatePickUpAgreement(PickUpAgreement currentPickUpAgreement)
         {
