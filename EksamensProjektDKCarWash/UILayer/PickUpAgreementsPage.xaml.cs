@@ -28,6 +28,7 @@ namespace UILayer
         {
             InitializeComponent();
             puac.puar.RegisterSubscriber(this);
+
             Thread pickUpAgreementsThread = new Thread(() => LoadAllPickUpAgreements());
             pickUpAgreementsThread.Start();
         
