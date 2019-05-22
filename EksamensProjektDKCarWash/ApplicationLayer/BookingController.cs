@@ -81,9 +81,9 @@ namespace ApplicationLayer
             br.UpdateAllBookings(dbc.Sp_GetAllBookings());
         }
 
-        public string GetBooking(int bookingID) 
+        public string GetBooking(int bookingId) 
         {
-            CurrentBooking = br.GetBooking(bookingID);  // Save the current booking for UpdateBooking();
+            CurrentBooking = br.GetBooking(bookingId);  // Save the current booking for UpdateBooking();
             return CurrentBooking.ToString();
         }
 
@@ -154,14 +154,14 @@ namespace ApplicationLayer
 
             return timestamps;
         }
-        public List<string>GetDailyBookings(DateTime DailyDateTime)
+        public List<string>GetDailyBookings(DateTime dailyDateTime)
         {
             List<string> dailyBookingsStrings = new List<string>();
             List<Booking> dailybookings = br.GetBookings();
 
             foreach (Booking item in dailybookings)
             {
-                if (item.BookingDate == DailyDateTime)
+                if (item.BookingDate == dailyDateTime)
                 {
                     string tostring = item.ToString();
                     string[] split = tostring.Split(';');
