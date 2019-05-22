@@ -50,7 +50,7 @@ namespace ApplicationLayer
 
         public void DeletePickUpAgreement(int pickUpAgreementId)
         {
-            foreach (PickUpAgreement pickUpAgreement in pickUpAgreements)
+            foreach (PickUpAgreement pickUpAgreement in pickUpAgreements.ToList())
             {
                 if (pickUpAgreement.PickUpAgreementId == pickUpAgreementId)
                 {
