@@ -14,10 +14,10 @@ namespace ApplicationLayer
         public PickUpAgreementRepo puar = PickUpAgreementRepo.GetInstance();
         public PickUpAgreement CurrentPickUpAgreement;
 
-        public void CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string streetName, string licensePlate, string brand, DateTime pickUpDate, string pickUpTime, double price)
+        public void CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string address, string licensePlate, string brand, DateTime pickUpDate, string pickUpTime, double price)
         {
 
-            PickUpAgreement pua = dbc.Sp_CreatePickUpAgreement(driverName, pickUpTruckName, postalCode, licensePlate, brand, price, streetName, pickUpDate, pickUpTime);
+            PickUpAgreement pua = dbc.Sp_CreatePickUpAgreement(driverName, pickUpTruckName, postalCode, licensePlate, brand, price, address, pickUpDate, pickUpTime);
             try
             {
                 puar.AddPickUpAgreementToList(pua);

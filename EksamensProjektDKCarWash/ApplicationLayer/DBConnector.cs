@@ -135,7 +135,7 @@ namespace ApplicationLayer
                     Driver driver = new Driver(driverName);
                     PickUpTruck put = new PickUpTruck(pickUpTruckName);
                     Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
-                    pua = new PickUpAgreement(pickUpId, driver, put, city, postalCode, vehicle, price, ad, pickUpDate, pickUpTime);
+                    pua = new PickUpAgreement(pickUpId, driver, put, city, postalCode, vehicle, price, address, pickUpDate, pickUpTime);
                 }
 
                 catch (SqlException e)
