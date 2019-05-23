@@ -10,13 +10,13 @@ namespace DomainLayer
     {
         public string LicensePlate { get; private set; }
         public string Brand { get; private set; }
-        public int VehicleID { get; private set; }
+        public int VehicleId { get; private set; }
 
-        public Vehicle(string licensePlate, string brand, int vehicleID)
+        public Vehicle(string licensePlate, string brand, int vehicleId)
         {
             LicensePlate = licensePlate;
             Brand = brand;
-            VehicleID = vehicleID;
+            VehicleId = vehicleId;
         }
     }
 }
