@@ -167,7 +167,7 @@ namespace ApplicationLayer
                     cmd1.Parameters.Add(new SqlParameter("@PickUpDate", currentPickUpAgreement.PickUpDate));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpTime", currentPickUpAgreement.PickUpTime));
                     cmd1.Parameters.Add(new SqlParameter("@Price", currentPickUpAgreement.Price));
-                    cmd1.Parameters.Add(new SqlParameter("StreetName", currentPickUpAgreement.StreetName));
+                    cmd1.Parameters.Add(new SqlParameter("StreetName", currentPickUpAgreement.Address));
                     cmd1.ExecuteNonQuery();
                 }
                 catch (SqlException e)
