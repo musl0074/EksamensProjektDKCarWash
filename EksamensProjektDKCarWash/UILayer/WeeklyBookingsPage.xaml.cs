@@ -21,11 +21,11 @@ namespace UILayer
     public partial class WeeklyBookingsPage : Page, ISubscriber
     {
         private BookingController bc = new BookingController();
-        public DateTime CurrentMonday { get; set; }
         public Thread updateThread;
         public DailyBookingsPage dailyBookingsPage;
-        private List<Label> LabelsInGrid = new List<Label>();
+        private List<Label> labelsInGrid = new List<Label>();
         private object loadWeeklyLock = new object();
+        public DateTime CurrentMonday { get; set; }
 
 
         public WeeklyBookingsPage()
@@ -181,7 +181,7 @@ namespace UILayer
                 Grid.SetRow(l, row);
                 Grid_Main.Children.Add(l);
 
-                LabelsInGrid.Add(l); // Save the instance, so it can be cleared every update
+                labelsInGrid.Add(l); // Save the instance, so it can be cleared every update
             });
         }
 
@@ -217,7 +217,7 @@ namespace UILayer
         // Clears the grid for all the labels that has been added
         private void ClearGrid ()
         {
-            foreach (Label label in LabelsInGrid)
+            foreach (Label label in labelsInGrid)
             {
                 Dispatcher.Invoke(() => Grid_Main.Children.Remove(label));
             }

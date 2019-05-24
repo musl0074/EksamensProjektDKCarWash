@@ -23,11 +23,11 @@ namespace UILayer
     {
         PickUpAgreementController puac = new PickUpAgreementController();
     
-        private Action ActionNow;
+        private Action actionNow;
 
         public CreatePickUpAgreementWindow(Action action)
         {
-            ActionNow = action;
+            actionNow = action;
             InitializeComponent();
             UpdateUpToCurrentDate();
             LoadDrivers();
@@ -101,7 +101,7 @@ namespace UILayer
 
             puac.CreatePickUpAgreement(driver, pickUpTruck, Convert.ToInt32(postalCode), address, licensePlate, brand, bookingDate, pickUpTime, Convert.ToDouble(price));
             this.Close();
-            ActionNow();
+            actionNow();
             
         }
 

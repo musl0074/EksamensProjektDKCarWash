@@ -21,14 +21,14 @@ namespace UILayer
     public partial class UpdatePickUpAgreement : Window
     {
         PickUpAgreementController puac = new PickUpAgreementController();
-        string Data;
+        string data;
         int pickUpAgreementId;
         int vehicleId;
 
-        public UpdatePickUpAgreement(string data)
+        public UpdatePickUpAgreement(string newData)
         {
             InitializeComponent();
-            Data = data;
+            data = newData;
             UpdateUpToCurrentDate();
             LoadDrivers();
             LoadPickUpTrucks();
@@ -95,9 +95,9 @@ namespace UILayer
         {
             List<string> pickUpAgreementData = new List<string>();
             string[] dataSplit = new string[10];
-            string newData = Data.Split('}')[0];
+            string newData = data.Split('}')[0];
             dataSplit = newData.Split(',');
-            pickUpAgreementId = int.Parse(Data.Split(',')[0].Split('=')[1]);
+            pickUpAgreementId = int.Parse(data.Split(',')[0].Split('=')[1]);
             for (int i = 1; i < dataSplit.Length; i++)
             {
                 pickUpAgreementData.Add(dataSplit[i].Split('=')[1].Trim());

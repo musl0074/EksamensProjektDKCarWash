@@ -11,11 +11,11 @@ namespace ApplicationLayer
 {
    public class BookingController
     {
-        public Booking CurrentBooking { get; private set; }
+       
         public BookingRepo br = BookingRepo.GetInstance();
         private PackageRepo pr = PackageRepo.GetInstance();
         private DBConnector dbc = new DBConnector();    
-
+        public Booking CurrentBooking { get; private set; }
 
         
 

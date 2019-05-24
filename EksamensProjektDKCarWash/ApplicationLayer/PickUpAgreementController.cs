@@ -24,7 +24,7 @@ namespace ApplicationLayer
             }
             catch (NullReferenceException e)
             {
-                //MessageBox.Show(e.Message);
+             //   MessageBox.Show(e.Message);
                 throw;
             }
         }
