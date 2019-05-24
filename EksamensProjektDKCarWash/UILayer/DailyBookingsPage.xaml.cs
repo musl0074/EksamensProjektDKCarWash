@@ -23,10 +23,10 @@ namespace UILayer
     public partial class DailyBookingsPage : Window, ISubscriber
     {
         private BookingController bc = new BookingController();
-        public DateTime CurrentDateTime { get; set; }
         private int fontSize = 20;
         public Thread updateThread;
         private List<Button> buttonsInGrid = new List<Button>();
+        public DateTime CurrentDateTime { get; set; }
 
         public DailyBookingsPage(DateTime currentDateTime, string day)
         {

@@ -15,11 +15,11 @@ namespace DomainLayer
         public int PostalCode { get; private set; }
         public Vehicle Vehicle { get; private set; }
         public double Price { get; private set; }
-        public string StreetName { get; private set; }
+        public string Address { get; private set; }
         public DateTime PickUpDate { get; private set; }
         public string PickUpTime { get; private set; }
 
-        public PickUpAgreement(int pickUpAgreementId, Driver driver, PickUpTruck pickUpTruck, string city, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
+        public PickUpAgreement(int pickUpAgreementId, Driver driver, PickUpTruck pickUpTruck, string city, int postalCode, Vehicle vehicle, double price, string address, DateTime pickUpDate, string pickUpTime)
         {
             PickUpAgreementId = pickUpAgreementId;
             Driver = driver;
@@ -28,12 +28,12 @@ namespace DomainLayer
             PostalCode = postalCode;
             Vehicle = vehicle;
             Price = price;
-            StreetName = streetName;
+            Address = address;
             PickUpDate = pickUpDate;
             PickUpTime = pickUpTime;
         }
 
-        public void UpdatePickUpAgreement(Driver driver, PickUpTruck pickUpTruck, string city, int postalCode, Vehicle vehicle, double price, string streetName, DateTime pickUpDate, string pickUpTime)
+        public void UpdatePickUpAgreement(Driver driver, PickUpTruck pickUpTruck, string city, int postalCode, Vehicle vehicle, double price, string address, DateTime pickUpDate, string pickUpTime)
         {
             Driver = driver;
             PickUpTruck = pickUpTruck;
@@ -41,15 +41,15 @@ namespace DomainLayer
             PostalCode = postalCode;
             Vehicle = vehicle;
             Price = price;
-            StreetName = streetName;
+            Address = address;
             PickUpDate = pickUpDate;
             PickUpTime = pickUpTime;
         }
 
         public override string ToString()
         {
-            return PickUpAgreementId.ToString() + "," + Vehicle.LicensePlate + "," + Vehicle.Brand + "," + StreetName + "," + PostalCode.ToString() 
-                + "," + City + "," + Driver.Name + "," + PickUpDate.ToString() + "," + PickUpTime + "," + Price.ToString() + "," + Vehicle.VehicleID.ToString();
+            return PickUpAgreementId.ToString() + "," + Vehicle.LicensePlate + "," + Vehicle.Brand + "," + Address + "," + PostalCode.ToString() 
+                + "," + City + "," + Driver.Name + "," + PickUpDate.ToString() + "," + PickUpTime + "," + Price.ToString() + "," + Vehicle.VehicleId.ToString();
         } 
     }
 }

@@ -12,9 +12,9 @@ namespace ApplicationLayer
 {
     public class DBConnector
     {
-        PackageRepo pr = new PackageRepo();
         private static string connectionString = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
         private static string connectionString2 = "Server=EALSQL1.eal.local; Database= B_DB26_2018; User Id=B_STUDENT26; Password=B_OPENDB26;";
+        PackageRepo pr = new PackageRepo();
         public Booking Sp_CreateBooking(string customerName, string startTime, DateTime bookingDate, string email, string telephone, List<Package> packages, string licensePlate, string brand, string vat = "")
         {
 
@@ -97,7 +97,7 @@ namespace ApplicationLayer
         }
 
 
-        public PickUpAgreement Sp_CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string licensePlate, string brand, double price, string streetName, DateTime pickUpDate, string pickUpTime)
+        public PickUpAgreement Sp_CreatePickUpAgreement(string driverName, string pickUpTruckName, int postalCode, string licensePlate, string brand, double price, string address, DateTime pickUpDate, string pickUpTime)
         {
             PickUpAgreement pua = null;
             int pickUpId = 0;
@@ -117,7 +117,7 @@ namespace ApplicationLayer
                     cmd1.Parameters.Add(new SqlParameter("@LicensePlate", licensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@Brand", brand));
                     cmd1.Parameters.Add(new SqlParameter("@Price", price));
-                    cmd1.Parameters.Add(new SqlParameter("@StreetName", streetName));
+                    cmd1.Parameters.Add(new SqlParameter("@StreetName", address));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpDate", pickUpDate));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpTime", pickUpTime));
 
@@ -135,7 +135,7 @@ namespace ApplicationLayer
                     Driver driver = new Driver(driverName);
                     PickUpTruck put = new PickUpTruck(pickUpTruckName);
                     Vehicle vehicle = new Vehicle(licensePlate, brand, vehicleId);
-                    pua = new PickUpAgreement(pickUpId, driver, put, city, postalCode, vehicle, price, streetName, pickUpDate, pickUpTime);
+                    pua = new PickUpAgreement(pickUpId, driver, put, city, postalCode, vehicle, price, address, pickUpDate, pickUpTime);
                 }
 
                 catch (SqlException e)
@@ -146,18 +146,7 @@ namespace ApplicationLayer
             return pua;
         }
 
-        //public Booking Sp_CreateBookingStump(string customerName, DateTime startTime, string email, string telephone, int package)
-        //{
-        //    try
-        //    {
-        //        return new Booking(customerName, startTime, email, telephone, package,3);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        MessageBox.Show(e.Message); 
-        //        throw;
-        //    } 
-        //}
+     
 
         public void Sp_UpdatePickUpAgreement(PickUpAgreement currentPickUpAgreement)
         {
@@ -169,7 +158,7 @@ namespace ApplicationLayer
                     SqlCommand cmd1 = new SqlCommand("Sp_UpdatePickUpAgreement", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@PickUpAgreementID", currentPickUpAgreement.PickUpAgreementId));
-                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentPickUpAgreement.Vehicle.VehicleID));
+                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentPickUpAgreement.Vehicle.VehicleId));
                     cmd1.Parameters.Add(new SqlParameter("@DriverName", currentPickUpAgreement.Driver.Name));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpTruckName", currentPickUpAgreement.PickUpTruck.PickUpTruckName));
                     cmd1.Parameters.Add(new SqlParameter("@PostalCode", currentPickUpAgreement.PostalCode));
@@ -178,7 +167,7 @@ namespace ApplicationLayer
                     cmd1.Parameters.Add(new SqlParameter("@PickUpDate", currentPickUpAgreement.PickUpDate));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpTime", currentPickUpAgreement.PickUpTime));
                     cmd1.Parameters.Add(new SqlParameter("@Price", currentPickUpAgreement.Price));
-                    cmd1.Parameters.Add(new SqlParameter("StreetName", currentPickUpAgreement.StreetName));
+                    cmd1.Parameters.Add(new SqlParameter("StreetName", currentPickUpAgreement.Address));
                     cmd1.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -202,7 +191,7 @@ namespace ApplicationLayer
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@BookingID", currentBooking.Id));
                     cmd1.Parameters.Add(new SqlParameter("@CustomerID", currentBooking.Customer.CustomerId));
-                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentBooking.Customer.Vehicle.VehicleID));
+                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentBooking.Customer.Vehicle.VehicleId));
                     cmd1.Parameters.Add(new SqlParameter("@Brand", currentBooking.Customer.Vehicle.Brand));
                     cmd1.Parameters.Add(new SqlParameter("@LicensePlate", currentBooking.Customer.Vehicle.LicensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@StartTime", currentBooking.StartTime));

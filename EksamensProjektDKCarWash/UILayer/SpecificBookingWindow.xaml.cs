@@ -22,13 +22,13 @@ namespace UILayer
     public partial class SpecificBookingWindow : Window
     {
         BookingController bc = new BookingController();
-        string CurrentBooking;
+        string currentBooking;
         int specficbookingId;
 
         public SpecificBookingWindow(string bookingId)
         {
             InitializeComponent();
-            CurrentBooking = LoadBooking(bookingId);
+            currentBooking = LoadBooking(bookingId);
 
 
 
@@ -54,7 +54,7 @@ namespace UILayer
 
         private void Button_Update_Click(object sender, RoutedEventArgs e)
         {
-            string[] split = CurrentBooking.Split(';');
+            string[] split = currentBooking.Split(';');
             Window UpdateWindow = new UpdateBookingWindow(int.Parse(split[0])); // BookingId
             UpdateWindow.WindowState = WindowState.Maximized;
             UpdateWindow.Show();
