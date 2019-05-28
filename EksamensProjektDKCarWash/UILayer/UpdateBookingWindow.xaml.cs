@@ -34,6 +34,7 @@ namespace UILayer
 
             LoadBooking(bookingId);
             UpdateUpToCurrentDate();
+            CheckEnableCreateButton();
         }
 
         // Load all informations about the booking

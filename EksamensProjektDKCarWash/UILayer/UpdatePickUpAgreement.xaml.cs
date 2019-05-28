@@ -33,7 +33,7 @@ namespace UILayer
             LoadDrivers();
             LoadPickUpTrucks();
             InsertPickUpAgreement();
-
+            CheckEnableUpdateButton();
         }
 
         private void Calendar_Main_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
