@@ -169,7 +169,7 @@ namespace UnitTestProject1
                     SqlCommand cmd1 = new SqlCommand("Sp_UpdatePickUpAgreement", con);
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@PickUpAgreementID", currentPickUpAgreement.PickUpAgreementId));
-                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentPickUpAgreement.Vehicle.VehicleID));
+                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentPickUpAgreement.Vehicle.VehicleId));
                     cmd1.Parameters.Add(new SqlParameter("@DriverName", currentPickUpAgreement.Driver.Name));
                     cmd1.Parameters.Add(new SqlParameter("@PickUpTruckName", currentPickUpAgreement.PickUpTruck.PickUpTruckName));
                     cmd1.Parameters.Add(new SqlParameter("@PostalCode", currentPickUpAgreement.PostalCode));
@@ -201,7 +201,7 @@ namespace UnitTestProject1
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Parameters.Add(new SqlParameter("@BookingID", currentBooking.Id));
                     cmd1.Parameters.Add(new SqlParameter("@CustomerID", currentBooking.Customer.CustomerId));
-                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentBooking.Customer.Vehicle.VehicleID));
+                    cmd1.Parameters.Add(new SqlParameter("@VehicleID", currentBooking.Customer.Vehicle.VehicleId));
                     cmd1.Parameters.Add(new SqlParameter("@Brand", currentBooking.Customer.Vehicle.Brand));
                     cmd1.Parameters.Add(new SqlParameter("@LicensePlate", currentBooking.Customer.Vehicle.LicensePlate));
                     cmd1.Parameters.Add(new SqlParameter("@StartTime", currentBooking.StartTime));
